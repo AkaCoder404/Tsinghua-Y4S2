@@ -1,10 +1,11 @@
 # Tsinghua-Y4S2
-course information for second semester of my fourth year at tsinghua university
+This repository contains all notes and assignments for my second semester of my fourth year at Tsinghua University
 
+| Course Name Zh | Course Name En                 | Teacher | Credits |
+| -------------- | ------------------------------ | ------- | ------- |
+| 初等数论       | Number Theory                  | 何翔    | 2       |
+| 高等线性       | Linear Algebra 2               | 杨一龙  | 2       |
+| 数据结构       | Data Structures and Analysis   | 邓俊辉  | 4       |
+| 数字逻辑电路   | Digital Logic and Circuits     | 赵有健  | 3       |
+| 数据库专题训练 | Specific Training for Database | 李国良  | 2       |
 
-Courses 
-初等数学 10420402-0 何翔   星期二第1节(全周)，六教6A415
-高等线性 10421392-0 杨一龙 星期五第6节(全周)，六教6A201
-数据结构 30240184-0 邓俊辉 星期二第3节(全周)，四教4302； 星期四第1节(全周)，四教4302
-数字逻辑 30240343-0 赵有健  星期一第2节(全周)，六教6C300
-数据库专 30240422-0 李国良 星期第0节(13-16周)，实验； 星期五第3节(1-12周)，六教6A017

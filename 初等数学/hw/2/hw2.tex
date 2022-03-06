@@ -1,0 +1,91 @@
+\documentclass[12pt, a4paper, oneside]{article}
+\usepackage{CJKutf8}
+\usepackage{amsmath, amsthm, amssymb, bm, color, framed, graphicx, hyperref, mathrsfs}
+\usepackage{fancyhdr}
+\usepackage[left=20mm, right=20mm, top=20mm, bottom=20mm]{geometry}
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\begin{CJK}{UTF8}{gbsn}{计83 李天勤 2018080106}\end{CJK}}
+\lhead{\begin{CJK}{UTF8}{gbsn}{初等数论及应用作业1}\end{CJK}}
+	
+
+\title{\textbf{课程作业}}
+\author{Dylaaan}
+\date{\today}
+\newpage
+\linespread{1.5}
+\definecolor{shadecolor}{RGB}{241, 241, 255}
+\newcounter{problemname}
+\newenvironment{problem}{\begin{shaded}\stepcounter{problemname}\par\noindent\textbf{题目\arabic{problemname}. }}{\end{shaded}\par}
+\newenvironment{solution}{\par\noindent\textbf{解答. }}{\par}
+\newenvironment{note}{\par\noindent\textbf{题目\arabic{problemname}的注记. }}{\par}
+
+\begin{document}
+\begin{CJK}{UTF8}{gbsn}
+
+% \maketitle
+% \newpage
+
+\section{1.2 最大公因子和小公倍数}
+
+\setcounter{problemname}{3}
+\begin{problem}
+    设$a,b,c\in \mathbb{Z},  a\neq 0$, 则$a \mid bc$ 当且仅当 $\frac{a}{(a,b)}\mid c$
+\end{problem}
+
+
+\begin{problem}
+    $m$和$n$是互素的正整数：证明：
+    \newline 
+    $(1)$ 对于每个整数 $a,(a,mn)=(a,m)(a,n)$ \newline
+    $(2)$ $mn$的每个正因子$d$均可惟一地表示成$d=d_1d_2$, 其中 $d_1$和$d_2$分别为$m$和$n$地正因子。
+\end{problem}
+
+\begin{problem}
+    设$n$为正整数，$a,b$是不全为零的整数，证明：\newline
+    $(1) (a^n,b^n)=(a,b)^n$ \newline
+    $(2)$ 若$a$和$b$是互素的正整数，$ab=c^n, c\in \mathbb{Z}$，则$a$和$b$都是正整数的$n$次方幂，事实上，$a=(a,c)^n, b= (b,c)^n$ 
+\end{problem}
+
+
+\setcounter{problemname}{8}
+\begin{problem}
+    用辗转相除法求963和957地最大公因子，并求出方程$963x + 657y = (963, 957)$ 的全部整数解
+\end{problem}
+
+\begin{problem}
+    求下列方程的全部整数解 \newline
+    $(1) 6x + 20y - 15x = 23$ \newline
+    $(2) 25x + 13y + 7x = 2$ 
+\end{problem}
+
+
+\setcounter{problemname}{11}
+\begin{problem}
+    设$f(x)=x^n+a_1x^n-1 + \dots + a_{n-1}x+a_n$ 是首项系数为1的整系数多项式，则$f(x)$的每个有理数必为整数
+\end{problem}
+
+
+\begin{problem}
+    说$m$和$n$为正整数，则在$n,2n,\dots,mn$这$m$个数当中恰有$(m,n)$个是$m$的倍数。
+\end{problem}
+
+\setcounter{problemname}{15}
+\begin{problem}
+    设$m$和$n$是互素的非零整数，证明：对每个整数$a$，如果$m\mid a, n\mid a$,则 $mn \mid a$
+\end{problem}
+
+
+\section{1.3 惟一分解定理}
+
+\setcounter{problemname}{2}
+\begin{problem}
+    设$a,b,c$均为正整数，证明
+\end{problem}
+
+\begin{problem}
+    整数$n$叫作无平方因子，是指不存在整数$m\ge2$，是的$m^2\mid n$, 证明
+\end{problem}
+
+\end{CJK}
+\end{document}

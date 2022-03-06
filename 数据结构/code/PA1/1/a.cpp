@@ -27,7 +27,6 @@ int main() {
     std::cin >> a >> b;
     method1(a, b);
 
-
   }
 
   return 0;

@@ -1,0 +1,50 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage[ruled, vlined, linesnumbered]{algorithm2e}
+
+\begin{document}
+
+\begin{algorithm}
+\DontPrintSemicolon
+\caption{Cost-Vector Algorithm}\label{costalgorithm}
+\KwIn{Training sentences $S_{i}$}
+\KwOut{Sentence instances with cost-vectors for training $S_{i,c_i}$}
+\SetKwBlock{Begin}{function}{end function}
+\Begin($\text{generateCosts} {(} EV_{i,v,r} {)}$)
+{
+  $S_{i,c_{i}} = \left[ \right]$\;
+  \ForAll{$s \in S, v \in EV $}
+  {
+    $c_{i} = \left\lbrace \right\rbrace$\;
+    set $region \; r = EV_{i,r}$\;
+    \For{$p \leftarrow 1, properties$}
+    {
+      $c_{i,p} \coloneqq cost \left( kb_{r,p},v_{i,r} \right)$\;
+      \uIf{$c_{p} > Cost_t$}
+      {
+        $c_{p} \coloneqq \infty$
+      }
+      \Else
+      {
+        continue
+      }
+    }
+    \uIf{$\min \left( c \right)  > APE_t$}
+    {
+      $c_{i,no\_property} \coloneqq 0$
+    }
+    \Else
+    {
+      $c_{i,no\_property} \coloneqq \infty$
+    }
+    $\text{push} \left( S_{i,c_{i}}, \left( s,c_{i} \right) \right)$
+  }\label{endfor}
+  \Return{$S_{i,c_{i}}$}
+}
+\end{algorithm}
+\end{document}

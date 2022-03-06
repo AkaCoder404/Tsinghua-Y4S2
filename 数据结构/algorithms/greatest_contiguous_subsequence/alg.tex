@@ -1,0 +1,202 @@
+\documentclass[10pt]{article}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{fullwidth}
+\algrenewcommand\textproc{}
+\algrenewcommand\algorithmicrequire{\textbf{Input:}}
+\algrenewcommand\algorithmicensure{\textbf{Output:}}
+
+
+\errorcontextlines\maxdimen
+
+% begin vertical rule patch for algorithmicx 
+\makeatletter
+% start with some helper code
+% This is the vertical rule that is inserted
+\newcommand*{\algrule}[1][\algorithmicindent]{\makebox[#1][l]{\hspace*{.5em}\thealgruleextra\vrule height \thealgruleheight depth \thealgruledepth}}%
+% its height and depth need to be adjustable
+\newcommand*{\thealgruleextra}{}
+\newcommand*{\thealgruleheight}{.75\baselineskip}
+\newcommand*{\thealgruledepth}{.25\baselineskip}
+
+\newcount\ALG@printindent@tempcnta
+\def\ALG@printindent{%
+    \ifnum \theALG@nested>0% is there anything to print
+        \ifx\ALG@text\ALG@x@notext% is this an end group without any text?
+            % do nothing
+        \else
+            \unskip
+            \addvspace{-1pt}% FUDGE to make the rules line up
+            % draw a rule for each indent level
+            \ALG@printindent@tempcnta=1
+            \loop
+                \algrule[\csname ALG@ind@\the\ALG@printindent@tempcnta\endcsname]%
+                \advance \ALG@printindent@tempcnta 1
+            \ifnum \ALG@printindent@tempcnta<\numexpr\theALG@nested+1\relax% can't do <=, so add one to RHS and use < instead
+            \repeat
+        \fi
+    \fi
+    }%
+\usepackage{etoolbox}
+% the following line injects our new indent handling code in place of the default spacing
+\patchcmd{\ALG@doentity}{\noindent\hskip\ALG@tlm}{\ALG@printindent}{}{\errmessage{failed to patch}}
+\makeatother
+
+% the required height and depth are set by measuring the content to be shown
+% this means that the content is processed twice
+\newbox\statebox
+\newcommand{\myState}[1]{%
+    \setbox\statebox=\vbox{#1}%
+    \edef\thealgruleheight{\dimexpr \the\ht\statebox+1pt\relax}%
+    \edef\thealgruledepth{\dimexpr \the\dp\statebox+1pt\relax}%
+    \ifdim\thealgruleheight<.75\baselineskip
+        \def\thealgruleheight{\dimexpr .75\baselineskip+1pt\relax}%
+    \fi
+    \ifdim\thealgruledepth<.25\baselineskip
+        \def\thealgruledepth{\dimexpr .25\baselineskip+1pt\relax}%
+    \fi
+    %\showboxdepth=100
+    %\showboxbreadth=100
+    %\showbox\statebox
+    \State #1%
+    %\State \usebox\statebox
+    %\State \unvbox\statebox
+    %reset in case the next command is not wrapped in \myState
+    \def\thealgruleheight{\dimexpr .75\baselineskip+1pt\relax}%
+    \def\thealgruledepth{\dimexpr .25\baselineskip+1pt\relax}%
+}
+% end vertical rule patch for algorithmicx
+
+
+
+\begin{document}
+% control width of algorithm boxes
+\begin{fullwidth}[width=\linewidth+4cm,leftmargin=-2cm,rightmargin=-2cm] 
+
+
+
+\begin{algorithm}[H]
+  \caption{Brute Force Method}
+  \begin{algorithmic}[1]
+    \Require $a$ - array of integers
+    \Require $n$ - size of array
+    \Ensure $sum$ - is the maximum sum of a contiguous subarray in $a$
+    \Procedure{GS}{$a$}
+      \State MaxSum $\gets$ a[0] \Comment{current maximum sum}
+      \For{i = 0 to n - 1}                   
+        \For{j = i to n - 1}                  
+        \State CurrentSum $\gets$ 0    \Comment{sum of subarray}
+          \For{k = i to j}                     
+          \State CurrentSum $\gets$ CurrentSum + a[k] 
+          \EndFor
+          \If{MaxSum $<$ CurrentSum} 
+            \State MaxSum $\gets$ CurrentSum \Comment {update maximum sum}
+          \EndIf
+        \EndFor
+      \EndFor
+    \EndProcedure
+  \end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[H]
+  \caption{Sliding Window Algorithm}
+  \begin{algorithmic}[1]
+    \Require $a$ - array of integers
+    \Require $n$ - size of array
+    \Ensure $sum$ - is the maximum sum of a contiguous subarray in $a$
+    \Procedure{GS}{$a$}
+      \State MaxSum $\gets$ a[0] \Comment{current maximum sum}
+      \For{i = 0 to n - 1}                
+        \State CurrentSum $\gets$ 0
+        \For{j = i to n - 1}   
+          \State CurrentSum $\gets$ CurrentSum + $a[j]$;
+        \If{MaxSum $<$ CurrentSum}  \Comment{update maximumx sum}
+          \State MaxSum $\gets$ CurrentSum
+        \EndIf
+        \EndFor
+      \EndFor
+    \EndProcedure
+  \end{algorithmic}
+\end{algorithm}
+
+
+\begin{algorithm}[H]
+  \caption{Kadane's Algorithm}
+  \begin{algorithmic}[1]
+    \Require $a$ - array of integers
+    \Require $n$ - size of array
+    \Ensure $sum$ - is the maximum sum of a contiguous subarray in $a$
+    \Procedure{GS}{$a$}
+      \State MaxSum $\gets$ a[0] \Comment{current maximum sum}
+      \State CurrentSum $\gets$   MaxSum
+      \For{i = 0 to n - 1}                
+        \State CurrentSum $\gets$ CurrentSum + $a[i]$   
+        \If{CurrentSum $<$ a[i]}  \Comment{current sum up to this less than current point}
+          \State CurrentSum $\gets a[i]$
+        \EndIf
+        \If{MaxSum $<$ CurrentSum}  \Comment{update maximumx sum}
+          \State MaxSum $\gets$ CurrentSum
+        \EndIf
+      \EndFor
+    \EndProcedure
+  \end{algorithmic}
+\end{algorithm}
+
+
+
+
+\begin{algorithm}[H]
+  \caption{Brute Force Method}
+  \begin{algorithmic}[1]
+    \Require $x$ - decision tree
+    \Ensure $abc$ is $x$ in Txx Bxxxxx Gxxxx
+  \Procedure{Recursion}{$a$}
+      \State $a\gets$ \Call{Recursion}{$a$} \Comment{Call Recursion again}
+      \State \textbf{return} $a$ 
+  \EndProcedure
+  \end{algorithmic}
+\end{algorithm}
+
+
+
+\begin{algorithm}[H]
+  \caption{Euclid’s algorithm}\label{euclid}
+  \begin{algorithmic}[1]
+    \Procedure{Euclid}{$a,b$}\Comment{The g.c.d.\ of a and b}
+      \myState{$r\gets a\bmod b$}
+      \While{$r\not=0$}\Comment{We have the answer if r is 0}
+        \myState{$a\gets\displaystyle\sum_{i=1}^n x_i$}\Comment{Nonsense to show that tall lines might work}
+        \myState{$a\gets b$}
+        \myState{$b\gets r$}
+        \myState{$r\gets a\bmod b$}
+      \EndWhile\label{euclidendwhile}
+      \myState{\Return $b$\Comment{The gcd is b}}
+    \EndProcedure
+  \end{algorithmic}
+\end{algorithm}
+
+
+\end{fullwidth}
+\end{document}
+
+
+
+
+% \begin{document}
+
+% \begin{algorithm}
+%   \caption{Euclid’s algorithm}\label{euclid}
+%   \begin{algorithmic}[1]
+%     \Procedure{Euclid}{$a,b$}\Comment{The g.c.d.\ of a and b}
+%       \myState{$r\gets a\bmod b$}
+%       \While{$r\not=0$}\Comment{We have the answer if r is 0}
+%         \myState{$a\gets\displaystyle\sum_{i=1}^n x_i$}\Comment{Nonsense to show that tall lines might work}
+%         \myState{$a\gets b$}
+%         \myState{$b\gets r$}
+%         \myState{$r\gets a\bmod b$}
+%       \EndWhile\label{euclidendwhile}
+%       \myState{\Return $b$\Comment{The gcd is b}}
+%     \EndProcedure
+%   \end{algorithmic}
+% \end{algorithm}
+% \end{document}

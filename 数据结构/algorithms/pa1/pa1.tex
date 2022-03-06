@@ -1,0 +1,152 @@
+\documentclass[10pt]{article}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{fullwidth}
+\algrenewcommand\textproc{}
+\algrenewcommand\algorithmicrequire{\textbf{Input:}}
+\algrenewcommand\algorithmicensure{\textbf{Output:}}
+
+
+\errorcontextlines\maxdimen
+
+% begin vertical rule patch for algorithmicx 
+\makeatletter
+% start with some helper code
+% This is the vertical rule that is inserted
+\newcommand*{\algrule}[1][\algorithmicindent]{\makebox[#1][l]{\hspace*{.5em}\thealgruleextra\vrule height \thealgruleheight depth \thealgruledepth}}%
+% its height and depth need to be adjustable
+\newcommand*{\thealgruleextra}{}
+\newcommand*{\thealgruleheight}{.75\baselineskip}
+\newcommand*{\thealgruledepth}{.25\baselineskip}
+
+\newcount\ALG@printindent@tempcnta
+\def\ALG@printindent{%
+    \ifnum \theALG@nested>0% is there anything to print
+        \ifx\ALG@text\ALG@x@notext% is this an end group without any text?
+            % do nothing
+        \else
+            \unskip
+            \addvspace{-1pt}% FUDGE to make the rules line up
+            % draw a rule for each indent level
+            \ALG@printindent@tempcnta=1
+            \loop
+                \algrule[\csname ALG@ind@\the\ALG@printindent@tempcnta\endcsname]%
+                \advance \ALG@printindent@tempcnta 1
+            \ifnum \ALG@printindent@tempcnta<\numexpr\theALG@nested+1\relax% can't do <=, so add one to RHS and use < instead
+            \repeat
+        \fi
+    \fi
+    }%
+\usepackage{etoolbox}
+% the following line injects our new indent handling code in place of the default spacing
+\patchcmd{\ALG@doentity}{\noindent\hskip\ALG@tlm}{\ALG@printindent}{}{\errmessage{failed to patch}}
+\makeatother
+
+% the required height and depth are set by measuring the content to be shown
+% this means that the content is processed twice
+\newbox\statebox
+\newcommand{\myState}[1]{%
+    \setbox\statebox=\vbox{#1}%
+    \edef\thealgruleheight{\dimexpr \the\ht\statebox+1pt\relax}%
+    \edef\thealgruledepth{\dimexpr \the\dp\statebox+1pt\relax}%
+    \ifdim\thealgruleheight<.75\baselineskip
+        \def\thealgruleheight{\dimexpr .75\baselineskip+1pt\relax}%
+    \fi
+    \ifdim\thealgruledepth<.25\baselineskip
+        \def\thealgruledepth{\dimexpr .25\baselineskip+1pt\relax}%
+    \fi
+    %\showboxdepth=100
+    %\showboxbreadth=100
+    %\showbox\statebox
+    \State #1%
+    %\State \usebox\statebox
+    %\State \unvbox\statebox
+    %reset in case the next command is not wrapped in \myState
+    \def\thealgruleheight{\dimexpr .75\baselineskip+1pt\relax}%
+    \def\thealgruledepth{\dimexpr .25\baselineskip+1pt\relax}%
+}
+% end vertical rule patch for algorithmicx
+
+
+
+\begin{document}
+% control width of algorithm boxes
+\begin{fullwidth}[width=\linewidth+4cm,leftmargin=-2cm,rightmargin=-2cm] 
+
+
+
+\begin{algorithm}[H]
+  \caption{Karatsuba Algorithm}
+  \begin{algorithmic}[1]
+    \Require $a, b$ - two numbers represent as strings
+    \Require $n$ - length of the two strings
+    \Ensure $product$ - the product of two numbers
+    \Procedure{Karatsuba}{$a$, $b$}
+      \State PadZeroes(a, b)  \Comment{make sure strings are of equal length}
+      \If{a and b are single digit numbers} \Comment{base case} 
+        \State return a * b
+      \EndIf
+      \State $al \gets a[0,n/2)$    \Comment{left of a}
+      \State $ar \gets a[n/2,n)$    \Comment{right of a}
+      \State $bl \gets b[0,n/2)$    \Comment{left of b}
+      \State $br \gets b[n/2,n)$    \Comment{right of b}
+      \State $p1 \gets Karatsuba(al, bl)$
+      \State $p2 \gets Karatsuba(al + ar, bl + br)$
+      \State $p3 \gets Karatsuba(al, bl)$ 
+      \State return $(10^n * p1) + 10^{n/2}*(p2 - p1 - p3) + p3$
+  
+    \EndProcedure
+  \end{algorithmic}
+\end{algorithm}
+
+
+\begin{algorithm}[H]
+  \caption{Graphics}
+  \begin{algorithmic}[1]
+    \Require $x, y$ - arrays representing points on x and y axis
+    \Require $n$ - the number of $x$ and $y$ points given
+    \Require $p$ - point given
+    \Ensure how many lines OP intersects
+    \Procedure{Graphics}{$x$, $y$}
+      \State QuickSort($x$)
+      \State QuickSort($y$)
+      \For{i = 0 to n - 1}
+        \If{$(0 - x[i]) * (p.y - 0) - (y[i] - 0) * (p.x - x[i]) > 0$} \Comment{ToLeft algorithm}
+          \State return $i$
+        \EndIf
+      \EndFor
+      \State return n - 1; \Comment{points intersect all numbers}
+    \EndProcedure
+  \end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[H]
+  \caption{Long Multiplication}
+  \begin{algorithmic}[1]
+    \Require $a,b$ - two numbers represented as strings
+    \Require $m,n$ - the length of two strings
+    \Ensure the product of the two numbers
+    \Procedure{LongMult}{$a$, $b$}
+      \State Prod $\gets$ array[m + n] \Comment{result is at most size m + n} 
+      \State Carry $\gets$ 0 \Comment{keep track of carry}
+      \If{$n < m$} Swap($a,b$)  \Comment{smaller number on bottom}
+      \EndIf
+      \For{i = m - 1 to 0}  \Comment{multiply starting from end of smaller number}
+        \For{j = n - 1 to 0}  \Comment{multiply digit by digit of larger number}  
+          \State TempProd $\gets$ Prod[i + j + 1] + (a[i] * a[j])  \Comment{store ones digit}
+          \State Prod[i + j + 1] $\gets$ TempSum mod $10$;
+          \State Prod[i + j]  $\gets$  TempSum / 10  \Comment{store sum carry in previous element}
+        \EndFor
+      \EndFor
+      \State return RemoveLeadingZero(Sum) \Comment{Remove leading zero}
+    \EndProcedure
+  \end{algorithmic}
+\end{algorithm}
+
+
+
+\end{fullwidth}
+\end{document}
+
+
+

@@ -1,0 +1,18 @@
+\documentclass{article}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
+\begin{document}
+
+\begin{algorithm}
+\caption{Recursion}
+
+\begin{algorithmic}[1]
+\Procedure{Recursion}{$a$}
+    \State $a\gets$ \Call{Recursion}{$a$} \Comment{Call Recursion again}
+    \State \textbf{return} $a$ 
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+\end{document}

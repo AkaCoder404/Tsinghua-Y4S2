@@ -20,7 +20,6 @@ bool toLeft(int ax, int ay, int bx, int by, int cx, int cy);
 // quicksort
 int partition(int *arr, int start, int end);
 void quicksort(int *arr, int start, int end);
-// void swap(int a, int b);
 
 int main() {
   int n;  // num of axis points
@@ -78,7 +77,6 @@ void method1(int n, int m, int *x, int *y, Point *points) {
     }
   }
 }
-
 
 int partition(int *arr, int start, int end) {
   int pivot = arr[start];

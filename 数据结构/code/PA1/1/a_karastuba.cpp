@@ -60,11 +60,13 @@ std::string karatsuba(std::string x, std::string y){
 	bl = y.substr(0, y.length()/2);
 	br = y.substr(y.length()/2);
  	
-	p1 = karatsuba(al, bl);
-	p2 = karatsuba(kadd(al, ar), kadd(bl, br));
-	p3 = karatsuba(ar, br);
+	p1 = karatsuba(al, bl);												// al * bl
+	p2 = karatsuba(kadd(al, ar), kadd(bl, br));		// (al + ar) * (bl + br)
+	p3 = karatsuba(ar, br);												// (ar * br)
 
 	return kadd(kadd(kmult10(p1, n), kmult10(ksub(ksub(p2,p1), p3), n/2)), p3); 
+	// ((al * bl) * 10^n + ((al + ar) * (bl + br) - (al * bl) -  (ar * br)） * 10^n/2) + (ar * br)
+
 }
 
 std::string kadd(std::string x, std::string y){

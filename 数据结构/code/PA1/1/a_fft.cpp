@@ -8,10 +8,11 @@
 const double PI =  3.14159265358979323846;
 
 struct Complex{ 
-  double x, y;
+  double x;
+  double y;
   Complex() { 
-    x=0; 
-    y=0; 
+    x = 0; 
+    y = 0; 
   }
   Complex(double x, double y) {    
     this->x = x;
@@ -34,7 +35,7 @@ Complex operator*(Complex a, Complex b) {
 
 /**
  * FFT 
- * @param a n-length coefficient vector a [a_0,a_1,...,a_(n-1)
+ * @param a n-length coefficient vector a [a_0,a_1,...,a_(n-1)]
  * @param n omega, primitive nth root of unity omega, n is a power of 2
  * @return vector of values of polynomial for the nth roots of unity 
  */
@@ -43,7 +44,7 @@ void fft(int n, Complex * a) {
   if(n <= 1 ) return; 
   int mid = n >> 1;     // n * 2^1
 
-  // divide step, even odd
+  // divide into even and odd numbers
   Complex a_even[mid];    // even numbers
   Complex a_odd[mid];    // odd numbers
 
@@ -56,8 +57,8 @@ void fft(int n, Complex * a) {
   fft(mid, a_even);
   fft(mid, a_odd);
 
-  Complex w1(cos(PI/mid),sin(PI/mid));
-  Complex w(1,0);
+  Complex w1(cos(PI/mid),sin(PI/mid));   // e^(-j*2*pi/(2*n))
+  Complex w(1,0);   
   Complex x;
 
   for (int i = 0; i < mid;i++) {
@@ -70,7 +71,9 @@ void fft(int n, Complex * a) {
 
 /**
  * IFT
- * @return 
+ * @param a n-length coefficient vector
+ * @param n 
+ * @return inverse fft 
  */
 void ifft(int n , Complex * a) {
   if(n<=1) return;
@@ -83,9 +86,11 @@ void ifft(int n , Complex * a) {
     a_even[i] = a[i << 1];
     a_odd[i] = a[(i<<1) + 1];
   }
+
   ifft(mid, a_even);
   ifft(mid, a_odd);
 
+  // performing inverse fft
   Complex w1(cos(PI/mid),-sin(PI/mid));
   Complex w(1,0);
   Complex x;
@@ -107,12 +112,8 @@ std::string multiply(std::string num1, std::string num2) {
   Complex b[100000];
 
   // convert to ints
-  for(int i = 0; i < n; i++) {
-    a[i].x = num1[i] - '0';
-  }
-  for(int i = 0; i < m; i++) {
-    b[i].x = num2[i] -'0';
-  }
+  for(int i = 0; i < n; i++) a[i].x = num1[i] - '0';
+  for(int i = 0; i < m; i++) b[i].x = num2[i] - '0';
 
   int k = 1;
   while( k <= (n+m)) k <<= 1; // coefficent vector length of 2n
@@ -123,21 +124,25 @@ std::string multiply(std::string num1, std::string num2) {
 
   // pairwise product of the vector elements A * B = IFFT(FFT(A) * FFT(B))
   for(int i = 0; i <= k; i++){
-      a[i]=a[i]*b[i];
+      a[i] = a[i] * b[i];
   }
+
   // do ift on result to get coefficients back
   ifft(k,a);
 
   // processing carry 
   std::string result = "";
   int carry = 0;
-  int temp_result[n+m]; n--; m--;
+  int result_length = n + m;
+  int temp_result[result_length]; n--; m--;
 
-  for(int i = (n+m); i >= 0; i--) {
-    temp_result[(n + m) - i] = a[i].x/k + 0.5;
+  // account for rounding error
+  for(int i = result_length; i >= 0; i--) {
+    temp_result[result_length - i] = a[i].x/k + 0.5;
   }
+
   // handle carries
-  for (int i = 0; i <= n + m; i++){
+  for (int i = 0; i <= result_length; i++){
     result += std::to_string(((temp_result[i]) + carry) % 10);
     carry = ((temp_result[i]) + carry) / 10;
   }
@@ -154,7 +159,7 @@ int main() {
     std::string x, y;
     std::cin >> x >> y;
     std::string result = multiply(x, y);
-    // result is back words, so reverse it
+    // result is backwords, so reverse it
     for(int i = result.length() - 1; i >= 0 ; i--) {
       std::cout << result[i];
     }
