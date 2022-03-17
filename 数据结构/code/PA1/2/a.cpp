@@ -7,90 +7,144 @@
 
 // struct
 struct Point {
-  int x, y;
+  long long int x, y;
+  Point() {
+    this->x = 0;
+    this->y = 0;
+  }
+  Point(long long int x, long long int y) : x(x) , y(y) {}
 };
 
 
 // methods
 // sort from least to greatest, then check one by one using toLeft rule O(n * n) -> pass 50% test
-void method1(int n, int m, int *x, int *y, Point *points); 
+void method1(long long int n, long long int m, long long int *x, long long int *y, Point *Points); 
 // functions
-// checks whether a point is to the left of a line using vector cross product
-bool toLeft(int ax, int ay, int bx, int by, int cx, int cy); 
-// quicksort
-int partition(int *arr, int start, int end);
-void quicksort(int *arr, int start, int end);
+// checks whether a Point is to the left of a line using vector cross product
+bool toLeft(long long int ax, long long int ay, long long int bx, long long int by, long long int cx, long long int cy); 
+long long int partition(long long int *arr, long long int start, long long int end);
+void quicksort(long long int *arr, long long int start, long long int end);
+
+// binary search 
+long long int binarySearch(long long int *x, long long int *y, Point c, long long int start, long long int end) {
+  // if (end - start > 0) {
+  //   long long int mid = (start + end) / 2;
+    
+  //   // if right of current line, and left of line on the right, it is true
+  //   if (toLeft(x[mid], 0, 0, y[mid], c.x, c.y) && !toLeft(x[mid+1], 0, 0, y[mid+1], c.x, c.y)) return mid;
+  //   // if right of current line and still right of line on the right, search more right
+  //   else if (toLeft(x[mid], 0, 0, y[mid], c.x, c.y)) return binarySearch(x, y, c, mid + 1, end);
+  //   // else if it is not right, search lower
+  //   // if (toLeft(x[mid], 0, 0, y[mid], c.x, c.y)) return binarySearch(x, y)
+  //   return binarySearch(x, y, c, start, mid);
+  //   // if it is false, look at lower half until its true
+  // }
+
+  // return -1;
+
+  // if (start < end - 1) {
+  //   long long int mid = (start + end) >> 1;
+  //   if (!mid) return start;
+  //   if (toLeft(x[mid], 0, 0, y[mid], c.x, c.y)) return binarySearch(x, y, c, mid + 1, end);
+  //   else return binarySearch(x, y, c, start, mid);
+  // }
+  // return start;
+
+  while (start < end - 1) {
+    long long int mid = (start + end) >> 1;
+    if (!mid) break;
+    if (toLeft(x[mid], 0, 0, y[mid], c.x, c.y)) start = mid;
+    else end = mid;
+  }
+  return start;
+
+}
 
 int main() {
-  int n;  // num of axis points
-  int m;  // num of query points
+  long long int n;  // num of axis Points
+  long long int m;  // num of query Points
  
-  // x and y axis points
-  scanf("%d", &n);
-  int x[n];
-  int y[n];
-  for (int i = 0; i < n; i++) scanf("%d", &x[i]);
-  for (int i = 0; i < n; i++) scanf("%d", &y[i]);
+  // x and y axis Points
+  scanf("%lld", &n);
+  long long int x[n + 1];
+  long long int y[n + 1];
+  for (long long int i = 1; i < n + 1; i++) scanf("%lld", &x[i]);
+  for (long long int i = 1; i < n + 1; i++) scanf("%lld", &y[i]);
 
-  // query points
-  scanf("%d", &m);
+  // query Points
+  scanf("%lld", &m);
   Point query[m];
-  for (int i = 0; i < m; i++) {
-    scanf("%d%d", &(query[i].x), &(query[i].y));
+  for (long long int i = 0; i < m; i++) {
+    scanf("%lld%lld", &(query[i].x), &(query[i].y));
   }
-
-  // int x1[m];
-  // int y1[m];
-  // for (int i = 0; i < m; i++) scanf("%d", &x1[i]);
-  // for (int i = 0; i < m; i++) scanf("%d", &y1[i]);
 
   method1(n, m, x, y, query);
   return 0;
 }
 
-bool toLeft(int ax, int ay, int bx, int by, int cx, int cy) {
-  // int value = (bx - ax) * (cy - ay) - (by - ay) * (cx - ax);
-  // printf("value %d\n", value);
-  // printf("check (%d,%d) - (%d,%d) with (%d, %d)\n", ax, ay, bx, by, cx, cy);
-  // + for points on left, - for points on right
-  return (bx - ax) * (cy - ay) - (by - ay) * (cx - ax) >   0 ? false : true; 
+bool toLeft(long long int ax, long long int ay, long long int bx, long long int by, long long int cx, long long int cy) {
+  // long long int value = (bx - ax) * (cy - ay) - (by - ay) * (cx - ax);
+  // printf("value %lld\n", value);
+  // printf("check (%lld,%lld) - (%lld,%lld) with (%lld, %lld)\n", ax, ay, bx, by, cx, cy);
+  // + for Points on left, - for Points on right
+  // return (bx - ax) * (cy - ay) - (by - ay) * (cx - ax) >  0 ? false : true;  
+   return (ax * cy + by * (cx - ax)) >= 0;
+  
 }
 
-void method1(int n, int m, int *x, int *y, Point *points) {
-  quicksort(x, 0, n - 1); // sort x axis
-  quicksort(y, 0, n - 1); // sort y axis
 
-  // check for each line whether it is to left or right
-  int count;
-  for (int i = 0; i < m; i++) {
-    count = 0;
-    for (int j = 0; j < n; j++) {
-      // line (x, 0) - (0, y) and line (0, 0) - (cx, cy)
-      if (toLeft(x[j], 0, 0, y[j], points[i].x, points[i].y)) {
-        count++;
-        if (count == n) printf("%d \n", n);
-      }
-      else {
-        printf("%d \n",  count);
-        break;
-      }
-    }
+
+void method1(long long int n, long long int m, long long int *x, long long int *y, Point *Points) {
+  quicksort(x, 1, n); // sort x axis
+  quicksort(y, 1, n); // sort y axis
+
+
+  // linear search O(m*n)
+  // check for each line whether the Point it is to left or right
+  // long long int count;
+  // for (long long int i = 0; i < m; i++) {
+  //   count = 0;
+  //   for (long long int j = 0; j < n; j++) {
+  //     // line (x, 0) - (0, y) and line (0, 0) - (cx, cy)
+  //     if (toLeft(x[j], 0, 0, y[j], Points[i].x, Points[i].y)) {
+  //       count++;
+  //       if (count == n) printf("%lld \n", n);
+  //     }
+  //     else {
+  //       printf("%lld \n",  count);
+  //       break;
+  //     }
+  //   }
+  // }
+
+  // use binary search
+  long long int count = 0;
+  for (long long int i = 0; i < m; i++) {
+    // check last case
+    // if (toLeft(x[n - 1], 0, 0, y[n - 1], Points[i].x, Points[i].y)) { 
+    //   printf("%lld \n", n);
+    //   continue;
+    // }
+    count = binarySearch(x, y, Points[i], 0, n + 1);
+    printf("%lld \n", count);
   }
+
+
 }
 
-int partition(int *arr, int start, int end) {
-  int pivot = arr[start];
-  int count = 0;
-  for (int i = start + 1; i <= end; i++) {
+long long int partition(long long int *arr, long long int start, long long int end) {
+  long long int pivot = arr[start];
+  long long int count = 0;
+  for (long long int i = start + 1; i <= end; i++) {
     if (arr[i] <= pivot)
         count++;
   }
   // giving pivot element its correct position
-  int pivotIndex = start + count;
+  long long int pivotIndex = start + count;
   std::swap(arr[pivotIndex], arr[start]);
 
   // sorting left and right parts of the pivot element
-  int i = start, j = end;
+  long long int i = start, j = end;
   while (i < pivotIndex && j > pivotIndex) {
     while (arr[i] <= pivot) {
       i++;
@@ -105,12 +159,12 @@ int partition(int *arr, int start, int end) {
   return pivotIndex;
 }
  
-void quicksort(int *arr, int start, int end) {
+void quicksort(long long int *arr, long long int start, long long int end) {
     // base case
     if (start >= end) return;
  
     // partitioning the array
-    int p = partition(arr, start, end);
+    long long int p = partition(arr, start, end);
  
     // sorting the left part
     quicksort(arr, start, p - 1);
@@ -118,4 +172,4 @@ void quicksort(int *arr, int start, int end) {
     // Sorting the right part
     quicksort(arr, p + 1, end);
 }
- 
+  

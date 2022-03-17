@@ -1,0 +1,199 @@
+\documentclass[12pt, a4paper, oneside]{article}
+\usepackage{CJKutf8}
+\usepackage{amsmath, amsthm, amssymb, bm, color, framed, graphicx, hyperref, mathrsfs}
+\usepackage{fancyhdr}
+\usepackage[left=20mm, right=20mm, top=20mm, bottom=20mm]{geometry}
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\begin{CJK}{UTF8}{gbsn}{计83 李天勤 2018080106}\end{CJK}}
+\lhead{\begin{CJK}{UTF8}{gbsn}{初等数论及应用作业1}\end{CJK}}
+	
+
+\title{\textbf{课程作业}}
+\author{Dylaaan}
+\date{\today}
+\newpage
+\linespread{1.5}
+\definecolor{shadecolor}{RGB}{241, 241, 255}
+\newcounter{problemname}
+\newenvironment{problem}{\begin{shaded}\stepcounter{problemname}\par\noindent\textbf{题目\arabic{problemname}. }}{\end{shaded}\par}
+\newenvironment{solution}{\par\noindent\textbf{解答. }}{\par}
+\newenvironment{note}{\par\noindent\textbf{题目\arabic{problemname}的注记. }}{\par}
+
+\begin{document}
+\begin{CJK}{UTF8}{gbsn}
+
+% \maketitle
+% \newpage
+
+\section{1.2 最大公因子和小公倍数}
+
+\setcounter{problemname}{3}
+\begin{problem}
+    设$a,b,c\in \mathbb{Z},  a\neq 0$, 则$a \mid bc$ 当且仅当 $\frac{a}{(a,b)}\mid c$
+\end{problem}
+
+\begin{solution}
+    Let $d = (a, b)$, then, $1 = (\frac{a}{d}, \frac{b}{d})$, and thus 
+    $$ \frac{a}{d} \mid \frac{b}{d} c $$
+    Since we know that $1 = (\frac{a}{d}, \frac{b}{d})$, we can say that $\frac{a}{d} \mid c \Rightarrow \frac{a}{a,b} $
+
+\end{solution}
+
+\begin{problem}
+    $m$和$n$是互素的正整数：证明：
+    \newline 
+    $(1)$ 对于每个整数 $a,(a,mn)=(a,m)(a,n)$ \newline
+    $(2)$ $mn$的每个正因子$d$均可惟一地表示成$d=d_1d_2$, 其中 $d_1$和$d_2$分别为$m$和$n$地正因子。
+\end{problem}
+
+\begin{solution} \newline
+    $(1)$ $(a,mn) = (a, m)(\frac{a}{(a,m)}, \frac{mn}{(a,m)})$ \newline
+    And since $\frac{a}{(a,m)}$ and $\frac{m}{(a,m)}$ are coprime
+    $$ = (a,m) (\frac{a}{(a,m)}, n)$$
+    And because $(m,n) = 1$
+    $$ = (a,m)(a, n) $$ 
+    \newline
+    $(2)$
+    \newpage
+
+\end{solution}
+
+\begin{problem}
+    设$n$为正整数，$a,b$是不全为零的整数，证明：\newline
+    $(1) (a^n,b^n)=(a,b)^n$ \newline
+    $(2)$ 若$a$和$b$是互素的正整数，$ab=c^n, c\in \mathbb{Z}$，则$a$和$b$都是正整数的$n$次方幂，事实上，$a=(a,c)^n, b= (b,c)^n$ 
+\end{problem}
+
+\begin{solution}
+    \newline
+    $(1)$ We can use the definition of primes to solve this question. First let
+    $a = p_1^{\alpha_1}\cdots p_k^{a_k}, b=p_1^{\beta_1} \cdots p_k^{\beta_k} $， where $p_1,\dots,p_k$ are all primes, and 
+    $\alpha_i, \beta_i$ are non-negative integers, $i = 1, \dots, k$
+    Thus 
+    $$ a^n =  p_1^{n\alpha_1}\cdots p_k^{na_k} $$
+    $$ b^n=p_1^{n\beta_1} \cdots p_k^{n\beta_k} $$
+    Let us say that $(a^n, b^n) = p_1^{\gamma_1}\cdots p_k^{\gamma_k} $, where
+    $$ \gamma_i = \min{(n\alpha_i, n\beta_i)} = n\min{(\alpha_i, \beta_i)}, i = 1, 2\dots k $$
+    Thus, $(a^n, b^n) = p_1^{\gamma_1}\cdots p_k^{\gamma_k} = (p_i^{\min{(\alpha_i, \beta_i)}}\cdots p_k^{\min{(\alpha_k, \beta_k)}})^n = (a,b)^n$
+    \newline
+    $(2)$ Let  
+    $$a = p_1^{\alpha_1}\cdots p_k^{a_k}, b=p_1^{\beta_1} \cdots p_s^{\beta_s} $$
+    Becuase $(a,b) = 1$, then $ab = p_1^{\alpha_1}\cdots p_k^{a_k}p_1^{\beta_1} \cdots p_s^{\beta_s}$ is a unique solution. Then let 
+    $$ c = p_1^{c_1}\cdots p_k^{c_k}q_1^{d_1}\cdots q_s^{d_s} $$
+    Then
+    $$ p_1^{\alpha_1}\cdots p_k^{a_k}p_1^{\beta_1} \cdots p_s^{\beta_s} = ab = c^n = p_1^{nc_1}\cdots p_k^{nc_k}q_1^{nd_1}\cdots q_s^{nd_s}  $$
+    If $\alpha_i = nc_i$, $\beta_j = nd_j, (i = 1, \dots k, j=1, \dots s)$, we get that $a=(p_1^{c_1} \cdots p_k^{c_k})^n$ and $b=(q_1^{c_1} \cdots q_s^{c_s})^n$. \newline
+    Therefore, $a$ and $b$ are an integer to the $nth$ power
+\end{solution}
+
+
+\setcounter{problemname}{8}
+\begin{problem}
+    用辗转相除法求963和957地最大公因子，并求出方程$963x + 657y = (963, 657)$ 的全部整数解
+\end{problem}
+
+\begin{solution}
+    Using Euclid's Algorithm, we can derive the 全部疏解. First we use the foward notation. 
+    $$ 963 = 1(657) + 306$$
+    $$ 657 = 2(306) + 45 $$
+    $$ 306 = 6(45) + 36 $$
+    $$ 45 =  1(36) + 9 $$ 
+    $$ 36 =  4(9) + 0 $$ 
+    So, the GCD is $(9)$ We get the equaltion $963/9x + 657/9y = 9/9 \Rightarrow 107x + 73y = 1$
+    Then we use reverse euclid's algorithm. 
+    $$ 9 = 45 -36 $$
+    $$ 9 = (657 - 2(306)) - (306 - 6(45)) $$ 
+    $$ 9 = (657 - 2(963 - 657)) - (963 - 657 - 6(657 - 2(306))) $$
+    $$ 9 = (657 - 2(963 - 657)) - (963 - 657 - 6(657 - 2(963 - 657))) $$ 
+    $$ = 22(657) - 15(963) \Rightarrow 963 \times -15 + 657 \times 22 = 9$$ 
+    THerefore, we have found an answer $(x_0, y_0) = (-15, 22)$ to get the equation for 全部整数解
+    $$ \left\{\begin{array}{@{}l@{}}
+        x =-15 + 657t\\
+        y = 22 - 963t
+      \end{array}\right.
+    $$ 
+
+
+\end{solution}
+
+\begin{problem}
+    求下列方程的全部整数解 \newline
+    $(1) 6x + 20y - 15x = 23$ \newline
+    $(2) 25x + 13y + 7x = 2$ 
+\end{problem}
+
+\newpage
+
+
+\setcounter{problemname}{11}
+\begin{problem}
+    设$f(x)=x^n+a_1x^n-1 + \dots + a_{n-1}x+a_n$ 是首项系数为1的整系数多项式，则$f(x)$的每个有理数必为整数
+\end{problem}
+
+
+\vfill
+\vspace{0.3\textheight}
+
+
+\begin{problem}
+    说$m$和$n$为正整数，则在$n,2n,\dots,mn$这$m$个数当中恰有$(m,n)$个是$m$的倍数。
+\end{problem}
+
+\vfill
+\vspace{0.3\textheight}
+
+\newpage
+
+\setcounter{problemname}{15}
+\begin{problem}
+    设$m$和$n$是互素的非零整数，证明：对每个整数$a$，如果$m\mid a, n\mid a$,则 $mn \mid a$
+\end{problem}
+
+\begin{solution}
+    Since $m \mid a$, $a = bm$ for some integer $b$, then if take $n \mid a$, which means $n \mid bm $, and since $(m, n) = 1$ (are coprime).
+    We know that $n$ must divide $b$. And therefore if $n | b$, where $b = nj$ for some integer $j$, $a = mnj$. So $mn \mid a$.
+\end{solution}
+
+
+\section{1.3 惟一分解定理}
+
+\setcounter{problemname}{2}
+\begin{problem}
+    设$a,b,c$均为正整数，证明 \newline
+    $(1)$ $(a,[b,c]) = [(a,b), (a,c)]$ \newline
+    $(2)$ $[a,(b,c)] = ([a,b][b,c]) $
+\end{problem}
+
+\begin{solution}
+    $(1)$ We can use the universal gcd laws. First we can use $[x,y] = xy/(x,y)$ to elimante all LCMs. Then we can use the properties of gcd to break it down
+    $$(a,[b,c]) = [(a,b), (a,c)] $$
+    $$\Rightarrow (a, \frac{b}{(b,c)}) = \frac{(a,b)(a,c)}{(a,b,c)}$$
+    $$\Rightarrow (a,b,c)(a(b,c), bc) = (a, b)(a,c)(b,c) $$ 
+    $$ = (aab, aac, abb, abc, acc, bbc, bbc) $$ 
+    $(2)$ Using a similar laws as above
+    $$ [a,(b,c)] = ([a,b][b,c])  $$ 
+    $$ \Rightarrow \frac{a(b,c)}{(a,b,c)} = a(\frac{b}{(a,b)}, \frac{c}{(a,c)}) $$
+    $$ $$ 
+\end{solution}   
+
+\begin{problem}
+    整数$n$叫作无平方因子，是指不存在整数$m\ge2$，是的$m^2\mid n$, 证明
+\end{problem}
+
+\begin{solution}
+    $(1)$ Here we have to prove that $n$ is a square free integer if and only if $n = 1$ or it is a product of different primes. \newline   
+    Lets suppose $ n = p_1^{\alpha_1} \cdot p_k^{\alpha_k}$ where $p_i$ are prime numbers and $\alpha_i$ are integers $i = 1,\dots,k$ \newline
+    Proof By Contradiction: If $n$ is a square free number, then it has prime numbers that are the same. \newline
+    $ n = p_1^{\alpha_1} \cdot p_k^{\alpha_k}$ where there is a pair $p_i = p_j$, 
+    If it has prime numbers that are the same, then we get a value where $a_i = 2$. Therefore there is a square number. And thus, it contradicts that $n$ is a square free number.
+    \newline
+    $(2)$ Here we have to prove that every number $n$ can be represented as the product of a square number and a square free number. \newline
+  
+
+\end{solution}
+
+
+
+\end{CJK}
+\end{document}

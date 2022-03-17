@@ -1,0 +1,338 @@
+\documentclass[12pt, a4paper, oneside]{article}
+\usepackage{CJKutf8}
+\usepackage{amsmath, amsthm, amssymb, bm, color, framed, graphicx, hyperref, mathrsfs}
+\usepackage{fancyhdr}
+\usepackage[left=20mm, right=20mm, top=20mm, bottom=20mm]{geometry}
+\pagestyle{fancy}
+\fancyhf{}
+\setlength{\headheight}{14.60191pt}
+\rhead{\begin{CJK}{UTF8}{gbsn}{计83 李天勤 2018080106}\end{CJK}}
+\lhead{\begin{CJK}{UTF8}{gbsn}{高等线性代数选讲作业1}\end{CJK}}
+	
+
+\title{\textbf{课程作业}}
+\author{Dylaaan}
+\date{\today}
+\newpage
+\linespread{1.5}
+\definecolor{shadecolor}{RGB}{241, 241, 255}
+\newcounter{problemname}
+\newenvironment{problem}{\begin{shaded}\stepcounter{problemname}\par\noindent\textbf{题目\arabic{problemname}. }}{\end{shaded}\par}
+\newenvironment{solution}{\par\noindent\textbf{解答. }}{\par}
+\newenvironment{note}{\par\noindent\textbf{题目\arabic{problemname}的注记. }}{\par}
+\newcommand{\TAG}[1]{\tag*{$\left\tagldelim\parbox{\tagwidth}{#1}\right\tagrdelim$}}
+
+\begin{document}
+\begin{CJK}{UTF8}{gbsn}
+
+% \maketitle
+% \newpage
+
+\section{Chapter 1: Topics in Linear Algebra}
+
+\begin{problem}
+We would like to find a real $n \times n$ matrix $A$ such that $A^2 - I$ \newline
+$1.$ For each even number n, find a real solution \newline
+$2.$ If odd $n$, show that there is no real solution
+\end{problem}
+
+\begin{solution}
+
+  We can use an example to prove that when $n$ is even, there exists a matrics whose square equals the negative identity. 
+  For example, the matrix, 
+  \begin{equation}
+    A = \begin{bmatrix}
+      0 & -1 \\ 
+      1 & 0 
+    \end{bmatrix}
+  \end{equation}
+  To prove that no real solution exists when $n$ is odd, we can use proof by contradiction.
+  The key in solving this problem is using the determinant of the matrices. \newline
+  Let $A, B$ be $n \times n$ matrices and $c$ be scalar. Then we have \newline
+  $1. \det{(AB)} = \det{(A)}\det{(B)}$ \newline
+  $2. \det{(cA)} = c^n\det(A)$ \newline
+  Assuming that we have $A$ such that $A^2=-I$, we know that if two matrices are similar, then their determiant is equal, thus we obtain 
+  $$ \det(A^2) = \det(-I) $$
+  $$ \det(A^2) = (-1)^n \det(I) = -1 $$ 
+  because $n$ is odd and $\det(I) = 1$ \newline
+  Since $A$ is a real matrix, the determinant of $A$ is also real. Thus, the solution to $\det(A)^2=-1$ is impossible. 
+  Hence there is no such real $A$ that satisfies the assumption.
+
+\end{solution}
+
+% \begin{note}
+%     这里是注记. 
+% \end{note}
+
+\begin{problem}
+  Suppose $A^2 = -I$ for a real $n \times n$ matrix $A$. For each vector $v \in \mathbb{R}^n$, we write $iv$ to mean $Av$. 
+  For any $n \times n$ matrix $B$, we say it is complex linear if $B(kv)=kBv$ for any complex number $k\in \mathbb{C}$
+\end{problem}
+
+\begin{solution}
+  If $A^2$ = -I. That means $A$ is composed with itself on the identity map on $\mathbb{R}$. That means that the effect of applying
+  $A$ twice is the same as multiplication by -1. This is similar to multiplication by imaginary unit $i$.
+  Thus complex scalar multiplication can be defined as 
+  $$ (x + iy)v = xv + yA(v) $$ 
+  1. In order to prove that B is complex linear if and only if AB=BA, we have to prove two things. \newline
+  (a) When $B$ is complex linear, $\Rightarrow AB=BA$ \newline
+  (b) If $AB=BA$, then $B$ is complex linear. \newline
+  Proof (a): We know that $B$ is complex linear, therefore $\forall k \in \mathbb{C}$ 
+  $$ B(kv) = kB(v) $$
+  $$ \Rightarrow B((a+bi)v) = a+bi(Bv) $$
+  $$ \Rightarrow \forall a,b \in \mathbb{R}, aBv + bB(iv) = a + bi(Bv)$$ 
+  $$ \Rightarrow \forall a,b \in \mathbb{R}, aBv + bBAv = a + bA(Bv)$$
+  Proof (b): \newline
+  2. Let $A$ = 
+  $$ A = \begin{bmatrix}
+    0 & -1 \\ 1 & 0 
+  \end{bmatrix}, X = \begin{bmatrix}
+    1 & 2 \\ -1 & -1
+  \end{bmatrix}$$ 
+  Since we know that property $AB=BA$, we can show that $X$ does not have to be complex linear
+
+  3. We can pick $C_1, C_2$ such that
+  $$ C_1 = \begin{bmatrix}
+    1 & 0 \\ 0 & -1
+  \end{bmatrix},  C_2 = \begin{bmatrix}
+    0 & -1 \\ -1 & 0
+  \end{bmatrix}
+  $$
+ 
+\end{solution}
+
+\begin{problem}
+  If $V$ is an abstract vector space over $C$, then for each vector $v$ and each $k \in C$, obviously $kv$ is well defined.
+  But as a result, for each vector $v$ and each $k\in \mathbb{R}$, $kv$ must be well-defined. 
+  So any complex vector space must be a real vector space (but NOT vice versa). 
+\end{problem}
+
+\begin{solution}
+  \newline
+  1. The map $C$ is real linear. 
+  $$ \forall k, a, b \in \mathbb{R}, c = a + bi$$
+  $$ k = i, kc' = b + ai, (kc)' = -b-ai, kc' \neq (kc)' $$
+  $$ \Rightarrow c(kv) \neq k(cv)$$
+ Therefore map cannot be complex linear and only real linear. But, can be real linear. \newline 
+  2. $\mathbb{C}$ linear implies $\mathbb{R}$ linear because if $C$ is linear, then when $C = a$, and $a\in \mathbb{R}$   \newline 
+  3. $\mathbb{R}$ basis = $\begin{bmatrix}
+    1 \\ 0
+  \end{bmatrix}, \begin{bmatrix}
+    0 \\ 1
+  \end{bmatrix}, \begin{bmatrix}
+    i \\ 0
+  \end{bmatrix}, \begin{bmatrix}
+    0 \\ i
+  \end{bmatrix} $, real dimension 4
+  \newline
+  $\mathbb{C}$ basis = $\begin{bmatrix}
+    1 \\ 0
+  \end{bmatrix}, \begin{bmatrix}
+    0 \\ 1
+  \end{bmatrix}
+  $, complex dimension 2
+  \newline
+  4. $\mathbb{C}$ linear independence implies $\mathbb{R}$ linear independence because
+  $$\forall c_1, \dots, c_k \in \mathbb{C}, \sum{(a_j+b_ji)v} = 0, \therefore a_j = 0, j = 1, \dots, k $$
+  \newline
+  5. $\mathbb{C}$ spanning implies $\mathbb{R}$ spanning because the basis of the real span is a subset of the complex span
+\end{solution}
+
+
+
+\begin{problem}
+  Adapted from Gilbert Strang 9.3.11-15. Take the permutation matrix
+\end{problem}
+
+\begin{solution}
+  A permutation matrix simply manipulates the rows. Sending 
+  $\begin{bmatrix}
+    a \\ b \\ c\\ d 
+  \end{bmatrix}$
+  to 
+  $\begin{bmatrix}
+    b \\ c \\ d \\ a
+  \end{bmatrix}$
+  would require permutation matrix 
+  $$ 
+    P = \begin{bmatrix}
+      0 & 1 & 0 & 0 \\
+      0 & 0 & 1 & 0 \\ 
+      0 & 0 & 0 & 1 \\ 
+      1 & 0 & 0 & 0
+    \end{bmatrix}
+  $$
+  And $F_4$ Fourier matrix is 
+  $$ 
+    F_4 = \begin{bmatrix}
+      1 & 1 & 1 & 1 \\
+      1 & i & -1 & -i  \\ 
+      1 & -1& 1 & -1 \\
+      1 & -i & -1 & i
+    \end{bmatrix}
+  $$
+
+  1. 
+  $$ P\begin{bmatrix}
+    1 \\ 1 \\ 1 \\ 1 
+  \end{bmatrix} 
+  = \begin{bmatrix}
+    1 \\ 1 \\ 1 \\ 1 
+  \end{bmatrix} ,
+  P\begin{bmatrix}
+    1 \\ i \\ -1 \\ -i
+  \end{bmatrix} =
+  \begin{bmatrix}
+    i \\ -1 \\ -i \\ 1
+  \end{bmatrix}
+  $$
+  2. $PF_4 = F_4D$ 
+  
+  $$
+  \begin{bmatrix}
+    0 & 1 & 0 & 0 \\
+    0 & 0 & 1 & 0 \\ 
+    0 & 0 & 0 & 1 \\ 
+    1 & 0 & 0 & 0
+  \end{bmatrix} 
+  \begin{bmatrix}
+    1 & 1 & 1 & 1 \\
+    1 & i & -1 & -i  \\ 
+    1 & -1& 1 & -1 \\
+    1 & -i & -1 & i
+  \end{bmatrix}
+  = 
+  \begin{bmatrix}
+    1 & i & -1 & -i  \\ 
+    1 & -1& 1 & -1 \\
+    1 & -i & -1 & i \\
+    1 & 1 & 1 & 1 \\
+  \end{bmatrix}
+  =
+  \begin{bmatrix}
+    1 & 1 & 1 & 1 \\
+    1 & i & -1 & -i  \\ 
+    1 & -1& 1 & -1 \\
+    1 & -i & -1 & i
+  \end{bmatrix}
+  \begin{bmatrix}
+    a_1 &&&\\
+    & a_2 &&\\
+    && a_3 &\\
+    &&& a_4\\
+  \end{bmatrix}
+  $$
+  where $ a_1 = 1, a_2 = i, a_3 = -1, a_4 = -i$ \newline
+  Eigenvalues and eigen vectors of $P$\newline
+  The characteristic equation is  $(P - \lambda I) = 0$
+  Where we get that $\det(P - \lambda I)$ is 
+  $$
+    \det\left(\begin{bmatrix}
+      -\lambda & 1 & 0 & 0 \\
+      0 & -\lambda & 1 & 0 \\ 
+      0 & 0 & -\lambda & 1 \\
+      1 & 0 & 0 & -\lambda  
+    \end{bmatrix}\right) = \lambda^4 - 1 = 0
+  $$
+  Thus the solutions $\lambda_1 = 1, \lambda_2 = -1, \lambda_3 = i, \lambda_4 = -i$ \newline
+  Sub into the characteristic polynomial and solve using reduced row echelon form to get eigen vectors. 
+  The eigenvectors for $\lambda_1,\lambda_2,\lambda_3,\lambda_4$ are
+  $$ 
+    \begin{bmatrix}
+      1 \\ 1 \\ 1 \\ 1
+    \end{bmatrix}, 
+    \begin{bmatrix}
+      -1 \\ 1 \\ -1 \\ 1 
+    \end{bmatrix},
+    \begin{bmatrix}
+      i \\ -1 \\ -i \\ 1
+    \end{bmatrix},
+    \begin{bmatrix}
+      -i \\ -1 \\ i \\ 1
+    \end{bmatrix}
+  $$
+  respectively. \newline
+  3. 
+  $$ 
+    C = \begin{bmatrix}
+      c_0 & c_1 & c_2 & c_3 \\
+      c_3 & c_0 & c_1 & c_2 \\ 
+      c_2 & c_3 & c_0 & c_1 \\ 
+      c_1 & c_2 & c_3 & c_0
+    \end{bmatrix} \begin{bmatrix}
+      1 \\ 1 \\ 1 \\ 1 
+    \end{bmatrix} = 
+    \begin{bmatrix}
+      c_0 + c_1 + c_2 + c_3 \\
+      c_0 + c_1 + c_2 + c_3 \\
+      c_0 + c_1 + c_2 + c_3 \\
+      c_0 + c_1 + c_2 + c_3 
+    \end{bmatrix}
+  $$ 
+
+  $$ 
+  C = \begin{bmatrix}
+    c_0 & c_1 & c_2 & c_3 \\
+    c_3 & c_0 & c_1 & c_2 \\ 
+    c_2 & c_3 & c_0 & c_1 \\ 
+    c_1 & c_2 & c_3 & c_0
+  \end{bmatrix} \begin{bmatrix}
+    1 \\ i \\ -1 \\ -i 
+  \end{bmatrix} =
+  \begin{bmatrix}
+    c_0 + ic_1 - c_2 - ic_3 \\
+    c_3 + ic_0 - c_1 - ic_2 \\ 
+    c_2 + ic_3 - c_0 - ic_1 \\ 
+    c_1 + ic_2 - c_3 - ic_0
+  \end{bmatrix}
+  $$ 
+  4. Write $C$ as a polynomial of $P$. Find the eigenvalues and eigen vectors of $C$
+  $$
+  P = \begin{bmatrix}
+    0 & 1 & 0 & 0 \\
+    0 & 0 & 1 & 0 \\
+    0 & 0 & 0 & 1 \\
+    1 & 0 & 0 & 0
+  \end{bmatrix},
+  P^2 = \begin{bmatrix}
+    0 & 0 & 1 & 0 \\
+    0 & 0 & 0 & 1 \\
+    1 & 0 & 0 & 0 \\
+    0 & 1 & 0 & 0
+  \end{bmatrix},
+  P^3 = \begin{bmatrix}
+    0 & 0 & 0 & 1 \\
+    1 & 0 & 0 & 0 \\
+    0 & 1 & 0 & 0 \\
+    0 & 0 & 1 & 0
+  \end{bmatrix}, 
+  P^4 = \begin{bmatrix}
+    1 & 0 & 0 & 0 \\
+    0 & 1 & 0 & 0 \\
+    0 & 0 & 1 & 0 \\
+    0 & 0 & 0 & 1
+  \end{bmatrix}
+  $$
+
+  $$ C = f(p) = C_0P^4 + C_1P + C_2P^2 +C_3P^3 $$
+  $$ \lambda_C = C_0 + C_1\lambda + C_2\lambda^2 + C_3\lambda^3 $$
+  $$ \lambda_{C_1} = C_0 + C_1 + C_2  + C_3, x_1 = \begin{bmatrix}
+    1 \\ 1 \\ 1 \\ 1
+  \end{bmatrix}$$
+  $$ \lambda_{C_1} = C_0 - iC_1 - C_2  + iC_3, x_2 = \begin{bmatrix}
+    1 \\ -i \\ -1 \\ i
+  \end{bmatrix} $$
+  $$ \lambda_{C_1} = C_0 - C_1 - C_2  - C_3, x_3 = \begin{bmatrix}
+    1 \\ -1 \\ 1\\ -1
+  \end{bmatrix} $$
+  $$ \lambda_{C_1} = C_0 + iC_1 - C_2  - iC_3, x_4 = \begin{bmatrix}
+    1 \\ i \\ 1\\ -i
+  \end{bmatrix} $$
+
+
+
+\end{solution}
+
+
+\end{CJK}
+\end{document}

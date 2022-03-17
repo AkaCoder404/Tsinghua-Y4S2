@@ -112,8 +112,54 @@ std::string multiply(std::string num1, std::string num2) {
   Complex b[100000];
 
   // convert to ints
-  for(int i = 0; i < n; i++) a[i].x = num1[i] - '0';
-  for(int i = 0; i < m; i++) b[i].x = num2[i] - '0';
+  // for(int i = 0; i < n; i++) a[i].x = num1[i] - '0';
+  // for(int i = 0; i < m; i++) b[i].x = num2[i] - '0';
+
+  // higher base ie 100
+  int base100n = n % 2 == 0 ? n/2 : n / 2 + 1;
+  int base100m = m % 2 == 0 ? m/2 : m / 2 + 1;
+  
+  // if odd, first digit is by itself
+  if (n % 2 == 1) {
+    a[0].x = (num1[0] - '0'); 
+    for(int i = 1, j = 1; i < n; i+=2, j++) {
+      int temp = (num1[i] - '0') * 10 + (num1[i + 1] - '0');
+      printf("temp %d\n", temp);
+      a[j].x = (num1[i] - '0') * 10 + (num1[i + 1] - '0');
+    }
+    // is even
+  } else {
+    for(int i = 0, j = 0; i < n; i +=2, j++ ) {
+      a[j].x = (num1[i] - '0') * 10 + (num1[i + 1] - '0');
+    }
+  }
+
+  if (m % 2 == 1) {
+    b[0].x = (num2[0] - '0');
+    for(int i = 1, j = 0; i < m; i+=2, j++) {
+      b[j].x = (num2[i] - '0') * 10 + (num2[i + 1] - '0');
+    }
+    // is even
+  } else {
+    for(int i = 0, j = 0; i < m; i +=2, j++ ) {
+      b[j].x = (num2[i] - '0') * 10 + (num2[i + 1] - '0');
+    }
+  }
+
+  printf("size of num1 %d\n", n);
+  for(int i = 0; i < base100n; i++) {
+    printf("%f ", a[i].x);
+  }
+
+  printf("\n");
+  printf("size of num2 %d\n", n);
+  for(int i = 0; i < base100m; i++) {
+    printf("%f ", a[i].x);
+  }
+
+  n = base100n;
+  m = base100m;
+
 
   int k = 1;
   while( k <= (n+m)) k <<= 1; // coefficent vector length of 2n
@@ -142,10 +188,22 @@ std::string multiply(std::string num1, std::string num2) {
   }
 
   // handle carries
-  for (int i = 0; i <= result_length - 2; i++){
-    result += std::to_string(((temp_result[i]) + carry) % 10);
-    carry = ((temp_result[i]) + carry) / 10;
+  // for (int i = 0; i <= result_length - 2; i++){
+  //   result += std::to_string(((temp_result[i]) + carry) % 10);
+  //   carry = ((temp_result[i]) + carry) / 10;
+  // }
+  printf("result\n");
+  for(int i = 0; i <= result_length - 2; i++) {
+    printf("%d ", temp_result[i]);
   }
+  printf("\n");
+
+   // handle carries
+  for (int i = 0; i <= result_length - 2; i++){
+    result += std::to_string(((temp_result[i]) + carry) % 100);
+    carry = ((temp_result[i]) + carry) / 100;
+  }
+  
 
   // add last carry 
   if(carry) { result += std::to_string(carry); }
