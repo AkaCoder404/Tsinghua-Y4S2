@@ -124,7 +124,7 @@ std::string multiply(std::string num1, std::string num2) {
     a[0].x = (num1[0] - '0'); 
     for(int i = 1, j = 1; i < n; i+=2, j++) {
       int temp = (num1[i] - '0') * 10 + (num1[i + 1] - '0');
-      printf("temp %d\n", temp);
+      // printf("temp %d\n", temp);
       a[j].x = (num1[i] - '0') * 10 + (num1[i + 1] - '0');
     }
     // is even
@@ -182,6 +182,12 @@ std::string multiply(std::string num1, std::string num2) {
   int result_length = n + m;
   int temp_result[result_length]; n--; m--;
 
+  printf("\nbefore account for recording error\n");
+  for(int i = 0; i <= result_length - 2; i++) {
+    printf("%d ", temp_result[i]);
+  }
+  printf("\n");
+
   // account for rounding error
   for(int i = result_length - 2; i >= 0; i--) {
     temp_result[result_length - 2 - i] = a[i].x/k + 0.5;
@@ -192,8 +198,8 @@ std::string multiply(std::string num1, std::string num2) {
   //   result += std::to_string(((temp_result[i]) + carry) % 10);
   //   carry = ((temp_result[i]) + carry) / 10;
   // }
-  printf("result\n");
-  for(int i = 0; i <= result_length - 2; i++) {
+  printf("\nresult\n");
+  for(int i = 0; i <= result_length - 2 ; i++) {
     printf("%d ", temp_result[i]);
   }
   printf("\n");
@@ -203,6 +209,12 @@ std::string multiply(std::string num1, std::string num2) {
     result += std::to_string(((temp_result[i]) + carry) % 100);
     carry = ((temp_result[i]) + carry) / 100;
   }
+
+  //  printf("\nresult after carry\n");
+  // for(int i = 0; i <= result_length - 2; i++) {
+  //   printf("%d ", temp_result[i]);
+  // }
+  printf("\n");
   
 
   // add last carry 
