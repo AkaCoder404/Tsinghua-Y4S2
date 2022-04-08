@@ -1,0 +1,73 @@
+\documentclass[12pt, a4paper, oneside]{article}
+\usepackage{CJKutf8}
+\usepackage{amsmath, amsthm, amssymb, bm, color, framed, graphicx, hyperref, mathrsfs}
+\usepackage{fancyhdr}
+\usepackage{multicol}
+\usepackage{mathtools}
+\usepackage{gauss}
+\usepackage[left=20mm, right=20mm, top=20mm, bottom=20mm]{geometry}
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\begin{CJK}{UTF8}{gbsn}{计83 李天勤 2018080106}\end{CJK}}
+\lhead{\begin{CJK}{UTF8}{gbsn}{高代线性代数作业 Midterm}\end{CJK}}
+	
+
+\title{\textbf{期中考试}}
+\author{AkaCoder404}
+\date{\today}
+\newpage
+\linespread{1.5}
+\definecolor{shadecolor}{RGB}{241, 241, 255}
+\newcounter{problemname}
+\newenvironment{problem}{\begin{shaded}\stepcounter{problemname}\par\noindent\textbf{题目\arabic{problemname}. }}{\end{shaded}\par}
+\newenvironment{solution}{\par\noindent\textbf{解答. }}{\par}
+\newenvironment{note}{\par\noindent\textbf{题目\arabic{problemname}的注记. }}{\par}
+
+% row operations
+\newenvironment{sysmatrix}[1]
+ {\left[\begin{array}{@{}#1@{}}}
+ {\end{array}\right]}
+\newcommand{\ro}[1]{%
+  \xrightarrow{\mathmakebox[\rowidth]{#1}}%
+}
+\newlength{\rowidth} % row operation width
+
+% begin document  
+\begin{document}
+\begin{CJK}{UTF8}{gbsn}
+
+% \maketitle
+% \newpage
+
+
+\section*{The Midterm}
+
+\setcounter{problemname}{0}
+\begin{problem}
+  Quaternion
+\end{problem}
+
+
+\begin{problem}
+  Drazin Inverse and Differential Equation 
+\end{problem}
+
+\begin{problem}
+  Sherman-Morrison-Woodburry Form
+\end{problem}
+
+\begin{problem}
+  Equations of Matrices
+\end{problem}
+
+
+\begin{problem}
+  Newton's Method
+\end{problem}
+
+\begin{problem}
+  Real  Mobius  Transformation
+\end{problem}
+
+\end{CJK}
+\end{document}

@@ -1,19 +1,8 @@
 // Linked List
-// 
 
 #include <cstdio>
 #include <cstring>
 #include <cstdlib>
-
-const int SZ = 1 << 20; // fast io
-struct fastio {
-  char inbuf[SZ];
-  char outbuf[SZ];
-  fastio() {
-    setvbuf(stdin, inbuf, _IOFBF, SZ);
-    setvbuf(stdout, outbuf, _IOFBF, SZ);
-  }
-} io;
 
 const int MAX_LENGTH = 1e6;
 char s[MAX_LENGTH];     // initial string
@@ -40,6 +29,7 @@ void swap(int &a, int &b) {
     b = c;
 }
 
+// debugging information
 void pri() {
   printf("--------------------------\n");
   printf("cha ");
@@ -88,6 +78,8 @@ int main() {
       pos[1] = idx;           // location of ] in terms of array pos
       cnt[1] = len + 1;       // location of ] in terms of string size
   } 
+
+  // pri();
 
   
   // number of operations
@@ -219,7 +211,6 @@ int main() {
           printf("%c", ch[u]);   
         }
         printf("\n");
-
         // pri();
         break;
       } 

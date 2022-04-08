@@ -1,0 +1,326 @@
+\documentclass[10pt, a4paper, oneside]{article}
+\usepackage{CJKutf8}
+\usepackage{amsmath, amsthm, amssymb, bm, color, framed, graphicx, hyperref, mathrsfs}
+\usepackage{fancyhdr}
+\usepackage{multicol}
+\usepackage[left=20mm, right=20mm, top=20mm, bottom=20mm]{geometry}
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\begin{CJK}{UTF8}{gbsn}{计83 李天勤 2018080106}\end{CJK}}
+\lhead{\begin{CJK}{UTF8}{gbsn}{高代线性代数作业3}\end{CJK}}
+	
+
+\title{\textbf{课程作业}}
+\author{AkaCoder404}
+\date{\today}
+\newpage
+\linespread{1.5}
+\definecolor{shadecolor}{RGB}{241, 241, 255}
+\newcounter{problemname}
+\newenvironment{problem}{\begin{shaded}\stepcounter{problemname}\par\noindent\textbf{题目\arabic{problemname}. }}{\end{shaded}\par}
+\newenvironment{solution}{\par\noindent\textbf{解答. }}{\par}
+\newenvironment{note}{\par\noindent\textbf{题目\arabic{problemname}的注记. }}{\par}
+
+\begin{document}
+\begin{CJK}{UTF8}{gbsn}
+
+% \maketitle
+% \newpage
+
+\section{1.3 Jordan Canonical Form}
+
+\setcounter{problemname}{0}
+\begin{problem}
+  Find a basis in the following vector space so that the linear map involved will be in Jordan normal form. Also find the Jordan normal form.
+\end{problem}
+
+\begin{solution} \newline
+  $(1)$ $\because V$ is a real vector space, $V \subset \mathbb{R}^4$ \newline
+  Let $x = a + bi, y = c + di$ \newline
+  $$ V \begin{bmatrix}
+    a \\ b \\ c \\ d
+  \end{bmatrix} = 
+  \begin{bmatrix}
+    a - c \\ -b \\ b - c \\ b-d
+  \end{bmatrix}, V = \begin{bmatrix}
+    -1 & 0 & -1 & 0 \\
+    0 & -1 & 0 & 0 \\
+    0 &  1 & -1 & 0 \\
+    0 & 1 & 0 & -1
+  \end{bmatrix}$$ Get Eigenvalues,
+  $$ \text{det}(XI-V) = \left| \begin{matrix}
+    x-1 && 1 \\
+    & x + 1 && \\
+    & -1 & x + 1 & \\
+    & -1 && x + 1
+  \end{matrix}\right|  = (x + 1)^3(x-1)$$ 
+  \begin{table}[h!]
+    \begin{center}
+      % \caption{Your first table.}
+      \label{tab:table1}
+      \begin{tabular}{l|c} % <-- Alignments: 1st column left, 2nd middle and 3rd right, with vertical lines in between
+        % \textbf{Value 1} & \textbf{Value 2} & \textbf{Value 3}\\
+        eigen & alg mult \\
+        \hline
+        1 & 1  \\
+        -1 & 3 \\
+      \end{tabular}
+    \end{center}
+  \end{table} \newline
+  $\text{Ker}(V-I)$ = $\text{span}\left\{ \begin{pmatrix} (1 \\ 0 \\ 0 \\ 0)\end{pmatrix}\right\}$, $V_1 = \begin{pmatrix}
+    1 \\ 0 \\ 0 \\ 0
+  \end{pmatrix}$ \newline
+  $\text{Ker}(V+I)^2$ = $\text{span}\left\{ \begin{pmatrix} 1 \\ 4 \\ 0 \\ 0, \end{pmatrix}, \begin{pmatrix} 1 \\ 0 \\ 2 \\ 0 \end{pmatrix}, \begin{pmatrix} 0 \\ 0 \\ 0 \\ 1 \end{pmatrix}  \right\}$ \newline
+  $\text{Ker}(V+I)$ = $\text{span}\left\{ \begin{pmatrix} 1 \\ 0 \\ 2 \\ 0 \end{pmatrix}, \begin{pmatrix} 0 \\ 0 \\ 0 \\ 1 \end{pmatrix}  \right\}$ \newline
+  $V_2 = \begin{pmatrix}
+    1 \\ 4 \\ 0 \\ 0
+  \end{pmatrix}, (V+I)V_2 = \begin{pmatrix}
+    2 \\ 0 \\ 4 \\ 4
+  \end{pmatrix}, V_3 = \begin{pmatrix}
+    0 \\ 0 \\ 1 \\ 0
+  \end{pmatrix}$
+  $$ \therefore V = \begin{pmatrix}
+    1 & 2 & 1 & 0 \\
+    0 & 0 & 4 & 0 \\ 
+    0 & 4 & 0 & 1 \\
+    0 & 4 & 0 & 0
+  \end{pmatrix}\begin{pmatrix}
+    1 \\
+    & -1 & 1 \\
+    && -1 \\
+    &&&-1 
+  \end{pmatrix}\begin{pmatrix}
+    1 & 2 & 1 & 0 \\
+    0 & 0 & 4 & 0 \\ 
+    0 & 4 & 0 & 1 \\
+    0 & 4 & 0 & 0
+  \end{pmatrix}^{-1}$$ \newline
+  $(2)$ 
+  $$V\begin{pmatrix}
+    a \\ b \\ c \\ d \\ e 
+  \end{pmatrix} = \begin{pmatrix}
+    0 \\ 4a \\ 3b + d \\ 2c \\  d + e
+  \end{pmatrix}, V = \begin{pmatrix}
+    0 & 0 & 0 & 0 & 0 \\
+    4 & 0 & 0 & 0 & 0 \\ 
+    0 & 3 & 0 & 1 & 0 \\
+    0 & 0 & 2 & 0 & 0 \\
+    0 & 0 & 0 & 1 & 1
+  \end{pmatrix}$$
+  $$ \text{det}(XI-V) = \left| \begin{matrix}
+    X & 0 & 0 & 0 & 0 \\
+    -4 & X & 0 & 0 & 0 \\
+    0 & -3 & X & -1 & 0 \\
+    0  & 0 & -2 & X & 0 \\
+    0 & 0 & 0 & -1 & X-1
+  \end{matrix}\right| = (x-1)x^2(x-\sqrt{2}) (x+\sqrt{2}) $$ 
+  \begin{table}[h!]
+    \begin{center}
+      % \caption{Your first table.}
+      \label{tab:table2}
+      \begin{tabular}{l|c} % <-- Alignments: 1st column left, 2nd middle and 3rd right, with vertical lines in between
+        % \textbf{Value 1} & \textbf{Value 2} & \textbf{Value 3}\\
+        eigen & alg mult \\
+        \hline
+        1 & 1  \\
+        $\sqrt{2}$ & 1 \\
+        $-\sqrt{2}$ & 1 \\ 
+        0 & 2
+      \end{tabular}
+    \end{center}
+  \end{table} \newline \newline
+  $\text{Ker}(V-I) = \text{span}\left\{ \begin{pmatrix} 0 \\ 0 \\ 0 \\ 0 \\ 1 \end{pmatrix}\right\}, V_1 = \begin{pmatrix}
+    0 \\ 0 \\ 0 \\ 0 \\ 1
+  \end{pmatrix}$ \newline
+  $\text{Ker}(V-\sqrt{2}I) = \text{span}\left\{ \begin{pmatrix} 0 \\ 0 \\ 1 - \sqrt{2} \\ \sqrt{2} - 1 \\ 1 \end{pmatrix}\right\}, V_2 = \begin{pmatrix}
+    0 \\\ 0 \\ 1 - \frac{\sqrt{2}}{2} \\ \sqrt{2} - 1 \\ 1
+  \end{pmatrix}$ \newline
+  $\text{Ker}(V+\sqrt{2}I) = \text{span}\left\{ \begin{pmatrix} 0 \\ 0 \\ 1 + \sqrt{2} \\ -1 - \sqrt{2} \\ 1 \end{pmatrix}\right\}, V_3 = \begin{pmatrix}
+    0 \\\ 0 \\ 1 + \frac{\sqrt{2}}{2} \\ -1 - \sqrt{2} \\ 1
+  \end{pmatrix}$ \newline
+  $\text{Ker}(V) = \text{span}\left\{\begin{pmatrix} 0 \\ 1 \\ 0 \\ -3 \\ 3 \end{pmatrix}\right\}, \text{Ker}(V^2) = \text{span}\left\{  \begin{pmatrix}
+      1 \\ -4 \\ -6 \\ 0 \\ 12
+    \end{pmatrix}, \begin{pmatrix}
+      1 \\ 0 \\ -6 \\ 0 \\ 12
+    \end{pmatrix}
+  \right\}$ \newline
+  $V_4 = \begin{pmatrix}
+    1 \\ 0 \\ -6 \\ 0 \\ 12
+  \end{pmatrix}, VV_4 = \begin{pmatrix}
+    0 \\ 4 \\ 0 \\ -12 \\ 12
+  \end{pmatrix}$
+  $$ \therefore V = \underbrace{\begin{pmatrix} 
+    0 & 0 & 0 & 0 & 1 \\
+    0 & 0 & 0 & 4 & 0 \\
+    0 & 1 - \frac{\sqrt{2}}{2} & 1 + \frac{\sqrt{2}}{2} & 0 & -6 \\
+    0 & \sqrt{2} - 1 &-1 - \sqrt{2}& -12 & 0 \\ 
+    1 & 1 & 1 & 12 & 12
+  \end{pmatrix}}_{X}\begin{pmatrix}
+    1 \\
+    &\sqrt{2} \\ 
+    &&-\sqrt{2} \\
+    &&&0 & 1\\
+    &&&& 0
+  \end{pmatrix}\underbrace{\begin{pmatrix} 
+    0 & 0 & 0 & 0 & 1 \\
+    0 & 0 & 0 & 4 & 0 \\
+    0 & 1 - \frac{\sqrt{2}}{2} & 1 + \frac{\sqrt{2}}{2} & 0 & -6 \\
+    0 & \sqrt{2} - 1 &-1 - \sqrt{2}& -12 & 0 \\ 
+    1 & 1 & 1 & 12 & 12 
+  \end{pmatrix}^{-1}}_{X^{-1}}$$ \newline
+  $(3)$ $\det(XI-A) = (x^2-a_1a_4)(x^2-a_2a_3)$ \newline
+  $ \text{Let } \sqrt{x} = 
+    \begin{cases}
+    \sqrt{x} &  x\geq 0 \\
+    -i\sqrt{x} & x < 0 
+    \end{cases}$ \newline
+  Case 1: $a_1 a_4 \neq a_2a_3$ and $a_1a_2 \neq 0, a_2a_3\neq 0$ \newline 
+  Eigenvalues are $\sqrt{a_1a_4}, -\sqrt{a_1a_4}, \sqrt{a_2a_3}, -\sqrt{a_2a_3}$ 
+  $$ A = \begin{pmatrix}
+    \sqrt{\frac{a_1}{a_4}} & -  \sqrt{\frac{a_1}{a_4}} & 0 & 0  \\ 
+    0 & 0 &   \sqrt{\frac{a_2}{a_3}} & -   \sqrt{\frac{a_2}{a_3}}\\
+    0 & 0 & 1 & 1 \\ 
+    1 & 1 & 0 & 0
+  \end{pmatrix} \begin{pmatrix}
+    \sqrt{a_1a_4} \\ & -\sqrt{a_1a_4} \\ && \sqrt{a_2a_3} \\ &&& -\sqrt{a_2a_3}
+  \end{pmatrix} \begin{pmatrix}
+    \sqrt{\frac{a_1}{a_4}} & -  \sqrt{\frac{a_1}{a_4}} & 0 & 0  \\ 
+    0 & 0 &   \sqrt{\frac{a_2}{a_3}} & -   \sqrt{\frac{a_2}{a_3}}\\
+    0 & 0 & 1 & 1 \\ 
+    1 & 1 & 0 & 0
+  \end{pmatrix}^{-1}$$
+  Case 2: $a_1a_4 = a_2a_3 \neq 0$ \newline 
+  Eigenvalues are $\sqrt{a_1a_4}, -\sqrt{a_1a_4}$ 
+  $$ A = \begin{pmatrix}
+    \sqrt{\frac{a_1}{a_4}} & 0 & -  \sqrt{\frac{a_1}{a_4}} & 0 \\
+    0 & \sqrt{\frac{a_2}{a_3}} & 0 & -\sqrt{\frac{a_2}{a_3}} \\ 
+    0 & 1 & 0 & 1 \\ 
+    1 & 0 & 1 & 0
+  \end{pmatrix} \begin{pmatrix}
+    \sqrt{a_1a_4} \\ & \sqrt{a_1a_4}  \\ && -\sqrt{a_1a_4}  \\ &&& -\sqrt{a_1a_4} 
+  \end{pmatrix} \begin{pmatrix}
+    \sqrt{\frac{a_1}{a_4}} & 0 & -  \sqrt{\frac{a_1}{a_4}} & 0 \\
+    0 & \sqrt{\frac{a_2}{a_3}} & 0 & -\sqrt{\frac{a_2}{a_3}} \\ 
+    0 & 1 & 0 & 1 \\ 
+    1 & 0 & 1 & 0
+  \end{pmatrix}^{-1}$$ 
+  Case 3: $a_1a_4=0, \bar{V}a_2a_3 = 0, a_1a_4\neq a_2a_3$ \newline
+  Eigenvalues are $0(2), \sqrt{a_2a_3}, -\sqrt{a_2a_3}$ \newline
+  1. If $a_1=a_4 = 0$ 
+  $$ A = \begin{pmatrix}
+    1 & 0 & 0 & 0 \\
+    0 & 0 & \sqrt{\frac{a2}{a3}} & -\sqrt{\frac{a2}{a3}} \\
+    0 & 0 & 1 & 1 \\
+    0 & 1 & 0 & 0
+  \end{pmatrix} \begin{pmatrix}
+    0 \\ &0 \\ && \sqrt{a_2a_3} \\ &&& -\sqrt{a_2a_3} \\
+  \end{pmatrix} \begin{pmatrix}
+    1 & 0 & 0 & 0 \\
+    0 & 0 & \sqrt{\frac{a2}{a3}} & -\sqrt{\frac{a2}{a3}} \\
+    0 & 0 & 1 & 1 \\
+    0 & 1 & 0 & 0
+  \end{pmatrix}^{-1}$$
+  2. If $a_1=0,a_4\neq 0$ 
+  $$ A = \begin{pmatrix}
+    0 & 1 & 0 & 0 \\
+    0 & 0 & \sqrt{\frac{a2}{a3}} & -\sqrt{\frac{a2}{a3}} \\
+    0 & 0 & 1 & 1 \\
+    a_4 & 0 & 0 & 0
+  \end{pmatrix} \begin{pmatrix}
+    0 & 1 \\ &0 \\ && \sqrt{a_2a_3} \\ &&& -\sqrt{a_2a_3} \\
+  \end{pmatrix} \begin{pmatrix}
+    0 & 1 & 0 & 0 \\
+    0 & 0 & \sqrt{\frac{a2}{a3}} & -\sqrt{\frac{a2}{a3}} \\
+    0 & 0 & 1 & 1 \\
+    a_4 & 0 & 0 & 0
+  \end{pmatrix}^{-1}$$
+  Case 4: $a_1a_4 = a_2a_3 = 0$ \newline
+  1. If 4 of them are zero, $a_1 = a_2 = a_3 = a_4 = 0$ 
+  $$A = I0I^{-1}$$
+  2. If 3 of them are zero, $a_1 = a_2 = a_3 = 0, a_4 \neq 0 $ \newline
+  $$A = \begin{pmatrix}
+    0 & 1 & 0 & 0 \\ 
+    0 & 0 & 1 & 0 \\
+    0 & 0 & 0 & 1 \\
+    a^4 & 0 & 0 & 0
+  \end{pmatrix} \begin{pmatrix}
+    0 & 1 \\ & 0 \\ && 0 \\ &&& 0  
+  \end{pmatrix} \begin{pmatrix}
+    0 & 1 & 0 & 0 \\ 
+    0 & 0 & 1 & 0 \\
+    0 & 0 & 0 & 1 \\
+    a^4 & 0 & 0 & 0
+  \end{pmatrix}^{-1}$$
+  3. If 2 of them are zero, $a_1 = a_2 = 0, a_3, a_4 \neq 0 $ \newline
+  $$A = \begin{pmatrix}
+    0 & 1 & 0 & 0 \\ 
+    0 & 0 & 0 & 1 \\
+    0 & 0 & a_3 & 0 \\
+    a^4 & 0 & 0 & 0
+  \end{pmatrix} \begin{pmatrix}
+    0 & 1 \\ & 0 \\ && 0 & 1 \\ &&& 0  
+  \end{pmatrix} \begin{pmatrix}
+    0 & 1 & 0 & 0 \\ 
+    0 & 0 & 0 & 1 \\
+    0 & 0 & a_3 & 0 \\
+    a^4 & 0 & 0 & 0
+  \end{pmatrix}^{-1}$$
+
+\end{solution}
+
+
+\begin{problem}
+ A partition of integer $n$ is a way to write $n$ as a sum of other positive integers.
+\end{problem}
+
+\begin{solution} \newline
+  $(1)$ For the partition $n = a_1 + \cdots + a_k$. \newline 
+    If we look at each column, column $a_i$ represents the length of a chain \newline
+    If we look at each row, row $j$ represents how many eigen vectors that we can find in $\text{Ker}(A^j)$, but not in $\text{Ker}(A^{j-1})$  \newline 
+    Thus, it is equal to $\dim{\ker(A^j)} - \dim{\ker(A^{j-1})}$, therefore, the two dot diagrams are transpose of each other. \newline
+  $(2)$ The total number of dots that are in the first column and the first row is $2a_1-1$, which is an odd number \newline
+  $\forall$ self-conjugat partitions the partition of distinct odd numbers is $n = 2a_1 - 1 + 2a_2-3 + \cdots + 2a_k - (k+1), k = n$, and 
+  $\forall$ distinct odd number partition n = $b_1 + \cdots + b_k$, where $a_1 = \frac{b_1 + 1}{2}, \dots, a_k = \frac{b_k + 2k-1}{2}$ \newline
+  $(3)$ Because $A$ is upper triangular and nilpotent \newline
+  $A$ takes the form $\begin{pmatrix}
+    0 & * & * & * \\
+    0 & 0 & * & * \\
+    0 & 0 & 0 & * \\
+    0 & 0 & 0 & 0 
+  \end{pmatrix}$ if none of $a_ij$ is zero, and that $A$ only has one eigenvalue of 0 \newline
+  $$ \therefore \dim{A} = 3, \dim\ker{A} = 1$$
+  $A^2$ takes the form $\begin{pmatrix}
+    0 & 0 & * & * \\
+    0 & 0 & 0 & * \\
+    0 & 0 & 0 & 0 \\
+    0 & 0 & 0 & 0 
+  \end{pmatrix} \Rightarrow \dim{A^2} = \dim\ker{A^2} = 2$ \newline
+  $A^3$ takes the form $\begin{pmatrix}
+    0 & 0 & 0 & * \\
+    0 & 0 & 0 & 0 \\
+    0 & 0 & 0 & 0 \\
+    0 & 0 & 0 & 0 
+  \end{pmatrix} \Rightarrow \dim{A^3} = 1 , \dim\ker{A^3} = 3$ \newline 
+  $A^4 = 0, \dim\ker{A^4} = 4 \Rightarrow$ the chain of $A$ is $\begin{pmatrix}
+    0 \\ 0 \\ 0 \\  1
+  \end{pmatrix}, A\begin{pmatrix}
+    0 \\ 0 \\ 0 \\ 1 
+  \end{pmatrix}, A^2\begin{pmatrix}
+    0 \\ 0 \\ 0 \\ 1 
+  \end{pmatrix}, A^3\begin{pmatrix}
+    0 \\ 0 \\ 0 \\ 1 
+  \end{pmatrix}$ \newline
+  Thus $A$'s Jordan canonical form has only one Jordan block, and the possibiliy is $100\%$
+
+\end{solution}
+
+\vfill
+\vspace{0.25\textheight}
+\newpage
+
+
+
+
+
+\end{CJK}
+\end{document}

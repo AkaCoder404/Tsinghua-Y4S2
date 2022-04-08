@@ -1,42 +1,5 @@
 
-// Directions
-// From the 34th century to the 72nd century, Moon City was in the outbreak of the new respiratory disease DIVOC-34. 
-// Every day in Moon City was one of three states: 
-// - low risk
-// - medium risk
-// - high risk.
-
-
-// IVOC-34 is a viral disease, but it does not produce permanent antibodies after getting sick, and even a person may recover after being diagnosed today, and be diagnosed again tomorrow. 
-// Of course, each person is diagnosed at most once a day. 
-// Fortunately, DIVOC-34 is not lethal, and the only symptom people have when they get it is constant hiccups. 
-// Of course, this still has a great impact on people's daily life!
-
-// Moon City has a population of 2 million, people are immortal, and no one is born or cloned in the city. 
-// And in order to prevent the spread of the DIVOC-34 epidemic, the Solar System Security Council decided to implement an extreme city closure, and there is no population movement between inside and outside the Moon City.
-
-
-// We now study n consecutive days starting from the day when the first confirmed case appeared in Moon City. 
-// The number of confirmed cases on day i is xi.
-
-// The Moon City Council decides on two thresholds p and q for assessing risk "(0≤p<q)"
-
-
-// On the ith day, we judge the risk level of Moon City as follows: 
-// consider the mi days before the ith day 
-// (that is, from the i−mi day to the i−1th day, 
-// note that the diagnosis data of the day has not yet been counted on the ith day
-//  If
-//  0≤k<p, Moon City is low risk; 
-//  p≤k<q, Moon City is medium risk; 
-//  q≤k, Moon City is high risk.
-
-
-// Now the Moon City Council wants to know how the number of 
-// low risk, 
-// medium risk and 
-// high risk 
-// days will change in the n days if we change the value of the threshold p,q
+/
 
 #include <cstdio>
 // #include <stdio.h>

@@ -1,0 +1,27 @@
+@startmindmap example_mindmap
+' set the theme
+!theme mimeograph
+
+* Summer Learning
+  ** Markdown
+    *** CommonMark
+    *** KaTeX
+    *** Mermaid
+    *** PlantUML
+  ** Hugo Framework
+    *** CI/CD
+    *** GitHub Tasks
+    *** Azure Static Sites
+
+left side
+
+** Rust
+** HTML5
+** CSS
+** JavaScript
+  *** Node
+  *** Electron
+** Angular
+** React
+
+@endmindmap

@@ -1,0 +1,365 @@
+\documentclass[10pt, a4paper, oneside]{article}
+\usepackage{CJKutf8}
+\usepackage{amsmath, amsthm, amssymb, bm, color, framed, graphicx, hyperref, mathrsfs}
+\usepackage{fancyhdr}
+\usepackage{multicol}
+\usepackage{mathtools}
+\usepackage{gauss}
+\usepackage[left=20mm, right=20mm, top=20mm, bottom=20mm]{geometry}
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\begin{CJK}{UTF8}{gbsn}{计83 李天勤 2018080106}\end{CJK}}
+\lhead{\begin{CJK}{UTF8}{gbsn}{高代线性代数作业4}\end{CJK}}
+	
+
+\title{\textbf{课程作业}}
+\author{AkaCoder404}
+\date{\today}
+\newpage
+\linespread{1.5}
+\definecolor{shadecolor}{RGB}{241, 241, 255}
+\newcounter{problemname}
+\newenvironment{problem}{\begin{shaded}\stepcounter{problemname}\par\noindent\textbf{题目\arabic{problemname}. }}{\end{shaded}\par}
+\newenvironment{solution}{\par\noindent\textbf{解答. }}{\par}
+\newenvironment{note}{\par\noindent\textbf{题目\arabic{problemname}的注记. }}{\par}
+
+% row operations
+\newenvironment{sysmatrix}[1]
+ {\left[\begin{array}{@{}#1@{}}}
+ {\end{array}\right]}
+\newcommand{\ro}[1]{%
+  \xrightarrow{\mathmakebox[\rowidth]{#1}}%
+}
+\newlength{\rowidth} % row operation width
+
+% kbordermatrix
+
+
+
+
+% begin document  
+\begin{document}
+\begin{CJK}{UTF8}{gbsn}
+
+% \maketitle
+% \newpage
+
+\section{1.4 Minimal Polynomials, Slyvester's Equation}
+
+
+\setcounter{problemname}{0}
+\begin{problem}
+  Considering the matrix $A = \begin{bmatrix}
+    1 & 2 & 1 & 2 \\ 
+    0 & 1 & 3 & 4 \\
+    0 & 0 & 3 & 5 \\
+    0 & 0 & 0 & 4
+  \end{bmatrix}$ \newline
+\end{problem}
+
+\begin{solution} \newline
+    $(1)$ Find a matrix $B$ such that $BAB^{-1} = \begin{bmatrix}
+      1 & 2 & 0 & 0 \\ 
+      0 & 1 & 0 & 0 \\
+      0 & 0 & 3 & 5 \\
+      0 & 0 & 0 & 4
+    \end{bmatrix}$ \newline
+    Let $A = \begin{bmatrix}
+      A_{11} & A_{12} \\ 
+      0 & A_{22}
+    \end{bmatrix}$, thus $BAB^{-1} = \begin{bmatrix}
+      A_{11} & 0 \\ 
+      0 & A_{22}
+    \end{bmatrix}$ \newline Let
+    $$ B = \begin{bmatrix}
+      I & X \\ 0 & I 
+    \end{bmatrix}, B^{-1} = \begin{bmatrix}
+      I & -X \\ 0 & I 
+    \end{bmatrix}$$
+    $$\therefore BAB^{-1} = \begin{bmatrix}
+      I & X \\ 0 & I 
+    \end{bmatrix} \begin{bmatrix}
+      A_{11} & A_{12} \\ 
+      0 & A_{22}
+    \end{bmatrix} \begin{bmatrix}
+      I & -X \\ 0 & I 
+    \end{bmatrix} $$ 
+    $$ \Rightarrow \begin{bmatrix}
+      A_{11} & A_{12} + XA_{11} - XA_{22} \\ 0 & A_{22}
+    \end{bmatrix}$$ Therefore
+    $$ A_{12} + XA_{11} - XA_{22} = 0$$
+    $$ A_{12} = XA_{22} - XA_{11} \space \text{(sylvestor's equation)}$$
+    $A_{11}$ and $A_{22}$ have no common eigenvalues, thus, there exists a unique solution $X = \begin{bmatrix}
+      a & b \\ c & d
+    \end{bmatrix}$ such that 
+    $$\begin{bmatrix}
+      -2a + 2c & 2d-5a-3b \\ 
+      -2c & -5c-3d 
+    \end{bmatrix} = \begin{bmatrix}
+      1 & 2 \\ 3 & 4 
+    \end{bmatrix} = \begin{cases}
+      a = -2 \\
+      b = 31/9 \\
+      c = -3/2 \\
+      d = 7/6
+    \end{cases}$$
+    $$\therefore B = \begin{bmatrix}
+      I & X \\ 
+      0 & I
+    \end{bmatrix} = \begin{bmatrix}
+      1 & 0 & -2 & \frac{31}{9} \\
+      0 & 1  & -\frac{3}{2} & \frac{7}{6} \\
+      0 & 0 & 1 & 0 \\
+      0 & 0 & 0 & 1
+    \end{bmatrix}$$
+    $(2)$ Find a basis for the subspace $V_3 + V_4$, where $V_\lambda$ is the eigenspace of $A$ for the eigenvalue $\lambda$ \newline
+    The eigenvalue of $BAB^{-1}$ is equal to the eigenvalue of $A$
+    $$ BAB^{-1} - 3I  = \begin{bmatrix}
+      -2 & 2 & 0 & 0 \\
+      0 & -2 & 0 & 0 \\
+      0 & 0 & 0 & 5 \\
+      0 & 0 & 0 & 1 
+    \end{bmatrix}$$
+    Eigenvector $\vec{v_1} = \begin{pmatrix}
+      0 \\ 0 \\ 1 \\ 0
+    \end{pmatrix}$, $V_3 = \text{span}\left\{ \begin{pmatrix}  0 \\ 0 \\ 1 \\ 0\end{pmatrix}\right\}$  
+    $$ BAB^{-1} - 4I  = \begin{bmatrix}
+      -3 & 2 & 0 & 0 \\
+      0 & -3 & 0 & 0 \\
+      0 & 0 & -1 & 5 \\
+      0 & 0 & 0 & 0
+    \end{bmatrix}$$
+    Eigenvector $\vec{v_2} = \begin{pmatrix}
+      0 \\ 0 \\ 5 \\ 1
+    \end{pmatrix}$, $V_4 = \text{span}\left\{ \begin{pmatrix}  0 \\ 0 \\ 5\\ 1\end{pmatrix}\right\}$ \newline
+    $\because BAB^{-1}v = \lambda v \Rightarrow A(B^{-1}v)=\lambda(B^{-1}v))$ \newline
+    $\vec{v'_1} = B^{-1}\vec{v_1} = \begin{pmatrix}
+      2 \\ \frac{3}{2} \\ 1 \\ 0
+    \end{pmatrix}$,  
+    $\vec{v'_2} = B^{-1}\vec{v_2} = \begin{pmatrix}
+      \frac{59}{9} \\ \frac{19}{3} \\ 5 \\ 1
+    \end{pmatrix}$ \newline
+    $ \therefore $ Basis for subspace $V_3 + V_4$ is 
+    $\left\{ 
+      \begin{pmatrix} 2 \\ \frac{3}{2} \\ 1 \\ 0 \end{pmatrix}     
+      \begin{pmatrix} \frac{59}{9} \\ \frac{19}{3} \\ 5 \\ 1 \end{pmatrix}
+    \right\} $
+\end{solution}
+
+\begin{problem}
+  Suppose we have complex matrix $A = \begin{bmatrix}
+    B & I \\ & B
+  \end{bmatrix}$. We know the characteristic polynomial of $A$ is just the square of the character polynomial of $B$. 
+  Is the minimal polynomial of $A$ the square of minimal polynomial of $B$
+\end{problem}
+
+\begin{solution}
+  $(1)$ $\begin{bmatrix}
+    X & 0 & I & 0 \\
+    0 & Y & 0 & I \\
+    0 & 0 & X & 0 \\
+    0 & 0 & 0 & Y
+  \end{bmatrix}$ \newline 
+
+  \[ \begin{gmatrix}[b]
+    X & 0 & I & 0 \\
+    0 & 0 & X & 0 \\
+    0 & Y & 0 & I \\
+    0 & 0 & 0 & Y
+  \rowops
+  \swap{1}{2} 
+  \end{gmatrix}
+  \]
+
+  \[ \begin{gmatrix}[b]
+    X & I & 0 & 0 \\
+    0 & X & 0 & 0 \\
+    0 & 0 & Y & I\\
+    0 & 0 & 0 & Y
+    \colops
+    \swap{1}{2}
+  \end{gmatrix}
+  \]therefore
+  $$\begin{bmatrix}
+    1 & 0 & 0 & 0 \\
+    0 & 0 & 1 & 0 \\
+    0 & 1 & 0 & 0 \\
+    0 & 0 & 0 & 1
+  \end{bmatrix} \begin{bmatrix}
+    X & 0 & I & 0 \\
+    0 & Y & 0 & I \\
+    0 & 0 & X & 0 \\
+    0 & 0 & 0 & Y
+  \end{bmatrix}\begin{bmatrix}
+    1 & 0 & 0 & 0 \\
+    0 & 0 & 1 & 0 \\
+    0 & 1 & 0 & 0 \\
+    0 & 0 & 0 & 1
+  \end{bmatrix} = \begin{bmatrix}
+    X & I & 0 & 0 \\
+    0 & X & 0 & 0 \\
+    0 & 0 & Y & I \\
+    0 & 0 & 0 & Y
+  \end{bmatrix} $$, proving that the two matrices are similar \newline
+  $(2)$ $B = \begin{bmatrix}
+    3 & 0 \\ 0 & 4
+  \end{bmatrix}, B^2 = \begin{bmatrix}
+    9 & 0 \\ 0 & 16
+  \end{bmatrix}$ \newline
+  Let $B$'s minimal polynomial be $f(x) = a_2x^2 + a_1x + a_0$ \newline
+  $\begin{cases}
+    9a_2 + 3a_1 + a_0 = 0 \\
+    16a_2 + 4a_1 + a_0 = 0
+  \end{cases} \Rightarrow \begin{cases}
+    a_2 = \frac{1}{2}a_0 \\
+    a_1 = -\frac{7}{12}a_0
+  \end{cases}$ \newline
+  Therefore $B's$ minimal polynomial is $f(x) = x^2 - 7x + 12$ \newline
+  $A = \begin{bmatrix}
+    3 & 0 & 1 & 0 \\
+    0 & 4 & 0 & 1 \\
+    0 & 0 & 3 & 0 \\
+    0 & 0 & 0 & 4
+  \end{bmatrix}$
+  $\therefore$ $A$ is similar to $XY$ in $(1)$, therefore, we know that $A$ is similar to the matrix, 
+  $$\begin{bmatrix}
+    3 & 0 & 1 & 0 \\
+    0 & 3 & 0 & 0 \\
+    0 & 0 & 4 & 1 \\
+    0 & 0 & 0 & 4 
+  \end{bmatrix}$$
+  which is also a Jordan Canonical Form of $A$. Thus, the minimal polynomial of $A$ is $f(x) = (x-3)^2(x-4)^2 = x^4 - 14x^3 + 73x^2 - 168x + 144$ \newline
+  $(3)$ \newline
+  $B = \begin{bmatrix}
+    0 & 1 \\ 0 & 0 
+  \end{bmatrix}, A = \begin{bmatrix}
+    0 & 1 & 1 & 0 \\
+    0 & 0 & 0 & 1 \\
+    0 & 0 & 0 & 1 \\
+    0 & 0 & 0 & 0
+  \end{bmatrix}, \text{rank}(A) = 2$ \newline
+  $A^2 = \begin{bmatrix}
+    B^2 & 2B \\ 0 & B^2 
+  \end{bmatrix}, A = \begin{bmatrix}
+    0 & 0 & 0 & 2 \\
+    0 & 0 & 0 & 0 \\
+    0 & 0 & 0 & 0 \\
+    0 & 0 & 0 & 0
+  \end{bmatrix}, \text{rank}(A^2) = 1$ \newline
+  $A^3 = \begin{bmatrix}
+    B^3 & 2B^2 \\ 0 & B^3 
+  \end{bmatrix}, A = \begin{bmatrix}
+    0 & 0 & 0 & 0 \\
+    0 & 0 & 0 & 0 \\
+    0 & 0 & 0 & 0 \\
+    0 & 0 & 0 & 0
+  \end{bmatrix}, \text{rank}(A^3) = 0$ \newline
+  $A^4 = 0$, therefore the size of $A$'s Jordan blocks are $1\times 1, 3\times 3$ \newline
+  $J = \begin{bmatrix}
+    0 & 1 & 0 & 0 \\
+    0 & 0 & 1 & 0 \\ 
+    0 & 0 & 0 & 0 \\
+    0 & 0 & 0 & 0
+  \end{bmatrix}$ \newline 
+  $(4)$ $B = \begin{bmatrix}
+    0 & 1 \\ 0 & 0
+  \end{bmatrix}, \therefore$ the minimal polynomial for $B$ is $f(x) = x^2$ \newline
+  $\Rightarrow A = \begin{bmatrix}
+    B & I \\ 0 & B 
+  \end{bmatrix} = \begin{bmatrix}
+    0 & 1 & 1 & 0 \\
+    0 & 0 & 0 & 1 \\ 
+    0 & 0 & 0 & 1 \\
+    0 & 0 & 0 & 0 
+  \end{bmatrix}$ \newline
+  $\Rightarrow J.C.F = \begin{bmatrix}
+    0 & 1 & 0 & 0 \\
+    0 & 0 & 1 & 0 \\
+    0 & 0 & 0 & 0 \\
+    0 & 0 & 0 & 0
+  \end{bmatrix}, \therefore$ the minimal polynomial for $A$ is $f(x) = x^3$ \newline
+  $(5)$ When $B = \begin{bmatrix}
+    3 & 0 \\ 0 & 4 
+  \end{bmatrix}, \min{B} = x^2 - 7x + 12, \min{A} = x^4 - 14x^3 +73x^2 - 168x + 144$ \newline
+  When $B = \begin{bmatrix}
+    3 & 0 \\ 0 & 4 
+  \end{bmatrix}, \min{B} = x^2, \min{A} = x^3
+  $ \newline
+  Thus, when matrix $B$ is non-singular, the minimal polynomial of matrix $A$ is the (minimal of polynomial of $B)^2$
+
+
+
+\end{solution}
+
+\begin{problem}
+  In class we see that for Sylvester's equations $AX-XB=C$, if $A$, $B$, have no common eigenvalue, then there is always a unique solution. 
+  What if $A$, $B$ have common eigenvalues? \newline
+  Let us take an extreme case, and assume that $A=B$. \newline
+  So we are looking at an equation $AX-XA=C$ for constant $n \times n$ matrices $A$, $C$.  \newline
+  Let $V$ be the space of $n\times n$ matrices and consider the linear map $L:V\rightarrow V$ such that $L(X) = AX-XA$
+\end{problem}
+
+\begin{solution} \newline
+  $(1)$ $X = kA, k \in N^*$ has infinite solutions for $L(X) = 0$ \newline
+  $(2)$ $L(XY) = AXY - XYA$ \newline 
+  $\Rightarrow L(X)Y + XL(Y) = (AX -XA)Y + X(AY-YA)$ \newline
+  $\Rightarrow AXY - XAY + XAY - XYA$  \newline
+  $\Rightarrow AXY - XYA$
+  $\therefore L(XY) = L(X)Y + XL(Y)$ \newline 
+  $(3)$ [DON'T KNOW]\newline
+  $(4)$ If $p(X)$ is $X$'s minimal polynomial, when $L(X) = I$, then $L(p(X)) = L(X)p'(X) = Ip'(X)=p'(X)$ \newline
+  $\therefore p'(X)=0$, which contradicts $p(X)$ being $X$'s minimal polynomial, thus $L(X) = I$ has no solutions \newline
+  $(5)$ Let $A = PBP^{-1}, B = \text{diag}(\lambda_1,\dots,\lambda_n), AX -XA = 0 \Rightarrow PBP^{-1}X - XPBP^{-1} = 0$ \newline
+  $\Rightarrow BP^{-1}X - P^{-1}XPBP = 0$ \newline
+  $\Rightarrow BP^{-1}XP - P^{-1}XPB = 0$ \newline  
+  Let $Y = P^{-1}XP, BY-YB = 0$
+  $$ Y = \begin{bmatrix}
+    y_{11} & y_{12} & \cdots & y_{1n} \\
+    \vdots &  & & \vdots \\
+    y_{n1} & \cdots & \cdots & y_{nn}
+  \end{bmatrix}
+  $$
+  $$ \begin{bmatrix}
+    \lambda_1 y_{11} & \lambda_1 y_{12} & \cdots & \lambda_1 y_{1n} \\
+    \vdots &  & & \vdots \\
+    \lambda_n y_{n1} & \cdots & \cdots &   \lambda_n y_{nn}
+  \end{bmatrix} = \begin{bmatrix}
+    \lambda_1 y_{11} & \lambda_2 y_{12} & \cdots & \lambda_n y_{1n} \\
+    \vdots &  & & \vdots \\
+    \lambda_1 y_{n1} & \cdots & \cdots &   \lambda_n y_{nn}
+  \end{bmatrix} = $$ Thus, the free elements exist on on the diagonal line. \newline
+  $\therefore \dim{\ker{L}} = n$
+  
+  $(6)$ Let $A$ = $(a_{ij}), i\leq 3, j \leq 3, X = (x_{ij}), i \leq 3, j \leq 3$\newline 
+  The diagonal of $AX = \begin{cases}
+    a_{11}x_{11} + a_{12}x_{21} + a_{13}x_{31} \\
+    a_{21}x_{12} + a_{22}x_{22} + a_{23}x_{32} \\
+    a_{31}x_{13} + a_{32}x_{23} + a_{33}x_{33}
+   \end{cases}$ \newline
+  Diagonal of $XA = \begin{cases}
+    a_{11}x_{11} + a_{21}x_{12} + a_{31}x_{13} \\
+    a_{12}x_{21} + a_{22}x_{22} + a_{32}x_{23} \\
+    a_{13}x_{31} + a_{23}x_{32} + a_{33}x_{33} \end{cases}
+  $ \newline
+  $\begin{cases}
+    a_{11}x_{11} + a_{12}x_{21} + a_{13}x_{31} =  a_{11}x_{11} + a_{21}x_{12} + a_{31}x_{13} \\
+    a_{21}x_{12} + a_{22}x_{22} + a_{23}x_{32} =  a_{12}x_{21} + a_{22}x_{22} + a_{32}x_{23} \\
+    a_{31}x_{13} + a_{32}x_{23} + a_{33}x_{33} =  a_{13}x_{31} + a_{23}x_{32} + a_{33}x_{33} 
+  \end{cases}$ \newline
+
+  $\Rightarrow \begin{cases}
+    a_{12} = a_{21} = a_{31} = a_{13} = 0 \\
+    a_{21} = a_{12} = a_{23} = a_{32} = 0 \\
+    a_{13} = a_{31} = a_{23} = a_{32} = 0 \\
+  \end{cases}$ \newline
+  $A = \begin{bmatrix}
+    1 & 0 & 0 \\ 0 & 2 & 0 \\ 0 & 0 & 3
+  \end{bmatrix}$
+
+
+
+
+\end{solution}
+
+\end{CJK}
+\end{document}

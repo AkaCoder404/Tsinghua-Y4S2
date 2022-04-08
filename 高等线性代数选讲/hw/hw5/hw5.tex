@@ -1,0 +1,204 @@
+\documentclass[12pt, a4paper, oneside]{article}
+\usepackage{CJKutf8}
+\usepackage{amsmath, amsthm, amssymb, bm, color, framed, graphicx, hyperref, mathrsfs}
+\usepackage{fancyhdr}
+\usepackage{multicol}
+\usepackage{mathtools}
+\usepackage{gauss}
+\usepackage[left=10mm, right=10mm, top=20mm, bottom=20mm]{geometry}
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\begin{CJK}{UTF8}{gbsn}{计83 李天勤 2018080106}\end{CJK}}
+\lhead{\begin{CJK}{UTF8}{gbsn}{高代线性代数作业5}\end{CJK}}
+	
+
+\title{\textbf{课程作业}}
+\author{AkaCoder404}
+\date{\today}
+\newpage
+\linespread{1.5}
+\definecolor{shadecolor}{RGB}{241, 241, 255}
+\newcounter{problemname}
+\newenvironment{problem}{\begin{shaded}\stepcounter{problemname}\par\noindent\textbf{题目\arabic{problemname}. }}{\end{shaded}\par}
+\newenvironment{solution}{\par\noindent\textbf{解答. }}{\par}
+\newenvironment{note}{\par\noindent\textbf{题目\arabic{problemname}的注记. }}{\par}
+
+% row operations
+\newenvironment{sysmatrix}[1]
+ {\left[\begin{array}{@{}#1@{}}}
+ {\end{array}\right]}
+\newcommand{\ro}[1]{%
+  \xrightarrow{\mathmakebox[\rowidth]{#1}}%
+}
+\newlength{\rowidth} % row operation width
+
+% kbordermatrix
+
+
+
+
+% begin document  
+\begin{document}
+\begin{CJK}{UTF8}{gbsn}
+
+% \maketitle
+% \newpage
+
+
+
+\setcounter{problemname}{0}
+\begin{problem}
+  Let $J = \begin{bmatrix}
+    1 & 1 \\ 0 & 1
+  \end{bmatrix}$, we have a function $f(x) = x|x|$. Note that as a real function, $f(x)$ is everywhere differentiable. 
+\end{problem}
+
+\begin{solution} \newline
+    $(1)$ Let $A_t = \begin{bmatrix}
+      1 & 1 \\ 0 & 1 + t
+    \end{bmatrix}$. Note that $\lim{A_t} = J$. Find $\lim{f(A_t)}$ \newline
+    $$A_t = \begin{bmatrix}
+      1 & 1 \\ 0 & 1 + t
+    \end{bmatrix} = \begin{bmatrix}
+      1 & \frac{1}{t} \\ 0 & 1 
+    \end{bmatrix} \begin{bmatrix}
+      1 & 0 \\ 0 & 1 + t
+    \end{bmatrix} \begin{bmatrix}
+      1 & -\frac{1}{t} \\ 0 & 1
+    \end{bmatrix}$$
+    $$ 
+      f(A_t) = \begin{bmatrix}
+        1 & \frac{1}{t} \\ 0 & 1 
+      \end{bmatrix} \begin{bmatrix}
+        f(1)  & 0 \\ 0 & f(1 + t)
+      \end{bmatrix} \begin{bmatrix}
+        1 & -\frac{1}{t} \\ 0 & 1
+      \end{bmatrix} = \begin{bmatrix}
+        f(1) & \frac{f(1+t) - f(1)}{t} \\ 0 & f(1 + t)
+      \end{bmatrix}
+    $$
+    $$
+      \lim{f(A_t)} = \begin{bmatrix}
+        f(1) & f'(t) \\ 0 & f(t)
+      \end{bmatrix} = \begin{bmatrix}
+        1 & 2 \\ 0 & 1
+      \end{bmatrix}
+    $$
+    $(2)$ Let $A_t = \begin{bmatrix}
+      1 & 1 \\ -t^2 & 1
+    \end{bmatrix}$. Note that $\lim{A_t} = J$. Find $\lim{f(A_t)}$. Is $f(J)$ well defined? \newline
+    $$
+      A_t = \begin{bmatrix}
+        1 & 1 \\ -t^2 & 1
+      \end{bmatrix} = \begin{bmatrix}
+        1 & 1 \\ -it & it  
+      \end{bmatrix} \begin{bmatrix}
+        1 - it & 0 \\ 0 & 1 + it
+      \end{bmatrix} \begin{bmatrix}
+        \frac{1}{2} & \frac{i}{2t} \\ \frac{1}{2} & \frac{i}{2t}
+      \end{bmatrix}
+    $$ 
+    $$ 
+      f(A_t) =  \begin{bmatrix}
+        1 & 1 \\ -it & it  
+      \end{bmatrix} \begin{bmatrix}
+        f(1 - it) & 0 \\ 0 & f(1 + it)
+      \end{bmatrix} \begin{bmatrix}
+        \frac{1}{2} & \frac{i}{2t} \\ \frac{1}{2} & \frac{i}{2t}
+      \end{bmatrix} = \begin{bmatrix}
+        \frac{1}{2}(f(1-it) + f(1+it)) & \frac{1}{2it}(f(1+it) - f(1-it)) \\  \frac{it}{2}(f(1+it) - f(1-it)) & \frac{1}{2}(f(1-it) + f(1+it))
+      \end{bmatrix}
+    $$
+    $$
+      \lim{f(A_t)} = \begin{bmatrix}
+        1 & 1 \\ 0 & 1
+      \end{bmatrix}
+    $$
+    $\because$ $\lim{f(A_t)}\neq f(\lim{A_t})$, $\therefore$ $f(J)$ is not well-defined
+\end{solution}
+
+\begin{problem}
+  Compute the following
+\end{problem}
+
+\begin{solution} \newline
+  $(1)$ Find the derivative of $\sin{(tA)}$ as function of $t$ \newline
+  $$ \sin{(tA)} = tA - \frac{(tA)^3}{3!} + \frac{(tA)^5}{5!} \cdots  $$
+  $$ \frac{d}{dt}\sin{(tA)} = A - \frac{(tA)^2}{2!} + \frac{(tA)^4}{4!} \cdots = A\cos{(At)} $$
+  $(2)$ For the forumla $f\left(\begin{bmatrix}
+    2A & A \\ & 2A
+  \end{bmatrix}\right) = \begin{bmatrix}
+    f(2A) & B \\ & f(2A)
+  \end{bmatrix}$, what is the block matrix $B$ in terms of $f$ and $A$? \newline
+  For the taylor expansion at $\begin{bmatrix}
+    2A & 0 \\ 0 & 2A
+  \end{bmatrix}, \begin{bmatrix}
+    0 & A \\ 0 & 0
+  \end{bmatrix}^2 = 0$
+  $$ \therefore 
+  f\left(\begin{bmatrix}
+    2A & A \\ 0 & 2A 
+  \end{bmatrix}\right) =  f\left(\begin{bmatrix}
+    2A & 0 \\ 0 & 2A 
+  \end{bmatrix}\right) +  f\left(\begin{bmatrix}
+    2A &  \\  & 2A 
+  \end{bmatrix} \cdot \begin{bmatrix}
+    0 & A \\ 0 & 0
+  \end{bmatrix}\right)
+  $$
+  $$ \Rightarrow \begin{bmatrix}
+    f(2A) & 0 \\ 0 & f(2A) 
+  \end{bmatrix} + \begin{bmatrix}
+    0 & f'(2A) \cdot A \\ 0 & 0
+  \end{bmatrix} = \begin{bmatrix}
+    f(2A) & f'(2A\cdot A) \\ & f(2A)
+  \end{bmatrix}
+  $$
+  $\therefore$ $B = f'(2A) \cdot A$ \newline
+  $(3)$ Prove or find counter example: The derivative to $f(A+tB)$ as a differentiable function of $t$ at $t=0$ is $f'(A)B$ \newline
+  Let $f(x) = x^2$ \newline
+  $\Rightarrow f(A + tB) = A^2 + t(AB + BA) + t^2B^2$ \newline
+  $\Rightarrow t = 0$, $\frac{d}{dt}f(A+tB) = AB + BA$ \newline
+  But we know that $f'(A)B = 2AB$ when $AB \neq BA$ \newline
+  $\therefore f'(A)B \neq \frac{d}{dt}f(A + tB)$ 
+\end{solution}
+
+\begin{problem}
+  Suppose $AB = BA$, in previous homework, we see that this implies that $A,B$ must have a common eigenvalue
+\end{problem}
+
+\begin{solution} \newline
+  $(1)$ Show that we can find invertible $X_1$, such that $X_1A{X_1}^{-1} = \begin{bmatrix} a_1 & * \\ & A_1 \end{bmatrix}$, $X_1B{X_1}^{-1} = \begin{bmatrix} b_1 & * \\ & B_1 \end{bmatrix}$, and that $A_1B_1 = B_1A_1$ \newline
+  Let the common eigenvector be $\vec{v}_0$ \newline
+  $$ A\vec{v}_0 = a_0\vec{v}_0, B\vec{v}_0 = b_0\vec{v}_0$$
+  
+  $$ {X_1}^{-1} = \begin{pmatrix}
+    a_1* \\ A_1
+  \end{pmatrix} = \begin{pmatrix}
+    a_1\vec{v}_1 & *
+  \end{pmatrix}, A_{{X_1}^{-1}} = \begin{pmatrix}
+    A\vec{v}_1 \cdots A\vec{v}_n 
+  \end{pmatrix} = \begin{pmatrix}
+    a_1\vec{v}_1 & *
+  \end{pmatrix} $$
+  Let $\vec{v}_1 = \vec{v}_0, a_1 = a_0$ \newline
+  $$X_1A{X_1}^{-1} = \begin{bmatrix} a_1 & * \\ & A_1 \end{bmatrix}, X_1B{X_1}^{-1} = \begin{bmatrix} b_1 & * \\ & B_1 \end{bmatrix}$$
+  $$ X_1AB{X_1}^{-1} = \begin{bmatrix} a_1 & * \\ & A_1 \end{bmatrix}  \begin{bmatrix} b_1 & * \\ & B_1 \end{bmatrix} =  \begin{bmatrix} a_1b_1 & * \\ & A_1B_1 \end{bmatrix} $$ 
+  $$ = X_1BA{X_1}^{-1} = \begin{bmatrix} a_1b_1 & 0\\ & A_1B_1 \end{bmatrix}$$
+  $\therefore A_1B_1 = B_1A_1$ \newline
+  $(2)$ Show that A,B can be simultaneously triangularized \newline 
+  $\because A_1B_1 = B_1A_1$, we can find 
+  $$X_2A{X_2}^{-1} = \begin{bmatrix} a_2 & * \\ & A_2 \end{bmatrix}, X_2B{X_2}^{-1} = \begin{bmatrix} b_2 & * \\ & B_2 \end{bmatrix}$$
+  $$X_2 = \begin{bmatrix}
+    1 & 0 \\ 0 & X_2'
+  \end{bmatrix} $$
+  $$ X_2X_1A{X_1}^{-1}{X_2}^{-1} = \begin{bmatrix}
+    a_1 && \\ &  a_2 & \\ && a_3
+  \end{bmatrix},  X_2X_1B{X_1}^{-1}{X_2}^{-1} = \begin{bmatrix}
+    b_1 && \\ &  b_2 & \\ && b_3
+  \end{bmatrix}$$ 
+  $\because$ we repeat this process for all $X_n$, $\therefore$ $AB$ can be simultaneously triangularized
+\end{solution}
+
+\end{CJK}
+\end{document}
