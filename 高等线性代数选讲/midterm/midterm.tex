@@ -5,7 +5,9 @@
 \usepackage{multicol}
 \usepackage{mathtools}
 \usepackage{gauss}
-\usepackage[left=20mm, right=20mm, top=20mm, bottom=20mm]{geometry}
+\usepackage{cases}
+
+\usepackage[left=10mm, right=10mm, top=20mm, bottom=20mm]{geometry}
 \pagestyle{fancy}
 \fancyhf{}
 \rhead{\begin{CJK}{UTF8}{gbsn}{计83 李天勤 2018080106}\end{CJK}}
@@ -32,6 +34,9 @@
 }
 \newlength{\rowidth} % row operation width
 
+\renewcommand{\arraystretch}{0.8}
+\newcommand{\Lim}[1]{\raisebox{0.5ex}{\scalebox{0.8}{$\displaystyle \lim_{#1}\;$}}}
+
 % begin document  
 \begin{document}
 \begin{CJK}{UTF8}{gbsn}
@@ -47,27 +52,589 @@
   Quaternion
 \end{problem}
 
+\begin{solution}
+  $$ a\begin{bmatrix}
+    1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0  \\ 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 1
+  \end{bmatrix} + b \begin{bmatrix}
+    0 & -1 & 0 & 0 \\ 1 & 0 & 0 & 0 \\ 0 & 0 & 0 & -1 \\ 0 & 0 & 1 & 0
+  \end{bmatrix} + c \begin{bmatrix}
+    0 & 0 & -1 & 0 \\ 0 & 0 & 0 & 1 \\ 1 & 0 & 0 & 0 \\ 0 & -1 & 0 & 0 
+  \end{bmatrix} + d \begin{bmatrix}
+    0 & 0 & 0 & -1 \\  0 & 0 & -1 & 0 \\ 0 & 1 & 0 & 0 \\ 1 & 0 & 0 & 0
+  \end{bmatrix}
+  $$ where $a,b,c,d \in \mathbb{R}$ \newline
+  1. Show that this gives a model of the quaternions as well. i.e, they statisfy $i^2=j^2=k^2=ijk=-1$
+  $$ i = \begin{bmatrix}
+    0 & -1 & 0 & 0 \\ 1 & 0 & 0 & 0 \\ 0 & 0 & 0 & -1 \\ 0 & 0 & 1 & 0
+  \end{bmatrix} \Rightarrow i^2 = \begin{bmatrix}
+    0 & -1 & 0 & 0 \\ 1 & 0 & 0 & 0 \\ 0 & 0 & 0 & -1 \\ 0 & 0 & 1 & 0
+  \end{bmatrix}^2 = \begin{bmatrix}
+    -1 & 0 & 0 & 0 \\ 0 & -1 & 0 & 0 \\ 0 & 0 & -1 & 0 \\ 0 & 0 & 0 & -1
+  \end{bmatrix}
+  $$ 
+  $$ j = \begin{bmatrix}
+    0 & 0 & -1 & 0 \\ 0 & 0 & 0 & 1 \\ 1 & 0 & 0 & 0 \\ 0 & -1 & 0 & 0 
+  \end{bmatrix} \Rightarrow j^2 = \begin{bmatrix}
+    0 & 0 & -1 & 0 \\ 0 & 0 & 0 & 1 \\ 1 & 0 & 0 & 0 \\ 0 & -1 & 0 & 0 
+  \end{bmatrix}^2 = \begin{bmatrix}
+    -1 & 0 & 0 & 0 \\ 0 & -1 & 0 & 0 \\ 0 & 0 & -1 & 0 \\ 0 & 0 & 0 & -1
+  \end{bmatrix}
+  $$ 
+  $$ k =  \begin{bmatrix}
+    0 & 0 & 0 & -1 \\  0 & 0 & -1 & 0 \\ 0 & 1 & 0 & 0 \\ 1 & 0 & 0 & 0
+  \end{bmatrix} \Rightarrow k^2 = \begin{bmatrix}
+    0 & 0 & 0 & -1 \\  0 & 0 & -1 & 0 \\ 0 & 1 & 0 & 0 \\ 1 & 0 & 0 & 0
+  \end{bmatrix}^2 =  \begin{bmatrix}
+    -1 & 0 & 0 & 0 \\ 0 & -1 & 0 & 0 \\ 0 & 0 & -1 & 0 \\ 0 & 0 & 0 & -1
+  \end{bmatrix}
+  $$ 
+  $$ ijk = \begin{bmatrix}
+    0 & -1 & 0 & 0 \\ 1 & 0 & 0 & 0 \\ 0 & 0 & 0 & -1 \\ 0 & 0 & 1 & 0
+  \end{bmatrix} \begin{bmatrix}
+    0 & 0 & -1 & 0 \\ 0 & 0 & 0 & 1 \\ 1 & 0 & 0 & 0 \\ 0 & -1 & 0 & 0 
+  \end{bmatrix} \begin{bmatrix}
+    0 & 0 & 0 & -1 \\  0 & 0 & -1 & 0 \\ 0 & 1 & 0 & 0 \\ 1 & 0 & 0 & 0
+  \end{bmatrix} =  \begin{bmatrix}
+    -1 & 0 & 0 & 0 \\ 0 & -1 & 0 & 0 \\ 0 & 0 & -1 & 0 \\ 0 & 0 & 0 & -1
+  \end{bmatrix}
+  $$
+  $\therefore$ this also gives a model of the quaternions as well \newline
+  2. Prove Hamilton Product \newline
+  $\because$ $L_q: \mathbb{R}^4 \rightarrow \mathbb{R}^4 \mapsto L_q(a + bi + cj + dk) = (r + xi +yj + zk)(a + bi + cj + dk)$  \newline
+  $\because$ $[v_1, v_2, v_3, v_4]$ be standard basis for $\mathbb{R}^4 \Rightarrow$ \newline
+  $L_q v_1 = (r + xi + yj + zk)(1 + 0i + 0j + 0k) = r + xi + yj + zk$ \newline
+  $L_q v_2 = (r + xi + yj + zk)(0 + 0i + 0j + 0k) = -x + ri + + zj - yk$ \newline
+  $L_q v_3 = (r + xi + yj + zk)(0 + 0i + 1j + 0k) = -y - zi + rj + xk$ \newline
+  $L_q v_4 = (r + xi + yj + zk)(0 + 0i + 0j + 1k) = -z + yi - xj + rk$ \newline
+  $$ L_q = \begin{bmatrix}
+    r & -x & -y & -z \\ 
+    x & r & -z & y \\
+    y & z & r & -x \\
+    z & -y & x & r
+  \end{bmatrix}
+  $$
+  Using the same logic, we can get $R_q$
+  $$ R_q = \begin{bmatrix}
+    r & -x & -y & -z \\
+    x & r & z & -y \\ 
+    y & -z & r & x \\ 
+    z & y & -x & r
+  \end{bmatrix}$$
+  $$ L_rR_q = \begin{bmatrix}
+    r & -x & -y & -z \\ 
+    x & r & -z & y \\
+    y & z & r & -x \\
+    z & -y & x & r
+  \end{bmatrix}\begin{bmatrix}
+    r & -x & -y & -z \\
+    x & r & z & -y \\ 
+    y & -z & r & x \\ 
+    z & y & -x & r
+  \end{bmatrix} $$
+  $$ = \begin{bmatrix}
+    r^2 - x^2 - y^2 - z^2 & -2rx & -2ry & -2rz \\
+    2rx & r^2 -x^2+y^2 + z^2 & -2xy & -2xz \\ 
+    2rx & -2xy  & r^2+x^2 -y^2 + z^2 & - 2yz \\ 
+    2rz & -2xz & -2yz & r^2 + x^2 + y^2  - z^2
+   \end{bmatrix} $$
+  $$ R_qL_q = \begin{bmatrix}
+    r & -x & -y & -z \\
+    x & r & z & -y \\ 
+    y & -z & r & x \\ 
+    z & y & -x & r
+  \end{bmatrix} \begin{bmatrix}
+    r & -x & -y & -z \\ 
+    x & r & -z & y \\
+    y & z & r & -x \\
+    z & -y & x & r
+  \end{bmatrix} $$ 
+  $$ = \begin{bmatrix}
+    r^2 - x^2 - y^2 - z^2 & -2rx & -2ry & -2rz \\
+    2rx & r^2 -x^2+y^2 + z^2 & -2xy & -2xz \\ 
+    2rx & -2xy  & r^2+x^2 -y^2 + z^2 & - 2yz \\ 
+    2rz & -2xz & -2yz & r^2 + x^2 + y^2  - z^2
+   \end{bmatrix} $$
+  $\therefore$ $L_qR_q = R_qL_q$ \newline
+  3. 
+  $$ L_qR_{\bar{q}} = \begin{bmatrix}
+    a & -b & -c & -d \\
+    b & a & -d & -c \\
+    c & d & a & -b \\
+    d & -c & b & a
+  \end{bmatrix} \begin{bmatrix}
+    a & b & c & d \\
+    -b & a & -d & c \\ 
+    -c & d & a & -b \\
+    -d & -c & b & a
+  \end{bmatrix} $$ 
+   $$ = \begin{bmatrix}
+    a^2+b^2+c^2+d^2 & ab-ab-cd+cd &ac+bd-ac-bd&ad-bc+bc-ad \\
+    ab-ab+cd-cd & b^2-a^2-d^2-c^2 &bc-ad-ad+bc&bd+ac+bd+ac \\
+    ac-bd-ac+bd&bc+ad+ad+bc&c^2-d^2+a^2-b^2&cd+cd-ab-ab \\
+    ad+bc-cb-ad&bd-ac+bd-ac&cd+cd+ab+ab&d^2-c^2-b^2+a^2
+  \end{bmatrix}$$ 
+  $\because q\bar{q} = (a+bi+cj+dk)(a-bi-cj-dk) = a^2 + b^2 + c^2 + d^2 + 0 = 1 $ 
+  $$ = \begin{bmatrix}
+    1 & 0 & 0 & 0 \\
+    0 & a^2+b^2-c^2-d^2 & 2(bc-ad) &2(ac+bd) \\
+    0 & 2(ad+bc) & a^2-b^2+c^2-d^2 & 2(cd-ab) \\
+    0 & 2(bd-ac) & 2(ab+cd) & a^2-b^2-c^2+d^2
+  \end{bmatrix} = \begin{bmatrix}
+    1 & 0 \\ 
+    0 & Q
+  \end{bmatrix}
+  $$
+  Let $q=r+xi+yj+zk$, where it's matrix representation is $$
+  \begin{bmatrix}
+    r & -x & -y & -z \\ 
+    x & r & -z & y \\
+    y & z & r & -x \\
+    z & -y & x & r
+  \end{bmatrix}$$ It's conjugate $\bar{q}=r-xi-yj-zk$ would have the matrix representation $$
+  \begin{bmatrix}
+    r & x & y & z \\ 
+    -x & r & z & -y \\
+    -y & z & r & -x \\
+    -z & y & -x & r
+  \end{bmatrix}
+  $$
+  Which is the transpose of it's conjugate form. Thus, when $Q=$ $$
+  \begin{bmatrix}
+    a^2+b^2-c^2-d^2 & 2(bc-ad) &2(ac+bd) \\
+    2(ad+bc) & a^2-b^2+c^2-d^2 & 2(cd-ab) \\
+    2(bd-ac) & 2(ab+cd) & a^2-b^2-c^2+d^2
+  \end{bmatrix}
+  $$ we can show that $Q$ is orthogonal if and only if $L_qR_{\bar{q}}$ is also orthogonal
+  $$ \Rightarrow L_qR_{\bar{q}} = \begin{bmatrix}
+    1 & 0 \\ 0 & Q
+  \end{bmatrix}, (L_qR_{\bar{q}})^T(L_qR_{\bar{q}}) = \begin{bmatrix}
+    1 & 0 \\ 0 & Q^T
+  \end{bmatrix}\begin{bmatrix}
+    1 & 0 \\ 0 & Q
+  \end{bmatrix} = \begin{bmatrix}
+    1 & 0 \\ 0 & Q^TQ
+  \end{bmatrix}
+  $$ 
+  $\because$ $q$ is a unit quaternion, the matrix representation of $q\bar{q}$ has to be equal to the identiy matrix. 
+  $$\Rightarrow (L_qR_{\bar{q}})^T(L_qR_{\bar{q}})=R_{\bar{q}}^TL_q^TL_qR_{\bar{q}}=R_qR_{\bar{q}} = I$$
+  $\therefore$ $Q$ is orthognal
+ \end{solution}
+
 
 \begin{problem}
   Drazin Inverse and Differential Equation 
 \end{problem}
 
+\begin{solution} \newline
+  1. Prove that $\begin{bmatrix}
+    R^{-1} & 0 \\ 0 & 0
+  \end{bmatrix} = X\begin{bmatrix}
+    (R')^{-1} & 0 \\ 0 & 0 
+  \end{bmatrix}X^{-1}$\newline
+  $$\Rightarrow \begin{bmatrix}
+    R^{-1} & 0 \\ 0 & 0
+  \end{bmatrix}X =  X\begin{bmatrix}
+    (R')^{-1} & 0 \\ 0 & 0 
+  \end{bmatrix} $$
+  Let $X$ be $\begin{bmatrix}
+    x_1 & x_2 \\ x_3 & x_4
+  \end{bmatrix}$
+  $$ \Rightarrow \begin{bmatrix}
+    R^{-1} & 0 \\ 0 & 0
+  \end{bmatrix}\begin{bmatrix}
+    x_1 & x_2 \\ x_3 & x_4
+  \end{bmatrix} = \begin{bmatrix}
+    x_1 & x_2 \\ x_3 & x_4
+  \end{bmatrix}\begin{bmatrix}
+    (R')^{-1} & 0 \\ 0 & 0 
+  \end{bmatrix} $$
+  $$ \Rightarrow \begin{bmatrix}
+    R^{-1}x_1 &  R^{-1}x_2 \\ 0 & 0
+  \end{bmatrix} = \begin{bmatrix}
+    x_1(R')^{-1} & 0 \\ x_3(R')^{-1} & 0 
+  \end{bmatrix} $$
+  Thus we need to prove the two cases
+  \begin{numcases}{}
+    $$ R^{-1}x_1 = x_1(R')^{-1}$$ \label{positive}  \\ 
+    $$R^{-1}x_2 = 0 $$ & $x_2 = 0$\label{negative}
+  \end{numcases} \newline
+  Prove (\ref{positive}),
+  $$\because \begin{bmatrix}
+    R & \\ & N
+  \end{bmatrix} = X\begin{bmatrix}
+    R' & \\ & N'
+  \end{bmatrix}X^{-1}$$
+  $$\Rightarrow \begin{bmatrix}
+    R & \\ & N
+  \end{bmatrix}X = X\begin{bmatrix}
+    R' & \\ & N'
+  \end{bmatrix}$$ 
+  $$ \Rightarrow \begin{bmatrix}
+    R & \\ & N
+  \end{bmatrix} \begin{bmatrix}
+    x_1 & x_2 \\ x_3 & x_4
+  \end{bmatrix} = \begin{bmatrix}
+    x_1 & x_2 \\ x_3 & x_4
+  \end{bmatrix} \begin{bmatrix}
+    R' & \\ & N'
+  \end{bmatrix} $$ 
+  $$ \Rightarrow\begin{bmatrix}
+    Rx_1 & Rx_2 \\ Nx_3 & Nx_4
+  \end{bmatrix} = \begin{bmatrix}
+    x_1R' & x_2N' \\ x_3R' & x_4N'
+  \end{bmatrix}$$ 
+  $\therefore Rx_1 = x_1R'$
+  $$\therefore R^{-1}x_1 = x_1(R')^{-1}$$
+  Prove (\ref{negative})
+  $$Rx_2 = X_2N'$$
+  $$Rx_2N' = X_2(N')^2$$
+  $$R^2X_2 = X_2(N')^2$$
+  $\therefore$ $R^kx_2 = x_2(N')^k$
+  $\because N'$ is nilpotent, $R^kx_2 = 0, x_2=0$ \newline
+  Since conditions (1) and (2) are both proved, we get the equation to be true. \newline
+  2. Show that $AA^{(D)} = A^{(D)}A$, $A^{(D)}AA^{(D)} = A^{(D)}$, and $A^{(D)}A^{k+1} = A^k$ where $k$ is the smallest integer 
+  such that $\ker{(A^k)} = \ker{(A^{k+1})}$
+  $$ AA^{(D)} = X\begin{bmatrix}
+    A_R & \\ & A_N 
+  \end{bmatrix} X^{-1} X\begin{bmatrix}
+    A_R ^{-1} & \\ & 0 
+  \end{bmatrix} X^{-1}  = X \begin{bmatrix}
+    I & 0 \\ 0 & 0
+  \end{bmatrix} X^{-1}$$ 
+  $$ A^{(D)}A = X\begin{bmatrix}
+    A_R ^{-1} & \\ & 0 
+  \end{bmatrix}  X^{-1} X\begin{bmatrix}
+    A_R & \\ & A_N 
+  \end{bmatrix} X^{-1}  = X \begin{bmatrix}
+    I & 0 \\ 0 & 0
+  \end{bmatrix} X^{-1}
+  $$
+  $\therefore$ $AA^{(D)} = A^{(D)}A$
+  $$ A^{(D)}AA^{(D)} =  X \begin{bmatrix}
+    I & 0 \\ 0 & 0
+  \end{bmatrix} X^{-1} X\begin{bmatrix}
+    A_R ^{-1} & \\ & 0 
+  \end{bmatrix}X^{-1} = X\begin{bmatrix}
+    A_R ^{-1} & \\ & 0 
+  \end{bmatrix}X^{-1} = A^{(D)} $$
+  $\therefore$ $A^{(D)}AA^{(D)} = A^{(D)}$
+  $$ A^{(D)}A^{k+1} - A^k = X\begin{bmatrix}
+    A_R ^{-1} & \\ & 0 
+  \end{bmatrix}X^{-1} X\begin{bmatrix}
+    A_R^{k+1} & \\ & A_N^{k+1} 
+  \end{bmatrix} X^{-1} - X\begin{bmatrix}
+    A_R^{k} & \\ & A_N^{k} 
+  \end{bmatrix}X^{-1}$$
+  $$ =X\begin{bmatrix}
+    A_R^{k} & \\ & 0
+  \end{bmatrix}X^{-1} - X\begin{bmatrix}
+    A_R^{k} & \\ & A_N^{k} 
+  \end{bmatrix}X^{-1} $$
+  $\because A_N$ is nilpotent
+  $$ =X\begin{bmatrix}
+    A_R^{k} & \\ & 0
+  \end{bmatrix}X^{-1} - X\begin{bmatrix}
+    A_R^{k} & \\ & 0 
+  \end{bmatrix}X^{-1} = 0 $$
+  3. Calculate $(ab^*)^{(D)}$ for non-zero vectors $a, b \in C_n$ \newline
+  $\because$ $(b^*a)$ is an inner product, the result equals a constant value.
+  $$ A = (ab^*) = X \begin{bmatrix}
+    A_R & \\ & A_N 
+  \end{bmatrix} X^{-1} $$ 
+  $$ A =  X \begin{bmatrix}
+    r & 0 \\  0 & 0 
+  \end{bmatrix} X^{-1} $$
+  And it's trace 
+  $$ \text{tr}\left(\begin{bmatrix}
+    r & 0 \\ 0  & 0
+  \end{bmatrix}\right) = \text{tr}(A) = \text{tr}(ab^*) = \text{tr}(b^*a) = b^*a$$ so we can guess that
+  $$ A =  X \begin{bmatrix}
+    b^*a & 0 \\  0 & 0 
+  \end{bmatrix} X^{-1}  $$
+  $$ \because A^{(D)}  = X \begin{bmatrix}
+    A^{-1}_k & 0 \\ 0 & 0 
+  \end{bmatrix} X^{-1}$$
+  $$\therefore A^{(D)} = X\begin{bmatrix}
+    \frac{1}{b^*a} & 0 \\ 0 & 0
+  \end{bmatrix}X^{-1} = \frac{1}{(b^*a)^2}A$$
+  $$ A = (ab^*) $$
+  $$ \therefore (ab^*)^{(D)} = \frac{(ab^*)}{(b^*a)^2}$$
+  4. For fixed $A$, show that we can find a polynomial $p(x)$ such that $A(D) = p(A)$ \newline
+  5. If $AB = BA$, show that $e^{-A^{(D)}Bt}AA^{(D)}v_0$ is a solution to $Av'+ Bv = 0$ for any constant vector $v_0$.
+  
+  
+
+  
+\end{solution}
+
 \begin{problem}
   Sherman-Morrison-Woodburry Form
 \end{problem}
 
+\begin{solution} \newline
+  1. Write $(I_m - AB)^{-1}$ as the sum of a series of matrices.
+  $$ (I_m - AB)^{-1} = I_m + AB + ABAB + \dots = \sum_{i=0}^{+\infty} (AB)^i$$ 
+  2. Deduce the formula $(I_m - AB)^{-1} = I_m + A(I_n-BA)^{-1}B$ when $I_m - AB$ and $I_n-BA$
+  are invertible and all eigenvalues of $AB$ and $BA$ have absolute value less than 1.
+  $$ (I_m - AB)^{-1} = \sum_{i=0}^{+\infty} (AB)^i = I_m + \sum_{i=1}^{+\infty} (AB)^i = I_m + A\left(\sum_{i=1}^{+\infty} (BA)^{i-1}\right)B = I_m + A(I_n - BA)^{-1}B$$ 
+  3. Prove that $Ap(BA) = p(AB)A$ for all polynomials $p(x)$ \newline
+  Let $p(x) = \sum_{i=0}^n{a_i}x^i$
+  $$Ap(BA) = A\left(\sum_{i=0}^{n} a_i(BA)^{i}\right) = \sum_{i=0}^{n} a_iA(BA)^{i} = \sum_{i=0}^{n} a_i(BA)^{i}A = p(AB)A$$
+  4. For any well-defined $f(A)$, there must exist a polynomial $p(x)$ such that $f(A) = p(A)$\newline
+  Let $A$ = $$ A = \begin{bmatrix}
+    X & 0 \\ 0 & Y
+  \end{bmatrix}$$
+  where $X, Y$ are any two square matrix.
+  $$ \Rightarrow f(A) = \begin{bmatrix}
+    f(X) & \\ & f(Y) 
+  \end{bmatrix} = p(A) = \begin{bmatrix}
+    p(X) & \\ & p(Y)
+  \end{bmatrix}$$
+  $\therefore f(X) = p(X), f(Y) = p(Y)$ \newline
+  $\therefore$  there exists a polynomial $p(X)$ such that $p(X) = f(X), p(Y) = f(Y)$
+  5. Show that $Af(BA) = f(AB)A$ as long as $f(AB)$ and $f(BA)$ are defined \newline
+  $\because$ $f$ is defined on $AB$ and $BA$, there exists a $p$ such that
+  $$p(AB) = f(AB)$$ $$p(BA) = f(BA)$$
+  $\therefore$
+  $$Af(BA) = Ap(BA) = p(AB)A = f(AB)A $$
+  6. Verify that $f(AB) = I_m + Af(BA)B$ using the identity above. \newline
+  $$I_m+Af(BA)B = I_m + f(AB)AB = I_m + \left(\sum_{i=0}^{+\infty} {(AB)^i}(AB)\right) = \sum_{i=0}^{+\infty}(AB)^i=f(AB)$$
+\end{solution}
+
+
+
 \begin{problem}
   Equations of Matrices
 \end{problem}
+
+\begin{solution} \newline
+  1. Show that the solutions to the Sylvester's equation $NX-XN=0$ are exactly the polynomials of $N$ \newline
+  Let $X = $ 
+  $$ \begin{bmatrix}
+    a_{11} & a_{12} & \cdots & a_{1n} \\
+    \vdots & \vdots & \ddots & \vdots \\
+    a_{n1} & a_{n2} & \cdots & a_{nn}
+  \end{bmatrix}$$ 
+  $$ XN = \begin{bmatrix}
+    0 & a_{11} & \cdots & a_{1(n-1)} \\
+    0 & a_{21} & \cdots & a_{2(n-1)} \\
+    \vdots & \vdots & \ddots & \vdots \\
+    0 & a_{n1} & \cdots & a_{n(n-1)}
+  \end{bmatrix}, NX = \begin{bmatrix}
+    a_{21} & a_{22} & \cdots & a_{2n} \\
+    a_{31} & a_{32} & \cdots & a_{3n} \\
+    \vdots & \vdots & \ddots & \vdots \\
+    a_{n1} & a_{n2} & \cdots & a_{nn} \\
+    0 & 0 & \cdots & 0
+  \end{bmatrix}$$ 
+  It is clear to see that 
+  $$ \begin{cases}
+    a_{i1} = 0 & i = 2,3,\cdots,n \\
+    a_{1j} = 0 & j = 1,2,\cdots,n-1 \\
+    a_{ij} = a_{(i-1)(j-1)} & 
+  \end{cases}$$
+  Thus, the matrix $X$ is an upper triangular matrix where the elements on the every upper diagonal is equal. This means it is a linear combination of powers of nilpotent matrices. \newline
+  2. Show that $Y,Y-I,(Y-I)^2,\dots,(Y-I)^{n-1}$ are linearly independent in the space of  matrices, and that they span the space of matrices made of polynomials of $N$ \newline
+  $$ Y = e^N = \sum_{k=0}^{+\infty}\frac{1}{k!}N^k = \sum_{k=0}^{n-1}\frac{1}{k!}N^k $$ 
+  $$ Y - I = \sum_{k=1}^{+\infty}\frac{1}{k!}N^k $$ 
+  $$ (Y - I)^k = \sum_{i_1=1}^{n-1}\cdots\sum_{i_k=1}^{n-1}\frac{1}{i_1!\cdots i_k!}N^{i_1+\cdots+i_k - k} $$ 
+  Let us assume that $Y,Y-I,(Y-I)^2,\dots,(Y-I)^{n-1}$ are not linearly independent matrices \newline
+  Let $$Y = \sum_{k=1}^{n-1}{a_k(Y-I)^k}$$
+  which deduces
+  $$ I + \sum^{n-1}_{k=1} \frac{1}{k!} N^k = Y =  \sum^{n-1}_{k=1}{a_kN^k}\sum_{i_1=1}^{n-1}\cdots\sum_{i_k=1}^{n-1}\frac{1}{i_1!\cdots i_k!}N^{i_1+\cdots+i_k - k}$$
+  However, this shows that $I$ can not be expressed as a linear combinations of other matrixes, which contradicts our assumption. The same logic can be extended for $(Y-I)^k$ \newline
+  Let 
+  $$ (Y-I)^j= \sum^{n-1}_{k=j+1}{a_k(Y-I)^k} $$ 
+  $$ (N^j) \sum_{i_1=1}^{n-1}\cdots\sum_{i_j=1}^{n-1}\frac{1}{i_1!\cdots i_j!}N^{i_1+\cdots+i_j - j} = (Y-I)^j =  \sum^{n-1}_{k=j+1}{a_kN^k}\sum_{i_1=1}^{n-1}\cdots\sum_{i_k=1}^{n-1}\frac{1}{i_1!\cdots i_k!}N^{i_1+\cdots+i_k - k}$$
+  However, this shows that the elements of $N^j$  component cannot be expressed as a linear combination of the matrices $(Y-I)^{j+1}, \cdot, (Y-I)^{n-1}$  and so on, which also contradicts our assumption. \newline
+  $\therefore$ $Y,Y-I,(Y-I)^2,\dots,(Y-I)^{n-1}$ are linearly independent in the space of matrices \newline
+  $\because N^n = 0, N^{n-1} \neq 0$ the span of solution space is $n$, and thus these matrices form the basis of the solution space of X. \newline
+  3. Find all solutions $X$ to the matrix equation $e^X=e^N$ \newline
+  $$ \because e^N = I + N + \frac{N^2}{2!} + \cdots +  = \sum_{n=0}^{\infty} \frac{N^n}{n!}$$
+  $\because$ $N$ is a nilpotent jordan block, then $e^N$ is an upper triangular with 1 on the main diagonal, so it is invertable. 
+  $$ \therefore e^{-N}e^X= e^Xe^{-N} = I$$
+  Therefore $X$ and $N$ commute, and $$X=N + 2\pi kiI, k\in\mathbb{Z}$$
+  4. Find real matrices $A, B$ such that $AB\neq BA$ but $e^A=e^B$ \newline
+  We can use the fact that an exponent of a diagonal matrix is simply the exponent of the elements along the diagonal.
+  Let $A = \begin{bmatrix}
+    i\pi & 0 \\ 0 & -i\pi 
+  \end{bmatrix}, B = \begin{bmatrix}
+    i\pi & 1 \\ 0 & -i\pi
+  \end{bmatrix} $ 
+  $$ AB = \begin{bmatrix}
+    i\pi & 0 \\ 0 & -i\pi 
+  \end{bmatrix}  \begin{bmatrix}
+    i\pi & 1 \\ 0 & -i\pi
+  \end{bmatrix} =  \begin{bmatrix}
+    -\pi^2 & i\pi \\ 0 & -\pi^2
+  \end{bmatrix} $$
+  $$ BA =  \begin{bmatrix}
+    i\pi & 1 \\ 0 & -i\pi
+  \end{bmatrix} \begin{bmatrix}
+    i\pi & 0 \\ 0 & -i\pi 
+  \end{bmatrix}  =  \begin{bmatrix}
+    -\pi^2 & -i\pi \\ 0 & -\pi^2
+  \end{bmatrix}$$
+  $$ e^A = \begin{bmatrix}
+    e^{i\pi} & 0 \\ 0 & e^{-i\pi} 
+  \end{bmatrix} = \begin{bmatrix}
+    -1 & 0 \\ 0 & -1
+  \end{bmatrix}$$ 
+  $$ e^B = \begin{bmatrix}1&\frac{i}{2\pi }\\ 0&1\end{bmatrix}{\begin{bmatrix}i\pi &0\\ 0&-i\pi \end{bmatrix}}\begin{bmatrix}1&-\frac{i}{2\pi }\\ 0&1\end{bmatrix}$$
+  $$ = \begin{bmatrix}1&\frac{i}{2\pi }\\ 0&1\end{bmatrix}e^{\begin{bmatrix}i\pi &0\\ 0&-i\pi \end{bmatrix}}\begin{bmatrix}1&-\frac{i}{2\pi }\\ 0&1\end{bmatrix} = \begin{bmatrix}1&\frac{i}{2\pi }\\ 0&1\end{bmatrix}\begin{bmatrix}-1&0\\ 0&-1\end{bmatrix}\begin{bmatrix}1&-\frac{i}{2\pi }\\ 0&1\end{bmatrix} = \begin{bmatrix}
+    -1 & 0 \\ 0 & -1
+  \end{bmatrix}$$
+  $\therefore$ $AB\neq BA, e^A=e^B$ 
+  \newline
+  5. Prove that there is no solution $X$ to the equation $\sin{X}=\begin{bmatrix}
+    1 & 1996 \\ 0 & 1
+  \end{bmatrix}$ \newline
+  $\because$ $\sin^2{x} + \cos^2{x} = 1$
+  $$ \sin^2{X} + \cos^2{X} = I $$
+  $\therefore$ 
+  $$\cos^2{X} = I - \sin^2{X} \Rightarrow \begin{bmatrix}
+    1 & 0 \\ 0 & 1 
+  \end{bmatrix} - \begin{bmatrix}
+    1 & 1996 \\ 0 & 1
+  \end{bmatrix}^2 = \begin{bmatrix}
+    1 & 0 \\ 0 & 1 
+  \end{bmatrix} - \begin{bmatrix}
+    1 & 3992 \\ 0 & 1
+  \end{bmatrix} = \begin{bmatrix}
+    0 & -3992 \\ 0 & 0
+  \end{bmatrix}$$
+  $\Rightarrow \cos^2{x}$ is nilpotent, so is $\cos{x}$, which is a contradiction because that means the top right element of the matrix ($-3992$) should actually be zero.
+\end{solution}
 
 
 \begin{problem}
   Newton's Method
 \end{problem}
 
+\begin{solution} \newline
+  1. Show that if $X_n$ has no purely imaginary eigenvalue, then $X_{n+1}$ has no purely imaginary eigenvalue \newline
+  Let $\lambda_b$ be any one of the eigenvalues of $X_n$, where $v$ is the eigenvector of the matrix $X_n$
+  $$X_nv = \lambda_nv$$
+  $$X_n^{-1}v=\frac{v}{\lambda}$$
+  $\therefore$ Both $X_{n+1}$ and $X_n$ have the eigenvector $v$
+  $$\because X_{n+1} = \frac{1}{2}\left( X_n + X^{-1}_n\right), X_{n+1}v=\lambda_{n+1}v$$
+  $$\therefore \lambda_{n+1}=\frac{1}{2}\left(\lambda_n + \frac{1}{\lambda_n}\right)$$
+  Let $\lambda_b = x+iy, x \neq 0$
+  $$\lambda_{n+1}=\frac{1}{2}\left(x+iy + \frac{1}{x+iy}\right)= \frac{1}{2}\left(\frac{(x+iy)(x+iy)(x-iy)}{(x+iy)(x-iy)} + \frac{(x-iy)}{(x+iy)(x-iy)}\right)$$
+  $$=\frac{x(x^2+y^2 + 1)}{2(x^2+y^2)} + i\frac{y(x^2+y^2-1)}{2(x^2+y^2)}$$
+  Which means that $X_{n+1}$ also has no purely imaginary eigenvalue \newline
+  2. If $A$ is $1\times 1$, and not purely imaginary, show that $X_n$ does indeed converge to $\text{sign}(A)$ \newline
+  $\because \frac{f(x)-1}{f(x)+1} = (\frac{x-1}{x+1})^2$ where $f(x)=\frac{1}{2}\left(x+\frac{1}{x}\right)$
+  $$ \frac{X_{n+1} - 1}{X_{n+1} + 1} = \frac{\frac{1}{2}(X_n + X_n^{-1}) -1}{\frac{1}{2}(X_n + X_n^{-1}) +1} \left(\frac{2}{2}\right) = \frac{X_n + X_n^{-1} -2}{X_n + X_n^{-1}+2} = \frac{(X_n - 1)^2}{(X_n + 1)^2}$$
+  $\because X_0 = A$
+  $$= \frac{(A-1)^{2n}}{(A+1)^{2n}} \Rightarrow X_n = \frac{\frac{(A-1)^{2n}}{(A+1)^{2n}} - 1}{\frac{(A-1)^{2n}}{(A+1)^{2n}} + 1} = \frac{1 - \frac{(A+1)^{2n}}{(A-1)^{2n}}}{1 + \frac{(A+1)^{2n}}{(A-1)^{2n}}} $$
+  Let $\frac{1 - \frac{(A+1)^{2n}}{(A-1)^{2n}}}{1 + \frac{(A+1)^{2n}}{(A-1)^{2n}}}$ be (f) and let $\frac{\frac{(A-1)^{2n}}{(A+1)^{2n}} - 1}{\frac{(A-1)^{2n}}{(A+1)^{2n}} + 1}$ be (g)
+  $$\begin{cases}
+    \Lim{n\rightarrow + \infty} X_n = \Lim{n\rightarrow + \infty} (f)  = \frac{1 - 0}{1 + 0}  = 1&  A > 0, |A+1|^{2^n} < |A-1|^{2^n} \\
+    \Lim{n\rightarrow + \infty} X_n = \Lim{n\rightarrow + \infty} (g)  = \frac{0 - 1}{0 + 1}  = -1&  A < 0, |A+1|^{2^n} > |A-1|^{2^n}
+  \end{cases}
+  $$
+  $\therefore$ for $A_{1\times 1}$, $\Lim{n\rightarrow + \infty} X_n = \text{sign(A)}$ \newline
+  3. If $A$ is diagonalizable and has no purely imaginary eigenvalue, show that $X_n$ indeed coverge to $\text{sign}(A)$ \newline
+  $\because A$ is diagonalizable, then $X_n$ is also diagonalizable. Thus
+  $$\because X_n = BAB^{-1}$$
+  $$\therefore \Lim{m \rightarrow +\infty} X_m = B \Lim{n \rightarrow +\infty} \begin{bmatrix}
+    \lambda_{1m} & & & \\ 
+    & \lambda_{2m} & & \\
+    & & \ddots & \\
+    & & & \lambda_{nm} 
+  \end{bmatrix}_{n\times m} B^{-1}$$
+  If $A = B\text{ diag}{(\lambda_{10}, \dots, \lambda{n0})}B^{-1}$
+  $$\Rightarrow B \Lim{n \rightarrow +\infty} \begin{bmatrix}
+    \lambda_{1m} & & & \\ 
+    & \lambda_{2m} & & \\
+    & & \ddots & \\
+    & & & \lambda_{nm} 
+  \end{bmatrix} B^{-1} = B \Lim{n \rightarrow +\infty} \begin{bmatrix}
+    \text{sign}\lambda_{10} & & & \\ 
+    & \text{sign}\lambda_{20} & & \\
+    & & \ddots & \\
+    & & & \text{sign}\lambda_{n0} 
+  \end{bmatrix} B^{-1} = \text{sign}A$$ 
+  4. Suppose $A$ is an $n \times n$ Jordan block with eigenvalue 1. Show that $X_{n-1} = I$. \newline
+  From the result question 2, we can see describe $X_n$ as 
+  $$X_n = [I-(A+I)^{2^n}(A-I)^{-2^n}][I+(A+I)^{2^n}(A-I)^{-2^n}]^{-1}$$
+  Let $A = I + N$, then
+  $$ X_{n-1} =  [I-(I+N+I)^{2^{n-1}}(I+N-I)^{-2^{n-1}}][I+(I+N+I)^{2^{n-1}}(I+N-I)^{-2^{n-1}}]^{-1} $$
+  $$ = [I-N^n(2I+N)^{-2^{n-1}}][I-N^n(2I+N)^{-2^{n-1}}]^{-1} = I$$ 
+\end{solution} 
+
 \begin{problem}
   Real  Mobius  Transformation
 \end{problem}
+
+\begin{solution} \newline
+  1. Show that $f_A(x) \circ f_B = f_{AB} $ \newline
+  Let $A=\begin{bmatrix} a_1 & b_1 \\ a_2 & b_2 \end{bmatrix}$, $B=\begin{bmatrix}
+    a_2 & b_2 \\ c_2 & d_2
+  \end{bmatrix}$
+  $$f_A(f_B(x)) = \frac{a_1\left(\frac{a_2x+b_2}{c_2x+d_2}\right)+b_1}{c_1\left(\frac{a_2x+b_2}{c_2x+d_2}\right)+d_1} = \frac{a_1a_2x+a_1b_2+b_1c_2x+b_1d_2}{c_1a_2x+c_1b_2+d_1c_2x+d_1d_2} =\frac{(a_1a_2+b_1c_2)x+(a_1b_2+b_1d_2)}{(c_1a_2+d_1c_2)x +(c_1b_2+d_1d_2)}$$
+  $$AB = \begin{bmatrix}
+    a_1 & b_1 \\ 
+    c_1 & d_1
+  \end{bmatrix} \begin{bmatrix}
+    a_2 & b_2 \\ 
+    c_2 & d_2
+  \end{bmatrix} = \begin{bmatrix}
+    a_1a_2+b_1c_2 & a_1b_2+b_1d_2 \\
+    c_1a_2 +d_1c_2 & c_1b_2+d_1d_2
+  \end{bmatrix}$$
+  $\therefore$ $f_A\circ f_B = f_{AB}$ \newline
+2. $k\in \mathbb{R} - \{0\}$
+ $$ f_{kA}(x) = \frac{(ka_1)x + (kb_1)}{(kc_1)x + (kd_1)} = \frac{a_1x+b_1}{c_1x+d_1}=f_A(x)$$
+ Conversly, if $f_A(x) = f_B(x) \Rightarrow$
+ $$ 
+ \frac{a_1x+b_1}{c_1x+d_1} = \frac{a_2x+b_2}{c_2x+d_2} \Rightarrow a_1c_2x^2 + (a_1d_2 + b_1c_2)x + b_1d_2 = a_2c_1x^2 + (b_2c_1 + d_1a_2)x + b_2d_1
+ $$
+ Since $x$ is an arbitary value, let $k_1 = a_1c_2 = a_2c_1, k_2=b_1d_2=b_2d_1$, then
+ $$ a_2 = \frac{k_1}{c_1}, b_2 = \frac{k_2}{d_1}, c_2=\frac{k_1}{a_1}, d_2 = \frac{k_2}{b_1}$$
+ $$ \Rightarrow a_1d_2+b_2c_2 = d_1a_2 + b_2c_1 \Rightarrow \frac{a_1}{b_1}k_2 + \frac{b_1}{a_1}k_1 = \frac{d_1}{c_1}k_1  + \frac{c_1}{d_1}k_2\Rightarrow \frac{k_1}{k_2} = \frac{a_1c_1}{b_1d_1}$$
+ $$  \frac{a_1c_1}{b_1d_1} = \frac{a_1c_2}{b_1d_2} \Rightarrow \frac{c_1}{c_2} = \frac{d_1}{d_2}, \frac{a_1c_1}{b_1d_1} = \frac{a_1c_2}{b_2d_1}\Rightarrow \frac{b_1}{b_2} = \frac{c_1}{c_2} \frac{a_1c_1}{b_1d_1} = \frac{a_2c_1}{b_2d_1}\Rightarrow \frac{a_1}{a_2} = \frac{b_1}{b_2}$$
+ $$ \therefore \frac{a_1}{a_2} = \frac{b_1}{d_1} = \frac{c_1}{c_2} = \frac{d_1}{d_2} = A = kB $$ 
+ 3. \newline
+ $$ f_A\left(\frac{x}{y}\right) = \frac{a_1\left(\frac{x}{y}\right) + b_1}{c_1\left(\frac{x}{y}\right) + d_1}  = \frac{a_1x + b_1y}{c_1x+d_1y}$$
+ $$ A \begin{bmatrix}
+   x \\ y 
+ \end{bmatrix} = \begin{bmatrix}
+   a_1 & b_1 \\ c_1 & d_1
+ \end{bmatrix} \begin{bmatrix}
+   x \\ y
+ \end{bmatrix} = \begin{bmatrix}
+   a_1x + b_1y \\ c_1x + d_1y
+ \end{bmatrix}$$
+ $\therefore$ $A$ and $f_A$ can be used interchangably \newline
+ 4. Show that there are only four kinds of Mobius transformations \newline
+ If $x$ is the fixed point of the Mobius transformation $f_A$ and $x\in \mathbb{R}$, then  
+ $$ \frac{ax+b}{cx+d} = x \Leftrightarrow cx^2 - (a-d)x - b = 0$$
+ $\therefore$ $f_A$ may have every point fixed, two points fixed, one point fixed, or have no fixed point. \newline 
+ $(a) f_A$ has two fixed points 
+ $$ \begin{cases}
+  (a-d)^2 + 4bc > 0 & c\neq 0 \\
+ a \neq d & c = 0
+\end{cases} $$
+ $(b) f_A$ has one single fixed point 
+ $$ \begin{cases}
+   (a-d)^2 + 4bc > 0 & c \neq 0 \\
+   a = d \oplus b\neq 0& c=0
+ \end{cases}$$
+ $(c) f_A$ has no fixed point  
+ $$ \begin{cases}
+   (a-d)^2 + 4bc < 0 \oplus c \neq 0
+ \end{cases}$$
+ $(d) f_A$ everyone is fixed 
+ $$ \begin{cases}
+  b = c = 0 \\
+  a = d \neq 0 
+\end{cases} $$
+
+\end{solution} 
+
+
 
 \end{CJK}
 \end{document}

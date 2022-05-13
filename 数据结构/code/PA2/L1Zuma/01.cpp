@@ -6,14 +6,15 @@ string a;
 
 
 void play(int rank) {
+    printf("---------------------\n");
+    cout << "rank " << rank << "\n";
     int left = rank;
     int right = rank;
 
     // breaks when string is empty, you cannot a.at(0) on empty string
     char color = a.at(rank);
-
-    printf("---------------------\n");
-    cout << "ranks " << left << " " << right << "\n";
+    // char color = a[rank];
+// 
     cout << "strin " << a << "\n";
     
     
@@ -29,10 +30,7 @@ void play(int rank) {
     cout << "sizes " << size << "\n";
     printf("---------------------\n");
     if (size >= 3) {
-
-        // 
         a.erase(left, size);
-        printf("Hello\n");
         play(left - 1);
     }
 }
@@ -57,13 +55,3 @@ int main() {
     return 0;
 }
 
-// incorrect testcase
-// ACCBA
-// 5
-// 1 B
-// 0 A
-// 2 B
-// 4 C
-// terminate called after throwing an instance of 'std::out_of_range'
-//   what():  basic_string::at: __n (which is 18446744073709551615) >= this->size() (which is 0)
-// Aborted

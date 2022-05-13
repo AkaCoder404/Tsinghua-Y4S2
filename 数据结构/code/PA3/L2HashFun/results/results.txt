@@ -1,0 +1,72 @@
+testsets/I100000_Q200000_poj.in,naive,linear,time: 10.0001s,i_collisions: 330960219,q_collisions: 324859866 (break)
+testsets/I100000_Q200000_poj.in,naive,quadratic,time: 10.0001s,i_collisions: 218193587,q_collisions: 87469703 (break)
+testsets/I100000_Q200000_poj.in,naive,overflow,time: 10.0002s,i_collisions: 415339431,q_collisions: 404904421 (break)
+testsets/I100000_Q200000_poj.in,ascii,linear,time: 5.35358s,i_collisions: 27085636,q_collisions: 199704385
+testsets/I100000_Q200000_poj.in,ascii,quadratic,time: 9.97728s,i_collisions: 76946557,q_collisions: 167033172
+testsets/I100000_Q200000_poj.in,ascii,overflow,time: 10.0012s,i_collisions: 338455153,q_collisions: 329141953 (break)
+testsets/I100000_Q200000_poj.in,utf-8,linear,time: 1.07204s,i_collisions: 12798,q_collisions: 36928
+testsets/I100000_Q200000_poj.in,utf-8,quadratic,time: 0.470315s,i_collisions: 14279,q_collisions: 43414
+testsets/I100000_Q200000_poj.in,utf-8,overflow,time: 10.0001s,i_collisions: 68696781,q_collisions: 213482229 (break)
+testsets/I200000_Q250000_poj.in,naive,linear,time: 10.0003s,i_collisions: 269719906,q_collisions: 269104250 (break)
+testsets/I200000_Q250000_poj.in,naive,quadratic,time: 10s,i_collisions: 309754808,q_collisions: 107071947 (break)
+testsets/I200000_Q250000_poj.in,naive,overflow,time: 10s,i_collisions: 431166295,q_collisions: 428741301 (break)
+testsets/I200000_Q250000_poj.in,ascii,linear,time: 10.0002s,i_collisions: 212173473,q_collisions: 169806710 (break)
+testsets/I200000_Q250000_poj.in,ascii,quadratic,time: 10s,i_collisions: 57701897,q_collisions: 52788466 (break)
+testsets/I200000_Q250000_poj.in,ascii,overflow,time: 10.0002s,i_collisions: 328897128,q_collisions: 325528891 (break)
+testsets/I200000_Q250000_poj.in,utf-8,linear,time: 0.488831s,i_collisions: 73639,q_collisions: 95545
+testsets/I200000_Q250000_poj.in,utf-8,quadratic,time: 0.492985s,i_collisions: 86469,q_collisions: 113660
+testsets/I200000_Q250000_poj.in,utf-8,overflow,time: 10.0002s,i_collisions: 241065903,q_collisions: 202801219 (break)
+testsets/I20000_Q15000_hdu.in,naive,linear,time: 3.10503s,i_collisions: 146954627,q_collisions: 77237978
+testsets/I20000_Q15000_hdu.in,naive,quadratic,time: 0.348413s,i_collisions: 10806569,q_collisions: 4815977
+testsets/I20000_Q15000_hdu.in,naive,overflow,time: 3.2769s,i_collisions: 198293655,q_collisions: 107134008
+testsets/I20000_Q15000_hdu.in,ascii,linear,time: 0.039141s,i_collisions: 163347,q_collisions: 86935
+testsets/I20000_Q15000_hdu.in,ascii,quadratic,time: 0.066396s,i_collisions: 443266,q_collisions: 180459
+testsets/I20000_Q15000_hdu.in,ascii,overflow,time: 2.81835s,i_collisions: 152871355,q_collisions: 76700498
+testsets/I20000_Q15000_hdu.in,utf-8,linear,time: 0.049057s,i_collisions: 3300,q_collisions: 272
+testsets/I20000_Q15000_hdu.in,utf-8,quadratic,time: 0.051129s,i_collisions: 5096,q_collisions: 279
+testsets/I20000_Q15000_hdu.in,utf-8,overflow,time: 0.060684s,i_collisions: 711028,q_collisions: 113829
+testsets/I100000_Q200000_hdu.in,naive,linear,time: 10.0004s,i_collisions: 317573238,q_collisions: 292223326 
+testsets/I100000_Q200000_hdu.in,naive,quadratic,time: 10.0012s,i_collisions: 183386545,q_collisions: 62314457 
+testsets/I100000_Q200000_hdu.in,naive,overflow,time: 10.0002s,i_collisions: 303651046,q_collisions: 294246805 
+testsets/I100000_Q200000_hdu.in,ascii,linear,time: 3.56973s,i_collisions: 13164006,q_collisions: 93719185
+testsets/I100000_Q200000_hdu.in,ascii,quadratic,time: 10.0004s,i_collisions: 67847858,q_collisions: 96457888 
+testsets/I100000_Q200000_hdu.in,ascii,overflow,time: 10s,i_collisions: 320639826,q_collisions: 302718152
+testsets/I100000_Q200000_hdu.in,utf-8,linear,time: 0.372208s,i_collisions: 226188,q_collisions: 355329
+testsets/I100000_Q200000_hdu.in,utf-8,quadratic,time: 0.348355s,i_collisions: 146597,q_collisions: 65336
+testsets/I100000_Q200000_hdu.in,utf-8,overflow,time: 10.0002s,i_collisions: 159945555,q_collisions: 348574823 
+testsets/I200000_Q250000_hdu.in,naive,linear,time: 10.0002s,i_collisions: 233241222,q_collisions: 221104899
+testsets/I200000_Q250000_hdu.in,naive,quadratic,time: 10s,i_collisions: 288958302,q_collisions: 81854039
+testsets/I200000_Q250000_hdu.in,naive,overflow,time: 10.0005s,i_collisions: 348361210,q_collisions: 341288147
+testsets/I200000_Q250000_hdu.in,ascii,linear,time: 10.0013s,i_collisions: 300888712,q_collisions: 218570912
+testsets/I200000_Q250000_hdu.in,ascii,quadratic,time: 10s,i_collisions: 128318608,q_collisions: 92718356
+testsets/I200000_Q250000_hdu.in,ascii,overflow,time: 10.0061s,i_collisions: 273955528,q_collisions: 267069225
+testsets/I200000_Q250000_hdu.in,utf-8,linear,time: 1.02755s,i_collisions: 3715049,q_collisions: 2112911
+testsets/I200000_Q250000_hdu.in,utf-8,quadratic,time: 0.662971s,i_collisions: 783084,q_collisions: 206845
+testsets/I200000_Q250000_hdu.in,utf-8,overflow,time: 10.0007s,i_collisions: 318617146,q_collisions: 174823472
+testsets/I20000_Q15000_poj.in,naive,linear,time: 6.33679s,i_collisions: 199117932,q_collisions: 111207582
+testsets/I20000_Q15000_poj.in,naive,quadratic,time: 0.39206s,i_collisions: 10614159,q_collisions: 5934389
+testsets/I20000_Q15000_poj.in,naive,overflow,time: 3.77952s,i_collisions: 198751953,q_collisions: 110939501
+testsets/I20000_Q15000_poj.in,ascii,linear,time: 0.084833s,i_collisions: 204373,q_collisions: 114685
+testsets/I20000_Q15000_poj.in,ascii,quadratic,time: 0.093087s,i_collisions: 697773,q_collisions: 254019
+testsets/I20000_Q15000_poj.in,ascii,overflow,time: 3.63706s,i_collisions: 172190403,q_collisions: 91940184
+testsets/I20000_Q15000_poj.in,utf-8,linear,time: 0.044401s,i_collisions: 425,q_collisions: 233
+testsets/I20000_Q15000_poj.in,utf-8,quadratic,time: 0.027364s,i_collisions: 441,q_collisions: 241
+testsets/I20000_Q15000_poj.in,utf-8,overflow,time: 0.045329s,i_collisions: 138075,q_collisions: 43176
+testsets/I200000_Q250000_poj.in,naive,linear,time: 30.0004s,i_collisions: 826330391,q_collisions: 813002447
+testsets/I200000_Q250000_poj.in,naive,quadratic,time: 30.0066s,i_collisions: 688095723,q_collisions: 165243028
+testsets/I200000_Q250000_poj.in,naive,overflow,time: 30.0061s,i_collisions: 1092196953,q_collisions: 1066495064
+testsets/I200000_Q250000_poj.in,ascii,linear,time: 30.0002s,i_collisions: 752702220,q_collisions: 586674046
+testsets/I200000_Q250000_poj.in,ascii,quadratic,time: 25.8295s,i_collisions: 248587131,q_collisions: 216879970
+testsets/I200000_Q250000_poj.in,ascii,overflow,time: 30.0005s,i_collisions: 1113471645,q_collisions: 1085506575
+testsets/I200000_Q250000_poj.in,utf-8,linear,time: 0.431413s,i_collisions: 73639,q_collisions: 95545
+testsets/I200000_Q250000_poj.in,utf-8,quadratic,time: 0.449771s,i_collisions: 86469,q_collisions: 113660
+testsets/I200000_Q250000_poj.in,utf-8,overflow,time: 30.0001s,i_collisions: 934308378,q_collisions: 853613966
+testsets/I200000_Q250000_hdu.in,naive,linear,time: 30.0001s,i_collisions: 1335446624,q_collisions: 1200945214
+testsets/I200000_Q250000_hdu.in,naive,quadratic,time: 30.0001s,i_collisions: 1179225757,q_collisions: 173102955
+testsets/I200000_Q250000_hdu.in,naive,overflow,time: 30.0003s,i_collisions: 1398332286,q_collisions: 1317253036
+testsets/I200000_Q250000_hdu.in,ascii,linear,time: 30s,i_collisions: 963609951,q_collisions: 692247160
+testsets/I200000_Q250000_hdu.in,ascii,quadratic,time: 23.212s,i_collisions: 234894070,q_collisions: 188834395
+testsets/I200000_Q250000_hdu.in,ascii,overflow,time: 30.0003s,i_collisions: 1083288331,q_collisions: 1016035455
+testsets/I200000_Q250000_hdu.in,utf-8,linear,time: 0.641894s,i_collisions: 3715049,q_collisions: 2112911
+testsets/I200000_Q250000_hdu.in,utf-8,quadratic,time: 0.562289s,i_collisions: 783084,q_collisions: 206845
+testsets/I200000_Q250000_hdu.in,utf-8,overflow,time: 30.0003s,i_collisions: 1254378828,q_collisions: 700484153

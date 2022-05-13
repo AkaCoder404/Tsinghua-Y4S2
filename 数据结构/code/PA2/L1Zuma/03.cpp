@@ -5,12 +5,12 @@ using namespace std;
 string a;
 
 void play(int rank) {
+    printf("---------------------\n");
+    cout << "rank " << rank << "\n";
     int left = rank;
     int right = rank;
     char color = a.at(rank);
 
-    printf("---------------------\n");
-    cout << "ranks " << left << " " << right << "\n";
     cout << "strin " << a << "\n";
     
 

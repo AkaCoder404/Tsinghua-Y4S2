@@ -1,0 +1,271 @@
+\documentclass[12pt, a4paper, oneside]{article}
+\usepackage{CJKutf8}
+\usepackage{amsmath, amsthm, amssymb, bm, color, framed, graphicx, hyperref, mathrsfs}
+\usepackage{fancyhdr}
+\usepackage{multicol}
+\usepackage{mathtools}
+\usepackage{gauss}
+\usepackage[left=10mm, right=10mm, top=20mm, bottom=20mm]{geometry}
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\begin{CJK}{UTF8}{gbsn}{计83 李天勤 2018080106}\end{CJK}}
+\lhead{\begin{CJK}{UTF8}{gbsn}{高代线性代数作业6}\end{CJK}}
+	
+
+\title{\textbf{课程作业}}
+\author{AkaCoder404}
+\date{\today}
+\newpage
+\linespread{1.5}
+\definecolor{shadecolor}{RGB}{241, 241, 255}
+\newcounter{problemname}
+\newenvironment{problem}{\begin{shaded}\stepcounter{problemname}\par\noindent\textbf{题目\arabic{problemname}. }}{\end{shaded}\par}
+\newenvironment{solution}{\par\noindent\textbf{解答. }}{\par}
+\newenvironment{note}{\par\noindent\textbf{题目\arabic{problemname}的注记. }}{\par}
+
+% row operations
+\newenvironment{sysmatrix}[1]
+ {\left[\begin{array}{@{}#1@{}}}
+ {\end{array}\right]}
+\newcommand{\ro}[1]{%
+  \xrightarrow{\mathmakebox[\rowidth]{#1}}%
+}
+\newlength{\rowidth} % row operation width
+
+% kbordermatrix
+
+
+
+
+% begin document  
+\begin{document}
+\begin{CJK}{UTF8}{gbsn}
+
+% \maketitle
+% \newpage
+\section{Dual Stuff}
+
+\setcounter{problemname}{0}
+\begin{problem}
+  Let $V$ be the space of real polynomials of degree less than n. So dim $V = n$. Then for each
+$a\in\mathbb{R}$, the evaluation $ev_a$ is a dual vector.
+\end{problem}
+
+\begin{solution}
+  1. Under the basis of $1,x,\dots,x^{n-1}$, the polynomial $p(x)=k_o+k_1x+k_2x^2+\dots+k_{n-1}x^{n-1}$ can be represented as $\begin{pmatrix}
+    k_0 \\ k_1 \\ \vdots \\ k_m
+  \end{pmatrix}$
+  $\Rightarrow$
+  $$L : \begin{pmatrix}
+    k_0 \\ k_1 \\ \vdots \\ k_m
+  \end{pmatrix} \mapsto \begin{pmatrix}
+    p(a_1) \\ p(a_2) \\ \vdots \\ p(a_m)
+  \end{pmatrix}   = \begin{pmatrix}
+    k_0 + k_1a_1 + k_2a_1^2 + \cdots + k_{n-1}a_1^{n-1} \\
+    k_0 + k_1a_2 + k_2a_2^2 + \cdots + k_{n-1}a_2^{n-1} \\
+    \vdots \\ 
+    k_0 + k_1a_n + k_na_2^2 + \cdots + k_{n-1}a_n^{n-1} \\
+  \end{pmatrix} = \begin{pmatrix}
+    1 & a_1 & a_1^2 & \cdots & a_1^{n-1} \\
+    1 & a_2 & a_2^2 & \cdots & a_2^{n-1} \\
+    \vdots &  \vdots & \vdots  & \ddots & \vdots\\
+    1 & a_n & a_n^2 & \cdots & a_n^{n-1} \\
+  \end{pmatrix} \begin{pmatrix}
+    k_0 \\ k_1 \\ \vdots \\ k_m
+  \end{pmatrix}$$
+  Thus the matrix for $L$ under this basis is 
+  $$ \begin{bmatrix}
+    1 & a_1 & a_1^2 & \cdots & a_1^{n-1} \\
+    1 & a_2 & a_2^2 & \cdots & a_2^{n-1} \\
+    \vdots &  \vdots & \vdots  & \ddots & \vdots\\
+    1 & a_n & a_n^2 & \cdots & a_n^{n-1} \\
+  \end{bmatrix}$$
+  which happens to be the Vandermonder Matrix!
+\end{solution}
+
+\begin{solution} 
+  2. $$ \left| L \right| = \prod_{1 \leq j < i \leq n} (a_i - a_j)$$
+  $$ \begin{cases}
+    |L| \neq 0 & \text{iff }a_1,a_2,\dots,a_n\text{ are distinct} \\
+    L\text{ is invertable} & \text{iff }a_1,a_2,\dots,a_n\text{ are distinct}
+  \end{cases}$$
+\end{solution}
+
+\begin{solution}
+  3. Firstly, $ev_{a_1}, ev_{a_2}, \dots, ev_{an} \in V^*$ and dim $V^* = n$ \newline
+  $\therefore$ we only need to prove that $ev_{a_1}, ev_{a_2}, \dots, ev_{an}$ is in fact independent \newline
+  Let $b_1ev_{a_1} + b_2ev_{a_2} + \dots +  b_nev_{an} = (0, 0, \cdots, 0)$ \newline
+  $\Rightarrow$ $b_1p(a_1) + b_2p(a_2) + \cdots + b_np(a_n) =  (0, 0, \cdots, 0)$ \newline
+  $\Rightarrow$ $(b_1, b_2, \cdots, b_n)\begin{pmatrix}
+    p(a_1) \\ p(a_2) \\ \vdots \\ p(a_n) 
+  \end{pmatrix} = (0, 0, \cdots, 0)$ \newline
+  $\Rightarrow $ $(b_1, b_2, \cdots, b_n)L = (0, 0, \cdots, 0)$ \newline
+  $\therefore$ $L$ is in fact invertable, and thus $b_1 = b_2 = \cdots = b_n = 0 \Rightarrow ev_{a_1}, ev_{a_2}, \dots, ev_{an}$ is linear independent \newline
+  $\because ev_{a_1}, ev_{a_2}, \dots, ev_{an} \Rightarrow \text{we must have } b_1 = b_2 = \cdots = b_n = 0 \Rightarrow L$ is invertable \newline
+  $\therefore$ $ev_{a_1}, ev_{a_2}, \dots, ev_{an}$ form a basis for $V^*$ iff all $a_1,a_2,\dotsm a_n$ are distinct
+\end{solution}
+
+\begin{solution}
+  4. Let $a_n=-1,a_2=0, a_3=1$ 
+  $$ L = \begin{bmatrix}
+    1 & -1 & 1 \\ 1 & 0 & 0 \\ 1 & 1 & 1
+  \end{bmatrix}, L^{-1} = \begin{bmatrix}
+    0 & 1 & 0 \\
+    -\frac{1}{2} & 0 & \frac{1}{2} \\
+    \frac{1}{2} & -1 & \frac{1}{2}
+  \end{bmatrix}$$
+  $$Lp_{-1}=\begin{pmatrix}
+    1 \\ 0 \\ 0
+  \end{pmatrix} \Rightarrow p_{-1} = L^{-1}x\begin{pmatrix}
+    1 \\ 0 \\ 0
+  \end{pmatrix} \Rightarrow p_{-1} = \begin{pmatrix}
+    0 \\ -\frac{1}{2} \\ \frac{1}{2}
+  \end{pmatrix}$$
+  $\therefore$ $p_{-1}(x) = -\frac{1}{2}x + \frac{1}{2}x^2$ \newline
+  $\therefore$ $p_o(x) = -x^2 + 1$ \newline
+  $\therefore$ $p_1(x)=\frac{1}{2}x^2+\frac{1}{2}x$
+\end{solution}
+
+\begin{solution}
+  5. Let $b_2ev_2 + b_{-1}ev_{-1} + b_0ev_0+b_1ev_1+b_2ev_2 = (0, 0, 0, 0)$
+  $$\therefore \begin{pmatrix}
+    b_{-2} & b_{-1} & b_{0} & b_{1} b_{2} 
+  \end{pmatrix} \begin{pmatrix}
+    p(-2) \\ p(-1) \\ p(0) \\ p(1) \\ p(2)
+  \end{pmatrix} = (0, 0, 0, 0)$$
+  $$\therefore \begin{pmatrix}
+    b_{-2} & b_{-1} & b_{0} & b_{1} b_{2} 
+  \end{pmatrix}  \begin{pmatrix}
+    1 & -2 & 4 & -8 \\
+    1 & -1 & 1 & -1 \\
+    1 & 0 & 0 & 0 \\
+    1 & 1 & 1 & 1 \\
+    1 & 2 & 4 & 8
+  \end{pmatrix}  = (0, 0, 0, 0)$$
+  $\therefore b_{-2} = -1, b_{-1} = 4, b_{0} = -6, b_{1}=4, b_2 = -1$  \newline
+  $\therefore -ev_{-2} + 4ev_{-1} -6ev_0 + 4ev_1 - ev_2 = 0$
+\end{solution}
+
+%--------------------------------------------------------------------
+\begin{problem}
+  Let $V$ be the space of real polynomials of degree less than $3$. Which of the following is a
+dual vector? Prove it or show why not.
+
+\end{problem}
+
+\begin{solution} 
+  1.Let $p(x) = a_0 + a_1x + a_2x^2$, $(x+1)p(x) = a_0 + (a_0 + a_1)x + (a_1 + a_2)x^2 + a_2x^3$ \newline
+  $$\therefore p\mapsto ev_5((x+1)p(x)) \Leftrightarrow \begin{pmatrix}
+    a_0 \\ a_1 \\ a+2 
+  \end{pmatrix} \mapsto 6a_0 + 30a_1 + 150a_2$$
+  $\therefore$ it is equal to the row vector $\begin{pmatrix}
+    6 & 30 & 15
+  \end{pmatrix}$ \newline
+  $\therefore$ map is a dual vector
+\end{solution}
+
+\begin{solution}
+  2. Let $p(x) = a_0 + a_1x + a_2x^2$, $\lim_{x\rightarrow\infty}{\frac{p(x)}{x}} = \lim_{x\rightarrow\infty} (a_1+a_2x)$
+  $$\therefore p \mapsto \lim_{x\rightarrow\infty} {\frac{p(x)}{x}} \Leftrightarrow \begin{pmatrix}
+    a_0 \\ a_1 \\ a_2
+  \end{pmatrix} \mapsto a_1 + a_2x$$
+  $\therefore$ it cannot equal a constant row vector \newline
+  $\therefore$ the map is not a dual vector
+\end{solution}
+
+\begin{solution}
+  3. Let $p(x) = a_0 + a_1x + a_2x^2$, $\lim_{x\rightarrow\infty}{\frac{p(x)}{x^2}}=a_2$
+  $$ \therefore p \mapsto \lim_{x\rightarrow\infty}\frac{p(x)}{x^2} \Leftrightarrow \begin{pmatrix}
+    a_0 & a_1 & a_2
+  \end{pmatrix} \mapsto a_2 $$
+  $\therefore$ is is equal to row vector $\begin{pmatrix}
+    0 & 0 & 1
+  \end{pmatrix}$ \newline
+  $\therefore$ so this is a dual vector
+\end{solution}
+
+\begin{solution}
+  4. Let $p(x) = a_0 + a_1x + a_2x^2$, $p(3)p'(4) = (a_0+3a_1+9a_2)(a_1+2(4)a_2) =a_0a_1+8a_0a_4+3a_1^2+24a_1a_4+0a_1a_2+7_2a_2a_4$
+  $$ \therefore p \mapsto p(3)p'(4) \Leftrightarrow \begin{pmatrix}
+    a_0 \\ a_0 \\ a_2 
+  \end{pmatrix} \mapsto a_0a_1+8a_0a_4+3a_1^2+24a_1a_4+0a_1a_2+7_2a_2a_4$$
+  $\therefore$ it cannot be equal to a row veector
+  $\therefore$ the map is not a dual vector
+\end{solution}
+
+\begin{solution}
+  5. Let $p(x) = a_0 + a_1x + a_2x^2$, $\text{deg} = \begin{cases}
+    2 & a_2\neq0 \\
+    1 & a_2=0 \text{ and } a_1\neq 0 \\
+    0 & a_1=a_2=0 
+  \end{cases}$ 
+  $$ p \mapsto \text{deg}(p) \Leftrightarrow \begin{pmatrix}
+    a_0 \\ a_1 \\ a_2
+  \end{pmatrix} \mapsto \begin{cases}
+    2 & a_2\neq0 \\
+    1 & a_2=0 \text{ and } a_1\neq 0 \\
+    0 & a_1=a_2=0 
+  \end{cases}$$
+  $\therefore$ it is not a linear map since $L\begin{pmatrix}
+    0 \\ 1 \\ 0
+  \end{pmatrix} + L \begin{pmatrix}
+    1 \\ 0 \\ 0 
+  \end{pmatrix} = 1 + 2 \neq L\left(\begin{pmatrix}
+      0 \\ 1 \\ 0
+  \end{pmatrix} + \begin{pmatrix}
+    1 \\ 0 \\ 0
+  \end{pmatrix} = 2\right)$ \newline
+  $\therefore$ it is not a dual vector
+\end{solution}
+
+%--------------------------------------------------------------------
+\begin{problem}
+  For the differentiable function: ...
+\end{problem}
+
+\begin{solution} 
+  Let $v=\begin{pmatrix}
+    x \\ y
+  \end{pmatrix}, p = \begin{pmatrix}
+    x_0 \\ y_0
+  \end{pmatrix}$
+  $$\triangledown_v f = \lim_{t\rightarrow 0} {\frac{f\left( \begin{pmatrix}
+    x_0 \\ y_0
+  \end{pmatrix} + t\begin{pmatrix}
+    x \\ y
+  \end{pmatrix}\right) - f\left(\begin{pmatrix}
+    x_0 \\ y_0
+  \end{pmatrix}\right)}{t}}$$
+  Which is equivalent to the map
+  $$ \Rightarrow \begin{pmatrix}
+    x \\ y
+  \end{pmatrix} \mapsto \left( \frac{\partial f}{\partial x} \Bigr|_{x_0}, \frac{\partial f}{\partial y} \Bigr|_{y_0}\right)\begin{pmatrix}
+    x \\ y
+  \end{pmatrix}$$
+  $\therefore$ it is equal to the row vector $\left( \frac{\partial f}{\partial x} \Bigr|_{x_0}, \frac{\partial f}{\partial y} \Bigr|_{y_0}\right)$ \newline
+  $\therefore$ it is dual vector
+  $\therefore$ coordinates under standard basis, $\begin{pmatrix} 
+    1 \\ 0
+  \end{pmatrix}$ and $\begin{pmatrix}
+    0 \\ 1
+  \end{pmatrix}$ is  $\left( \frac{\partial f}{\partial x} \Bigr|_{x_0}, \frac{\partial f}{\partial y} \Bigr|_{y_0}\right)$
+\end{solution}
+
+\begin{problem}
+  Consider a linear map $L : V \rightarrow W$
+\end{problem}
+
+\begin{solution}
+  1. \newline
+  The domain of $L^*$ is in $W^*$, so $\text{Ker}(L^*)$ is collection of dual vectors in $W^*$ \newline
+  $\therefore$ $\text{Ker}(L^*)$ is a collection of dual vectors in $W^*$ that kills $\text{Ran}(L)$
+\end{solution}
+
+\begin{solution}
+  2. \newline
+  The codomain of $L^*$ is in $V^*$, so $\text{Ran}(L^*)$ is collection of dual vectors in $V^*$ \newline
+  $\therefore$ $\text{Ran}(L^*)$ is a collection of dual vectors in $V^*$ that kills $\text{Ker}(L)$
+\end{solution}
+
+\end{CJK}
+\end{document}

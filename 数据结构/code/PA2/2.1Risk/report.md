@@ -21,7 +21,7 @@ Thus, this gives us a time complexity of O(n^2), which only recieves a score of 
 
 ## 方法 2: Queap 
 The second attempt is located in the file b.cpp. 
-### Part 1: Setting up the Que's
+### Part 1: Setting up the Queue's
 Further analysis of the question highlighted two important key points. 
 > Each trace query will not trace days earlier than the trace query of the previous day
 
@@ -69,5 +69,4 @@ Space complexity is defined by the arrays and queues, which are $n$, so space co
 ## References 
 - queap data structure: https://en.wikipedia.org/wiki/Queap
 - prefix sum algorithm: https://en.wikipedia.org/wiki/Prefix_sum
-
 

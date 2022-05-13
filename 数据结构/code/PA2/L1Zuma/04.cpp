@@ -5,6 +5,7 @@ using namespace std;
 string a;
 
 void play(int rank) {
+    printf("rank %d\nstrin %s\n", rank, a.c_str());
     int left = rank;
     int right = rank;
     char color = a.at(rank);
