@@ -13,8 +13,6 @@ This algorithm only received 20/50, the rest were runtime error (too much memory
 ## Method 2 Segment Tree
 According to the tip, the algorithm could be improved by implementing a Segment Tree. A segmemnt tree could be implenented in a similar way to the Huffman Encoding Tree, using an array, and where the children of a node is located at `2 * pos + 1` and `2 * pos + 2`, where `pos` is the location of the parent node. 
 
-A segmemnt tree,
-
 The algorithm can be split into 3 parts, `constructSegmentTree`, `getSum`, and `updateNode`, where we build the tree using the given results. In this case, building the segment tree can be ignored, because all the initial values are simply 0, and thus we just have to declare an array large enough to store the nodes. `getSum` get's the sum of the times the cards were flipped and `updateNode` flips the cards between left and right.
 
 ### Time Complexity and Space Complexity
@@ -32,7 +30,7 @@ However, this method still requires a high space complexity, even more than the 
 
 
 ### Method 3 Improved Segment Tree
-In this problem, clearly, the yumber of playing cards is too large, directly implementing the a segmement tree where each playing card represents a leaf node, which requires a maximum of $4n=2^{33}$ nodes, exceeds the allowable space.
+In this problem, clearly, the number of playing cards is too large, directly implementing the a segmement tree where each playing card represents a leaf node, which requires a maximum of $4n=2^{33}$ nodes, exceeds the allowable space.
 
 Therefore, it is necessary to read all the query and left and right update/sum bounds, discretize the interval, and store the smallest interval segment in each leaf node. 
 

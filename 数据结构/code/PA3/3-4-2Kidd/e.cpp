@@ -46,10 +46,10 @@ void quickSort(int arr[], int low, int high)
     }
 }
  
-char inputOp[MAX];
-int inputLeft[MAX];
-int inputRight[MAX];
-int inputLen = 0;
+char inputOp[MAX];   // store type of input
+int inputLeft[MAX];  // store left bound
+int inputRight[MAX]; // store right bound
+int inputLen = 0;    // 
 int endPoints[ENDPOINTS_MAX];
 int endPointsLen = 0;
 

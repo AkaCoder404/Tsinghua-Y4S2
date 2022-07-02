@@ -1,0 +1,3 @@
+tree, testcase1.txt, testcase2.txt, testcase3.txt, testcase4.txt, testcase5.txt, testcase6.txt,
+avl,1.19361,0.429855,1.21025,0.600866,0.763074,0.290721,
+splay,1.28553,0.154067,1.68334,0.477307,0.898786,0.225441,

@@ -1,7 +1,7 @@
 #include <cstdio>
 #include <cstring>
 #include <stdlib.h>
-#define N 5000000
+#define N 50000
 
 // number of characters in our character set (2 for bin)
 #define NUM_CHAR 2

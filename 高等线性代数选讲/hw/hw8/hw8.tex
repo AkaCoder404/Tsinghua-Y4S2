@@ -49,22 +49,109 @@
 
 \begin{solution}
   1. \newline
+  $(i,j,k)$ entry of 3D matrix $\alpha \otimes \beta \otimes \lambda$ 
+  \begin{align}
+    \alpha \otimes \beta \otimes \lambda &= \alpha \otimes \beta \otimes \lambda \left( \begin{pmatrix}
+      0 \\ \vdots  \\ i \\ \vdots \\ 0
+    \end{pmatrix}, \begin{pmatrix}
+      0 \\ \vdots  \\ j \\ \vdots \\ 0
+    \end{pmatrix}, \begin{pmatrix}
+      0 \\ \vdots  \\ k\\ \vdots \\ 0
+    \end{pmatrix}\right)\nonumber \\
+    & = \left[\alpha 
+    \begin{pmatrix}
+      0 \\ \vdots  \\ 1 \\ \vdots \\ 0
+    \end{pmatrix}i,  
+    \right]\left[\beta
+    \begin{pmatrix}
+      0 \\ \vdots  \\ 1 \\ \vdots \\ 0
+    \end{pmatrix}j,  
+    \right]\left[\lambda
+    \begin{pmatrix}
+      0 \\ \vdots  \\ 1 \\ \vdots \\ 0
+    \end{pmatrix}k
+    \right] \nonumber \\
+     &= \alpha i\beta j \lambda k \nonumber 
+  \end{align}
 \end{solution}
 
 \begin{solution}
   2. \newline
+  All 3D matrices are sum of $\lambda$ rank-one 3D matrices \newline
+  $$A = \alpha_1 \otimes \beta_1 \otimes \lambda_1 + \alpha_2 \otimes  \beta_2 \otimes \lambda_3 + \cdots + \alpha_r \otimes \beta_r \otimes \lambda_r $$
+  $$ M_3 : A \mapsto (\alpha_1E) \otimes \beta_1 \otimes \lambda_1 + (\alpha_2 E)\otimes \beta_2 \otimes \lambda_2 + \cdots + (\alpha_r E)\otimes \beta_r \otimes \lambda_r $$ 
+  $$ \alpha_1(E_1 + E_2)\otimes B_1 \otimes \lambda_1 + \alpha_2(E_1+E_2)\otimes \beta_2 \otimes \lambda_2 + \cdots + \alpha_r(E_1 +E_2)\otimes\beta_r\otimes\lambda_r $$ 
+  $$ = \alpha_1E_1\otimes\beta_1\otimes\lambda_1+\alpha_2E_1\otimes\beta_2\otimes\lambda_2+\cdots+\alpha_rE_1\otimes\beta_r\otimes\lambda_r$$
+  $$ + \alpha_1E_2\otimes\beta_1\otimes\lambda_1+\alpha_2E_2\otimes\beta_2\otimes\lambda_2+\cdots+\alpha_rE_2\otimes\beta_r\otimes\lambda_r$$
+  $\because$
+  $$\alpha_1(kE)\otimes\beta_1\otimes\lambda_1+\alpha_2(kE)\otimes\beta_2\otimes\lambda_2+\cdots+\alpha_r(kE)\otimes\beta_r\otimes\lambda_r$$
+  $$=k\left[\lambda_1E\otimes\beta_1\otimes\lambda_1+\alpha_2E\otimes\beta_2\otimes\lambda_2+\cdots+\alpha_r\alpha_E\otimes\beta_r\otimes\lambda_r\right]$$
+  $\therefore$ $M_E$ is a linear map and layer operation is extended to a linear map $M_E$
 \end{solution}
 
 \begin{solution}
   3. \newline
+  Let $A$ be a rank $r$ 3D tensor, $B=M_E(A)$ \newline
+  We need to prove that $rank(B) = r$
+  Since $A$ is a rank $r$ 3D tensor, $A$ can be expressed as 
+  $$A = \alpha_1\otimes\beta_1\otimes\lambda_1 + \alpha_2\otimes\beta_2\otimes\lambda_2+\cdots+\alpha_r\otimes\beta_r\lambda_r$$
+  $$B = M_E(A) = (\alpha_1E)\otimes\beta_1\otimes\lambda_1 + (\alpha_2(E))\otimes\beta_2\otimes\lambda_2+\cdots+(\alpha_rE)\otimes\beta_r\lambda_r$$
+  $\therefore$ $rank(B)=rank(A)$ and $rank(B)\leq r$ \newline
+  Thus, if $rank(B) = p < r$, then $B=\alpha_1\otimes\beta_1\otimes\lambda_1+\cdots+\lambda_p\otimes\beta_p\otimes\lambda_p$ \newline
+  Since $B=M_E(A)$, then $A = M_E^{-1}(B)$
+  $$A=(\lambda_rE^{-1}\otimes\beta_1\otimes\lambda_1+\cdots+\alpha_pE^{-1}\otimes\beta_p\otimes\lambda_p)$$
+  where $rank(A) \leq p < r$, which is contradicting \newline
+  $\therefore$ $rank(B) = r$
 \end{solution}
 
 \begin{solution}
   4. \newline
+  If a 3D matrix has rank $\lambda_1, \lambda_1 < r$, then it can be expressed as the sum of $r_1$ rank-one tensor \newline
+  $$ M = \alpha_1\otimes\beta_1\otimes\lambda_1 + \alpha_2\otimes\beta_2\otimes\lambda_2 + \cdots + \alpha_{r_1}\otimes\beta_{r_1}\otimes\lambda_{r_1}$$
+  So, the $i^{th}$ value of the horizontal layer is 
+  $$ M_i = \lambda_{1i}(\alpha_1\otimes\beta_1) + \lambda_{2i}(\alpha_2\otimes\beta_2)+\cdots+\lambda_{r_1i}(\alpha_n\otimes\beta_{r1})$$ 
+  $\therefore$ \newline
+  All layers of $M$ can expressed as sum of $r_1$ rank one matrix \newline 
+  $rank(M_i) \leq r_1 < r \forall i $ \newline
+  Which contradicts our known conditions, therefore 3D matrix has at least rank r 
 \end{solution}
 
 \begin{solution}
   5. \newline
+  A 2D layer matrix has rank 2, $rank(M) \geq 2$
+  $$ \begin{bmatrix}
+    1 & 0 \\ 0 & 1
+  \end{bmatrix} = \begin{bmatrix}
+      \frac{1}{2} & -\frac{1}{2} \\
+      -\frac{1}{2} & \frac{1}{2}
+  \end{bmatrix} + \begin{bmatrix}
+    \frac{1}{2} & \frac{1}{2} \\
+    \frac{1}{2} & \frac{1}{2}
+  \end{bmatrix}$$
+
+  $$ \begin{bmatrix}
+    0 & 1 \\ 1 & 0
+  \end{bmatrix} = \begin{bmatrix}
+    -\frac{1}{2} & \frac{1}{2} \\
+     \frac{1}{2} & -\frac{1}{2}
+  \end{bmatrix} + \begin{bmatrix}
+    \frac{1}{2} & \frac{1}{2} \\
+    \frac{1}{2} & \frac{1}{2}
+  \end{bmatrix}$$
+  $$ M = \begin{pmatrix}
+      \frac{1}{2} \\ -\frac{1}{2}
+  \end{pmatrix} \otimes \begin{pmatrix}
+    1 \\ -1
+  \end{pmatrix} \otimes \begin{pmatrix}
+    1 \\ -1
+  \end{pmatrix} + \begin{pmatrix}
+    \frac{1}{2} \\ \frac{1}{2} 
+  \end{pmatrix} \otimes \begin{pmatrix}
+    1 \\ 1
+  \end{pmatrix}\otimes \begin{pmatrix}
+    1 \\ 1
+  \end{pmatrix}$$
+  $\because rank(M) \leq 2 \therefore rank(M)=2$
 \end{solution}
 
 
@@ -75,19 +162,128 @@
 
 \begin{solution}
   1. \newline
+  Horizontal layer 1 of $M$ is $A_1 = \begin{bmatrix}
+    3 & 4 & 5 \\ 
+    4 & 5 & 6 \\
+    5 & 6 & 7 \\
+  \end{bmatrix}$ \newline
+  Horizontal layer 2 of $M$ is $A_2 = \begin{bmatrix}
+    4 & 5 & 6 \\
+    5 & 6 & 7 \\
+    6 & 7 & 8
+  \end{bmatrix}$ \newline
+  Horizontal layer 3 of $M$ is $A_3 = \begin{bmatrix}
+    5 & 6 & 7 \\ 
+    6 & 7 & 8 \\ 
+    7 & 8 & 9 
+  \end{bmatrix}$ \newline
+  Since $M$ sends $(u,v,w)$ to $\left[u^TA_1v,u^TA_2v,u^TA_3v\right]w$ \newline
+  So $M$ sends $(u,v,w)$ to $\left[v^TA_1v,v^TA_2v,v^TA_3v\right]v$ \newline
+  $v^TA_1v=(x,y,z)\begin{pmatrix}
+    3 & 4 & 5 \\ 
+    4 & 5 & 6 \\
+    5 & 6 & 7
+  \end{pmatrix} \begin{pmatrix}
+    x \\ y \\ z
+  \end{pmatrix} = 3x^2 +5y^2+7z^2+8xy+10xz+12yz$ \newline
+  $v^TA_2v=(x,y,z)\begin{pmatrix}
+    4 & 5 & 6 \\
+    5 & 6 & 7 \\
+    6 & 7 & 8 
+  \end{pmatrix}\begin{pmatrix}
+    x \\ y \\ z
+  \end{pmatrix} = 4x^2+6y^2+8z^2+10xy+12xz+14yz$ \newline
+  $v^TA_3v=(x,y,z)\begin{pmatrix}
+    5 & 6 & 7 \\ 
+    6 & 7 & 8 \\ 
+    7 & 8 & 9 
+  \end{pmatrix}\begin{pmatrix}
+    x \\ y \\ z
+  \end{pmatrix} = 5x^2+7y^2+9z^2+12xy+14xz+16yz$ \newline
+  $\therefore$
+  \begin{align}
+    \left[v^TA_1v, v^TA_2v, v^TA_3v\right]\begin{pmatrix}
+      x \\ y \\ z
+    \end{pmatrix} &= x(3x^2+5y^2+7z^2+8xy+10xz+12yz) \nonumber \\
+    & + y(4x^2+6y^2+8z^2+10xy+12xy+14yz)\nonumber \\
+    & + z(5x^2+7y^2+9z^2+12xy+14xz+16yz)\nonumber 
+  \end{align}
+  $$ = 3x^5+6y^5+9z^3+12x^2y+15xy^2+21xz^2+15x^2z+22yz^2+21y^2z +36xyz $$
 \end{solution}
 
 \begin{solution}
   2. \newline
-\end{solution}
+  $M: (v_1, v_2, v_3) \mapsto M(v_1, v_2, v_3)$ \newline
+  $M': (v_1, v_2, v_3) \mapsto M'(\sigma(v_1), \sigma(v_2), \sigma(v_3))$ \newline
+  $M'$ is attained by exchanging the $x,y,z$ direction of $M$, follwoing the order of the $\sigma$ map. \newline
+  Since we know the entry of $M'$, 
+  $$ f(i) + f(j) + f(k)  = i + j + k$$ 
+  $\therefore$, the $(i,j,k)$ entry of the multilinear map $M^{\sigma}$ is always equal to $i+j+k$ \newline
+  $i\in \{1,2,3\}, j\in \{1,2,3\}, k\in \{1,2,3\}$ \newline
+  $M^{\sigma}$ is always equal to $M$ when $\sigma$ is an identity map \newline 
+  $M(v_1, v_2, v_3) = M(v_{\sigma(1)}, v_{\sigma(2)}, v_3{\sigma(3)})$
+\end{solution} 
 
 \begin{solution}
   3. \newline
+  Horizontal layer 1 of $M$, $A_1=\begin{bmatrix}
+    3 & 4 & 5 \\ 4 & 5 & 6 \\ 5 & 6 & 7
+  \end{bmatrix}$ \newline
+  $rank(A_1) = 2$ \newline
+  From the previous answer we know $rank(M)\geq rank(A_1)=2$ \newline
+  \begin{align}
+    M &= \begin{pmatrix}
+      4 & 5 & 6 \\ 
+      5 & 6 & 7 \\
+      6 & 7 & 8
+    \end{pmatrix} \otimes \begin{pmatrix}
+      1 \\ 1 \\ 1
+    \end{pmatrix} + \begin{pmatrix}
+      1 & 1 & 1 \\ 1 & 1 & 1 \\ 1 & 1 & 1
+    \end{pmatrix} \otimes \begin{pmatrix}
+      -1 \\ 0 \\ 1
+    \end{pmatrix} \nonumber \\
+    & = \left[\begin{pmatrix}
+      1 \\ 1 \\ 1
+    \end{pmatrix}\otimes\begin{pmatrix}
+      5 \\ 6 \\ 7
+    \end{pmatrix}+\begin{pmatrix}
+      1 \\ 1 \\ 1
+    \end{pmatrix}\otimes\begin{pmatrix}
+      -1 \\ 0 \\ 1
+    \end{pmatrix}\right]\otimes\begin{pmatrix}
+      1 \\ 1 \\ 1
+    \end{pmatrix} + \begin{pmatrix}
+      1 \\ 1 \\ 1
+    \end{pmatrix}\otimes\begin{pmatrix}
+      1 \\ 1 \\ 1
+    \end{pmatrix}\otimes\begin{pmatrix}
+      -1 \\ 0 \\ 1
+    \end{pmatrix} \nonumber\\
+    & =\begin{pmatrix}
+      1 \\ 1 \\ 1
+    \end{pmatrix}\otimes\begin{pmatrix}
+      5 \\ 6 \\ 7
+    \end{pmatrix}\otimes\begin{pmatrix}
+      1 \\ 1 \\ 1
+    \end{pmatrix}+\begin{pmatrix}
+      1 \\ 1 \\ 1
+    \end{pmatrix}\otimes\begin{pmatrix}
+      -1 \\ 0 \\ 1
+    \end{pmatrix}\otimes\begin{pmatrix}
+      1 \\ 1 \\ 1
+    \end{pmatrix}+\begin{pmatrix}
+      1 \\ 1 \\ 1
+    \end{pmatrix}\otimes\begin{pmatrix}
+      1 \\ 1 \\ 1
+    \end{pmatrix}\otimes\begin{pmatrix}
+      -1 \\ 0 \\ 1
+    \end{pmatrix} \nonumber
+  \end{align}
+  So $M$ can be decomposed as three $rank$ 1 tensors, $\therefore 2\leq rank(M)\leq 3$
 \end{solution}
 
-\begin{solution}
-  4. \newline
-\end{solution}
+
 
 \end{CJK}
 \end{document}

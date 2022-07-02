@@ -1,0 +1,261 @@
+\documentclass[12pt, a4paper, oneside]{article}
+\usepackage{CJKutf8}
+\usepackage{amsmath, amsthm, amssymb, bm, color, framed, graphicx, hyperref, mathrsfs}
+\usepackage{fancyhdr}
+\usepackage{multicol}
+\usepackage{mathtools}
+\usepackage{gauss}
+\usepackage[left=10mm, right=10mm, top=20mm, bottom=20mm]{geometry}
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\begin{CJK}{UTF8}{gbsn}{计83 李天勤 2018080106}\end{CJK}}
+\lhead{\begin{CJK}{UTF8}{gbsn}{高代线性代数作业9}\end{CJK}}
+	
+
+\title{\textbf{课程作业}}
+\author{AkaCoder404}
+\date{\today}
+\newpage
+\linespread{1.5}
+\definecolor{shadecolor}{RGB}{241, 241, 255}
+\newcounter{problemname}
+\newenvironment{problem}{\begin{shaded}\stepcounter{problemname}\par\noindent\textbf{题目\arabic{problemname}. }}{\end{shaded}\par}
+\newenvironment{solution}{\par\noindent\textbf{解答. }}{\par}
+\newenvironment{note}{\par\noindent\textbf{题目\arabic{problemname}的注记. }}{\par}
+
+% row operations
+\newenvironment{sysmatrix}[1]
+ {\left[\begin{array}{@{}#1@{}}}
+ {\end{array}\right]}
+\newcommand{\ro}[1]{%
+  \xrightarrow{\mathmakebox[\rowidth]{#1}}%
+}
+\newlength{\rowidth} % row operation width
+
+% kbordermatrix
+
+% begin document  
+\begin{document}
+\begin{CJK}{UTF8}{gbsn}
+
+% \maketitle
+% \newpage
+\section{More Tensors}
+
+\setcounter{problemname}{0}
+\begin{problem}
+  Squeezing a Ping Pong
+\end{problem}
+
+\begin{solution} 1. \newline
+  $\vec{p_1} = -\vec{e_1}$ \newline
+  $\vec{p_2} = -\vec{e_2}$ \newline
+  $\vec{p_3} = +\frac{\sqrt{2}}{2}\vec{e_1}+\frac{\sqrt{2}}{2}\vec{e_2}$ \newline
+  $T = \vec{p_1}\otimes\vec{f_1}+\vec{p_2}\otimes\vec{f_2}+\vec{p_3}\otimes\vec{f_3}$ \newline
+  Let $\begin{cases}
+    \vec{e_1} \otimes \vec{e_1} = e_{11} \\
+    \vec{e_2} \otimes \vec{e_2} = e_{22} \\
+    \vec{e_1} \otimes \vec{e_2} = e_{12} \\ 
+    \vec{e_2} \otimes \vec{e_1} = e_{21}
+  \end{cases}$ \newline
+  \begin{align}
+    T &= -e_{11} - e_{22} - \left(\frac{\sqrt{2}}{2}\vec{e_1}+\frac{\sqrt{2}}{2}\vec{e_2}\right)\otimes\left(\vec{e_1}+\vec{e_2}\right) \nonumber\\
+    &= -\left( \frac{\sqrt{2}}{2} + 1 \right)e_{11} - \left( \frac{\sqrt{2}}{2} + 1 \right)e_{22} - \frac{\sqrt{2}}{2} - \frac{\sqrt{2}}{2}e_{21} \nonumber
+  \end{align}
+\end{solution}
+
+\begin{solution} 2. \newline
+  Let $\vec{x} = \cos{\theta}\vec{e_1}+\sin{\theta}\vec{e_2}$ \newline
+  $\Rightarrow \vec{y} = \cos{(\theta + \frac{\sqrt{2}}{2})}\vec{e_1}+\sin{(\theta+\frac{\sqrt{2}}{2})}\vec{e_2} = -\sin{\theta}\vec{e_1} + \cos{\theta}\vec{e_2}$ \newline
+  $\Rightarrow \vec{y} = \cos{(\theta - \frac{\pi}{2})}\vec{e_1}+\sin{(\theta-\frac{\pi}{2})}\vec{e_2} = \sin{\theta}\vec{e_1} - \cos{\theta}\vec{e_2}$ \newline
+  For both $y$, \newline
+  $\vec{x}\otimes\vec{x} = \cos^2{\theta}e_{11} + \sin^2{\theta}e_{22} + \cos{\theta}\sin{\theta}e_{12} + \sin{\theta}\cos{\theta}e_{21}$ \newline
+  $\vec{y}\otimes\vec{y} = \sin^2{\theta}e_{11} + \cos^2{\theta}e_{22} - \sin{\theta}\cos{\theta}e_{12} - \sin{\theta}\cos{\theta}e_{21}$ \newline 
+  Let $T = k_1\vec{x}\otimes\vec{x}+k_2\vec{y}\otimes\vec{y}$ \newline
+  $\Rightarrow k_1\cos^2{\theta}+k_2\sin^2{\theta}=k_1\sin^2{\theta}+k_2\cos^2{\theta}$ \newline
+  Either $k_1=k_2$ or $\cos^2{\theta} = \sin^2{\theta}$ \newline
+  Case 1: $k_1=k_2$ has no solution, therefore
+  $$ \begin{cases}
+    \vec{x} = \frac{\sqrt{2}}{2}\vec{e_1} + \frac{\sqrt{2}}{2}\vec{e_2} \\
+    \vec{y} = \frac{\sqrt{2}}{2}\vec{e_1} - \frac{\sqrt{2}}{2}\vec{e_2} 
+  \end{cases} \text{or  } \begin{cases}
+    \vec{x} = -\frac{\sqrt{2}}{2}\vec{e_1} - \frac{\sqrt{2}}{2}\vec{e_2} \\
+    \vec{y} = \pm\left(\frac{\sqrt{2}}{2}\vec{e_1} - \frac{\sqrt{2}}{2}\vec{e_2}\right)
+  \end{cases}$$
+  Case 2: $\cos^2{\theta}=\sin^2{\theta}$
+  $$ \begin{cases}
+    \vec{x} = \frac{\sqrt{2}}{2}\vec{e_1}+\frac{\sqrt{2}}{2}\vec{e_2} \\
+    \vec{y} = \frac{\sqrt{2}}{2}\vec{e_1}-\frac{\sqrt{2}}{2}\vec{e_2}
+  \end{cases} \text{or  } \begin{cases}
+    \vec{x}=\frac{\sqrt{2}}{2}\left(\vec{e_1}+\vec{e_2}\right) \\ 
+    \vec{y}=\frac{\sqrt{2}}{2}\left(-\vec{e_1}+\vec{e_2}\right)
+  \end{cases} \text{or  } \begin{cases}
+    \vec{x}=-\frac{\sqrt{2}}{2}\left(\vec{e_1}+\vec{e_2}\right) \\
+    \vec{y}=\pm\frac{\sqrt{2}}{2}\left(\vec{e_1}-\vec{e_2}\right)
+  \end{cases}$$ 
+\end{solution}
+
+\begin{solution} 3. \newline
+  Short axis: direction $\vec{x}, \frac{\sqrt{2}}{2}\left(\vec{e_1}+\vec{e_2}\right)$ \newline
+  Long axis: direction $\vec{x}, \frac{\sqrt{2}}{2}\left(\vec{e_1}-\vec{e_2}\right)$ 
+\end{solution}
+
+\begin{solution} 4. \newline
+  If a circle is squeezed perpendicularly $\vec{p}$ and $\vec{f}$ would be collinear, let $T$ be 
+  $$T = \sum^n_{i=1}\vec{p_i}\otimes\vec{f_i} = \sum^n_{i=1}\vec{p_i}\otimes-k_i\vec{p_i}=-\sum^n_{i=1}k_i\vec{p_i}\otimes\vec{p_i}$$
+  $$\vec{p_i} = a_i\vec{e_i}+b_i\vec{e_2}, \sqrt{a_i^2+b_i^2}= 1$$
+  Which gives us \newline
+  $$T = -\sum^n_{i=1}{k_i\left(a_i\vec{e_1}+b_i\vec{e_2}\right)\otimes\left( a_i\vec{e_1} +b_i\vec{e_2}\right)} = -\sum^n_{i=1}k_i\left(a_i^2e_{11}+b_i^2e_{22} + a_ib_ie_{12} + a_ib_ie_{21} \right)$$
+  In matrix form 
+  $$ \begin{bmatrix}
+    \sum^n_{i=1}k_ia^2_i & \sum^n_{i=1}k_ia_ib_i \\
+    \sum^n_{i=1}k_ia_ib_i & \sum^n_{i=1}k_ib_i^2
+  \end{bmatrix}$$
+  Calculating the determinate gives us
+  $$ \lambda_1\lambda_2 = \left|T\right|=\left[\sum^n_{i=1}k_ib_i^2\cdot\sum^n_{i=1}k_ia_i - \sum^n_{i=1}k_ia_ib_i\cdot\sum^n_{i=1}k_ia_ib_i\right] \geq 0$$
+  $$ \lambda_1\lambda_2 \leq 0 \Rightarrow \lambda_1\leq 0, \lambda_2\leq 0 $$
+  $\therefore$ $T$ is a negative sum definite
+\end{solution}
+
+\begin{problem}
+  Change of Basis
+\end{problem}
+
+\begin{solution} 1. \newline
+  $\alpha_\beta(v_\beta) = \alpha_c(v_c)$ \newline
+  $\Leftrightarrow \alpha_\beta(v_\beta) = \alpha_c(Mv_\beta)$ \newline
+  $\Leftrightarrow \alpha_\beta(v_\beta) = (\alpha_cM)v_\beta$ \newline
+  $\therefore$ $\alpha_cM=\alpha_\beta$ \newline
+  $\therefore$ $\alpha_c=\alpha_\beta M^{-1}$
+\end{solution}
+
+\begin{solution} 2. \newline 
+  $$T(v,w) = \sum_{i,j}x_{ij}\left( b^*_iv \right)\left( b^*_j w\right) = \sum_{i,j}v_iw_j$$
+  $T_\beta$ is matrix with entries $x_{i,j}, v_\beta=\begin{pmatrix}
+    v_1 \\ v_2 \\ \vdots \\ v_n
+  \end{pmatrix}, w_\beta = \begin{pmatrix}
+    w_1 \\ w_2 \\ \vdots \\ w_n
+  \end{pmatrix}$
+  $$ v_\beta^T T_\beta W_\beta = \begin{pmatrix}
+    v_1 & v_2 & \cdots & v_n
+  \end{pmatrix}\begin{pmatrix}
+    x_{11} & x_{12} & \cdots & x_{1n} \\
+    x_{21} & x_{22} & \cdots & \vdots \\
+    \vdots & \vdots & \ddots & \vdots \\
+    x_{n1} & \cdots & \cdots & x_{nn}
+  \end{pmatrix}\begin{pmatrix}
+    w_1 & w_2 & \vdots & w_n
+  \end{pmatrix} = \sum_{ij}x_{ij}v_iw_j$$
+  $\therefore$ $T(v,w) = v^T_\beta T_\beta W_\beta$
+\end{solution}
+
+\begin{solution} 3. \newline
+  Since $T(v,w)$ is independent of basis \newline
+  $v_\beta^TT_\beta w_\beta = v_c^T T_c w_c$ \newline
+  $v_\beta^TT_\beta w_\beta = (Mv_\beta)^TT_c(Mv_\beta)$ \newline
+  $T_\beta = M^TT_cM$ \newline
+  $T_c = (M^T)^{-1}T_\beta M^{-1}$
+\end{solution}
+
+\begin{solution} 4. \newline
+  $T(\alpha, \beta) = \alpha_\beta T_\beta \beta_\beta^T = \alpha_cT_c\beta_c^T$ \newline
+  $a_c=\alpha_\beta M^{-1}$ \newline
+  $\beta_c = \beta_\beta M^{-1}$ \newline 
+  $\alpha_\beta T_\beta \beta_\beta^T = \alpha_\beta M^{-1}T_c(\beta_\beta M^{-1})^T$ \newline
+  $\Rightarrow T_\beta = M^{-1}T_c(M^{-1})^T$ \newline
+  $\Rightarrow T_c = MT_\beta M^T$
+\end{solution}
+
+\begin{solution}  5. \newline
+  $T(\alpha, \beta) = \alpha_\beta T_\beta v_\beta = \alpha_\beta M^{-1} T_c Mv_\beta$ \newline
+  $T_\beta = M^{-1}T_cM$ \newline
+  $T_c=MT_\beta M^{-1}$
+\end{solution}
+
+\begin{problem}
+  Why should the “gradient” be a row vector?
+\end{problem}
+
+\begin{solution}
+  Gradient of $f$ is $\partial f = 2xdx + 2ydy + 2zdz$ \newline
+  $v_{old} = \begin{pmatrix}
+    x \\ y \\ z 
+  \end{pmatrix}, v_{new} = Mv_{old}=\begin{bmatrix}
+    1 & 1 & 0 \\ 0 & 1 & 1 \\ 0 & 0 & 1
+  \end{bmatrix}\begin{pmatrix}
+    x \\ y \\ z
+  \end{pmatrix} = \begin{pmatrix}
+    x + y \\ y + z \\ z 
+  \end{pmatrix} = \begin{pmatrix}
+    u \\ v \\ w
+  \end{pmatrix}$
+  $$ \Rightarrow \begin{cases}
+    x = u + w - v \\ 
+    y = v - w \\
+    z = w
+  \end{cases}$$
+  Therefore
+  $$ f(v_{old}) = x^2 + y^2 = z^2 = (u = w - v)^2 + (v-w)^2 + w^2 = u^2 + 2v^2 +3w^2 +2vw - 2uv -4wv$$
+  $$ = f_{new}(v_{new}) = f_{new}(\begin{pmatrix}
+    u \\ v \\ w
+  \end{pmatrix})$$
+  Therefore 
+  $$f_{new}(v_{new}) = f_{new}\left( \begin{pmatrix}
+    u \\ v \\ w
+  \end{pmatrix} \right) = u^2 = 2v^2 +3w^2 + 2uw - 2uv -4wv$$
+  The gradient of $f_{new}$ is $df_{new} = (2u+2w-2v)du+(4v-2u-4w)dv + (6w+2u-4v)dw$ \newline
+  $\triangledown f_{new} (a, b, c) = \begin{pmatrix}
+    2a + 2c - 2b \\
+    -2a + 4b - 4c \\
+    2a -4b +6c
+  \end{pmatrix} $ \newline
+  $(M^{-1})^T=\begin{bmatrix}
+    1 & 1 & \\
+    & 1 & 1\\
+    & & 1
+  \end{bmatrix}^{-T} = \begin{bmatrix}
+    1 & -1 & 1 \\
+    & 1 & -1 \\
+    & & 1
+  \end{bmatrix}^T$ \newline
+  $(M^{-1})^T\triangledown (x,y,z) = \begin{pmatrix}
+    1 & -1 & 1 \\
+    & 1 & -1 \\
+    & & 1
+  \end{pmatrix}\begin{pmatrix}
+    2x \\ 2y \\ 2z
+  \end{pmatrix} = \begin{pmatrix}
+    1 & -1 & 1 \\
+    & 1 & -1 \\
+    & & 1
+  \end{pmatrix}\begin{pmatrix}
+    2a - 2b + 2c \\
+    2b - 2c \\
+    2c
+  \end{pmatrix}  $ \newline
+  $= 
+  \begin{pmatrix}
+    1 & & \\
+    -1 & 1 & \\
+    1 & -1 & 1 
+  \end{pmatrix}\begin{pmatrix}
+    2a - 2b + 2c \\
+    2b - 2c \\
+    2c
+  \end{pmatrix} = \begin{pmatrix}
+    2a + 2c -2b \\
+    -2a + 4b -4c \\
+    2a -4b + 6c
+  \end{pmatrix}$ \newline
+  Therefore
+  $$f_{new}(a,b,c) = (M^{-1})^T(\triangledown f(x,y,z))$$
+  when $\begin{pmatrix}
+    a \\ b \\ c
+  \end{pmatrix} = M \begin{pmatrix}
+    x \\ y \\ z
+  \end{pmatrix}$
+\end{solution}
+
+
+\end{CJK}
+\end{document}

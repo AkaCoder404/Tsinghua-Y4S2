@@ -57,8 +57,6 @@ int main() {
   
   int* segmentTree = createSegmentTree(n);
 
-
-  
   char op;
   long long int left, right;
   for (int i = 0; i < m; i++) {

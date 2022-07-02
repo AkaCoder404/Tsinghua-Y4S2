@@ -1,0 +1,142 @@
+\documentclass[12pt, a4paper, oneside]{article}
+\usepackage{CJKutf8}
+\usepackage{amsmath, amsthm, amssymb, bm, color, framed, graphicx, hyperref, mathrsfs}
+\usepackage{fancyhdr}
+\usepackage{multicol}
+\usepackage{mathtools}
+\usepackage{gauss}
+\usepackage[left=10mm, right=10mm, top=20mm, bottom=20mm]{geometry}
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\begin{CJK}{UTF8}{gbsn}{计83 李天勤 2018080106}\end{CJK}}
+\lhead{\begin{CJK}{UTF8}{gbsn}{高代线性代数作业9}\end{CJK}}
+	
+
+\title{\textbf{课程作业}}
+\author{AkaCoder404}
+\date{\today}
+\newpage
+\linespread{1.5}
+\definecolor{shadecolor}{RGB}{241, 241, 255}
+\newcounter{problemname}
+\newenvironment{problem}{\begin{shaded}\stepcounter{problemname}\par\noindent\textbf{题目\arabic{problemname}. }}{\end{shaded}\par}
+\newenvironment{solution}{\par\noindent\textbf{解答. }}{\par}
+\newenvironment{note}{\par\noindent\textbf{题目\arabic{problemname}的注记. }}{\par}
+
+% row operations
+\newenvironment{sysmatrix}[1]
+ {\left[\begin{array}{@{}#1@{}}}
+ {\end{array}\right]}
+\newcommand{\ro}[1]{%
+  \xrightarrow{\mathmakebox[\rowidth]{#1}}%
+}
+\newlength{\rowidth} % row operation width
+
+% kbordermatrix
+
+% begin document  
+\begin{document}
+\begin{CJK}{UTF8}{gbsn}
+
+% \maketitle
+% \newpage
+\section{Tensor Calculations}
+
+\setcounter{problemname}{0}
+\begin{problem}
+  Kronecker Product
+\end{problem}
+
+\begin{solution} 1. \newline
+  $\forall \vec{V}_1, \vec{V}_2 \in V, \vec{W}_1, \vec{W}_2 \in W, K\in\mathbb{R}, \mathbb{C}$ \newline
+  $(X\otimes Y)(\vec{V}_1, \vec{W}_1) + (X\otimes Y)(\vec{V}_2, \vec{W}_1) = X\vec{V}_1\otimes Y\vec{W}_1+X\vec{V}_2\otimes Y\vec{W}_1 = X(\vec{V}_1 , \vec{V}_2)\otimes Y\vec{W}_1 = (X\otimes Y)(\vec{V}_1+\vec{V}_2, \vec{W}_1)$ \newline
+  同理 $(X\otimes Y)(\vec{V}_1, \vec{W}_1) + (X\otimes Y)(\vec{V}_1, \vec{W}_2)=X\vec{V}_1\otimes Y\vec{W}_1 + XV_2\otimes Y\vec{W}_2=X\vec{V}_1\otimes Y(\vec{W}_1) + \vec{W}_2 = (X\otimes Y)(\vec{V}_1, \vec{W}_1 + \vec{W}_2)$ \newline 
+  $(X\otimes Y)(KV_1, W_1) = (KX\vec{V}_1)\otimes(Y\vec{W}_1)=K(X\vec{V}_1)\otimes(YW_1)=K(X\otimes Y)(V_1, W_1)$ \newline
+  $(X\otimes Y)(V_1, KW_1) = (X\vec{V}_1)\otimes(KY\vec{W}_1) = K(X\vec{V}_1)\otimes(Y\vec{W}_1) = K(X\otimes Y)(\vec{V}_1, \vec{W}_1)$ \newline
+  $\therefore$ $X\otimes Y$ is bilinear
+\end{solution}
+
+\begin{solution} 2. \newline
+  Assume that $(X\otimes Y)(V_i, W_j) = (\lambda_iV_i)\otimes(\mu_j W_j) = \lambda_i\mu_j(V_i\otimes W_j)$ \newline
+  so $\lambda_i\mu_j$ is an eigenvalue of $(X\otimes Y), \lambda_i$ is eigenvalue of $X$, $\mu_j$ is eigenvalue of Y \newline
+  thus trace$(X\otimes Y) = \sum{\text{all eigenvalues of} (X\otimes Y)} = \sum^{m}_{j=1}\sum^{n}_{i=1}(\lambda_i\lambda_j)$
+  $$ = \sum^N_{i=1}\lambda_i \cdot \sum^m_{j=1}\lambda_j = (\text{trace}X)(\text{trace}Y)$$
+  
+\end{solution}
+
+\begin{problem}
+  Quantum Entaglement
+\end{problem}
+
+\begin{solution}
+  $\mathbb{R}^n \otimes (\mathbb{R}^m)^* \rightarrow \mathbb{R}$ is an element of $\mathbb{R}\otimes (\mathbb{R}^n\otimes(\mathbb{R}^n)^*)^*$, i.e $\mathbb{R}\otimes(\mathbb{R}^n)^*\otimes\mathbb{R}^n$ \newline
+  i.e. $(\mathbb{R}^n)^*\otimes \mathbb{R}^n$ \newline
+  trace = $\sum_{i,j}(a_{ij} \vec{e}_i\otimes\vec{e}_j) (\vec{e}_i,\vec{e}_j$ is the basis of $\mathbb{R}^n)$ \newline
+  For an rank on matrix, $M=\vec{V}a$, trace$(M) = \sum{a_{ij}(e_iv\otimes e_j\alpha)}$ \newline
+  So trace$(V\alpha) = \sum{a_{ij}V_i\alpha_j}$ \newline
+  Meanwhile trace$(V\alpha)$ = trace$\begin{pmatrix}
+    V_1 \\ \vdots \\ V_n
+  \end{pmatrix}\begin{pmatrix}
+    (\alpha_1 & \cdots & \alpha_n)
+  \end{pmatrix} = \sum_{i=1}^{n}{V_i\alpha_i} = V_1\alpha_1 +V_2\alpha_2 +\cdots + V_n\alpha_n$
+  Thus
+ $$ a_ij = \begin{cases}
+   1 & \text{if} i = j \\ 
+   0 & \text{if} i \neq j
+ \end{cases}$$
+ So the entries of tensor trace are $a_{ij}$
+\end{solution}
+
+\begin{solution}
+  1. \newline
+  Symmetric: $(V_1 \otimes W_1, V_2 \otimes W_2) = (V_1, V_2)(W_1, W_2), (V_2\otimes W_2, V_1\otimes W_1)=(V_2,V_1)(W_2, W_1)$ \newline
+  $(V_1, V_2) =(V_2, V_1), (W_1, W_2)=(W_2, W_1)(HA, HB)$ is inner product space \newline
+  $\therefore$ $(V_1\otimes W_1, V_2\otimes W_2)=(V_2\otimes W_2, V_1\otimes W_1 )$ \newline
+  Positive definite: $\because$ $(V_1, V_1)\geq 0, (W_1, W_1)\geq 0$ and $(V_1, V_1)=0=(W_1, W_1)$ iff $V_1=\vec{O}, W_1=\vec{O}$ \newline
+  $\therefore$ $(V_1\otimes W_1, V_1\otimes W_1) = (V_1, V_1)(W_1, W_1) > 0$ iff $V_1=\vec{O}, W_1=\vec{O} \Leftrightarrow \vec{U}_1\otimes\vec{W}_1=0$
+\end{solution}
+
+\begin{solution}
+  2. \newline
+  $\alpha(e_1\otimes e_1) + b(e_2\otimes e_2)$ \newline
+  $\because$ We can write it in the form $\alpha(e_1\otimes e_1) + b(e_2\otimes e_2)$, rank $\leq 2$ \newline
+  Or it can be written as $\vec{V}=(V_1\vec{e}_1+V_2\vec{e}_2), \vec{W}=W_1\vec{e}_1+W_2\vec{e}_2$, $\vec{V}\otimes\vec{W}$ form. \newline
+  Then $\vec{V}\otimes\vec{W} = V_1W_1\vec{e}_1\otimes\vec{e}_1 + V_2W_2\vec{e}_2\otimes\vec{e_2} + V_1W_2\vec{e}_1\otimes\vec{e_2}+V_2W_1\vec{e_2}\otimes\vec{e_1} = a\vec{e_1}\otimes\vec{e_1} + b\vec{e_2}\otimes\vec{e_2}$ \newline
+  $V_1W_1V_2W_2 = ab \neq = 0$, according to $V_1W_1=a, V_2W_2=b$ \newline
+  $V_1W_1V_2W_2 = 0$, according to $V_1W_2=0, V_2W_1=0$
+\end{solution}
+
+
+\begin{solution}
+  3. \newline
+  $\vec{V} = \begin{bmatrix}
+    V_1 \\ V_2
+  \end{bmatrix}, \vec{W} = \begin{bmatrix}
+    W_1 \\ W_2
+  \end{bmatrix}, W = \vec{V}\otimes\vec{W}$ \newline
+  $(W, L\otimes I_B(W)) = (\vec{V}\otimes\vec{W}, \begin{bmatrix}
+    V_1 \\ -V_2
+  \end{bmatrix}\otimes\begin{bmatrix}
+    W_1 \\ W_2
+  \end{bmatrix}) = (V_1^2 - V_2^2)(W_1^2 + W_2^2) = a$ \newline
+  $(W, I_A\otimes L(W)) = (\vec{V}\otimes\vec{W}, \begin{bmatrix}
+    V_1 \\ V_2
+  \end{bmatrix}\otimes\begin{bmatrix}
+    W_1 \\ - W_2
+  \end{bmatrix}) = (V_1^2+V_2^2)(W_1^2-W_2^2) = b$ \newline
+  $V_1=1, V_2=0, W_1=\sqrt{\frac{a+b}{2}}, W_2=\sqrt{\frac{a-b}{2}}, (a\geq b)$ \newline
+  $V_1=\sqrt{\frac{a+b}{2}}, V_2=\sqrt{\frac{b-a}{2}}, W_1=1, W_2, (a < b)$ 
+\end{solution}
+
+\begin{solution}
+  4. \newline
+  $(W, L\otimes I_B(W)) = (W, \alpha e_1\otimes e_2 + b((-e_1)\otimes e_2))$ \newline
+  $(W, I_A\otimes L(W)) = (W, \alpha e_1 \otimes e_2 + be_1\otimes(-e_2))$ \newline
+  $\Rightarrow$ $= (W, \alpha, ae_1\otimes e_2-be_1\otimes e_2)$ \newline
+  $\therefore$ observing $A$ is identical to observing $B$ 
+\end{solution}
+
+
+
+\end{CJK}
+\end{document}
